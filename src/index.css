@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+.page {
+    margin: 2em auto;
+    width: max-content;
+    border: 1px solid black;
+}
+
+/* Container for the input group */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  /* Text input style */
+  .form-control {
+    font-size: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Label style 
+  .form-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    color: #6c757d;
+    pointer-events: none;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  }*/
+  
+  /* Floating label effect */
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /*.form-control:focus + .form-label,
+  .form-control:not(:placeholder-shown) + .form-label {
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    color: #007bff;
+  }*/
+  
