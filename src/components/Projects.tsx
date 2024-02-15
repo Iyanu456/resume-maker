@@ -12,13 +12,15 @@ interface projectProps {
     lineStyle: any,
     dateStyle: any,
     strokeWidth: number;
+    strokeLength: string;
+    fontSize: string;
 }
 
 export default function Projects(props: projectProps) {
     return (
-        <View style={{marginBottom: 15, marginTop: -10, fontSize: '13pt', lineHeight: '1.6pt'}}>
+        <View style={{marginBottom: 15, marginTop: -10, fontSize: `${props.fontSize}`, lineHeight: '1.6pt'}}>
             <Text style={props.titleStyle}>Projects</Text>
-            <Svg height="10" width="534"style={props.lineStyle}>
+            <Svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <Line
                 x1="0"
                 y1="0"

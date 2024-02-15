@@ -1,24 +1,26 @@
 import { View, Line, Svg, Text } from '@react-pdf/renderer';
 
 interface experienceProps {
-    titleStyle: any,
-    positionStyle: any,
+    titleStyle: any;
+    positionStyle: any;
     data: {
         position: string; 
         company: string; 
         duty: string[]; 
         date: string; 
     }[],
-    lineStyle: any,
-    dateStyle: any,
-    strokeWidth: number,
+    lineStyle: any;
+    dateStyle: any;
+    strokeWidth: number;
+    strokeLength: string;
+    fontSize: string;
 }
 
 const Experience: React.FC<experienceProps> = (props) => {
     return (
-        <View style={{marginBottom: 15, fontSize: '13pt', lineHeight: '1.6pt'}}>
+        <View style={{marginBottom: 15, fontSize: `${props.fontSize}`, lineHeight: '1.6pt'}}>
             <Text style={props.titleStyle}>Professional Experience</Text>
-            <Svg height="10" width="534" style={props.lineStyle}>
+            <Svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <Line
                 x1="0"
                 y1="0"
@@ -40,7 +42,7 @@ const Experience: React.FC<experienceProps> = (props) => {
                         </View>
                         {duty.map((item) => {
                             return (
-                                <Text style={{maxWidth: '80%'}}>{`• ${item}`}</Text>
+                                <Text style={{maxWidth: '75%'}}>{`• ${item}`}</Text>
                             )
                         })}
                     </View>

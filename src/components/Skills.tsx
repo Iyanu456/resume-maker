@@ -6,13 +6,15 @@ interface skillsProps {
     data: string[],
     lineStyle: any,
     strokeWidth: number;
+    strokeLength: string;
+    fontSize: string;
 }
 
 const Skills: React.FC<skillsProps> = (props) => {
     return (
-        <View style={{marginBottom: 15, fontSize: '13pt', lineHeight: '1.4pt'}}>
+        <View style={{marginBottom: 15, fontSize: `${props.fontSize}`, lineHeight: '1.4pt'}}>
             <Text style={props.titleStyle}>Skills</Text>
-            <Svg height="10" width="534" style={props.lineStyle}>
+            <Svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <Line
                 x1="0"
                 y1="0"

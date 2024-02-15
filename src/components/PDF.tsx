@@ -1,4 +1,4 @@
-import { Document as BlobDocument, Page as BlobPage, Font, View, Text, StyleSheet } from '@react-pdf/renderer';
+import { Document as BlobDocument, Page as BlobPage, Font, View, Text, StyleSheet, Link } from '@react-pdf/renderer';
 import Education from './Education';
 import Skills from './Skills';
 import Experience from './Experience';
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     margin: 'auto',
     fontWeight: 'semibold',
+    maxWidth: '70%',
   }, 
   profession: {
     textAlign: 'center',
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   subtitle: {
-    fontSize: '13pt',
+    fontSize: '12pt',
     fontFamily: 'Inter',
     fontWeight: 'bold'
   },
@@ -66,39 +67,50 @@ const styles = StyleSheet.create({
   dateStyle: {margin: 'auto 0 auto auto', fontFamily: 'Inter'}
 });
 
-var strokeWidth = 2;
 
 interface documentProps {
   info: {
-    name: string;
+    firstname: string;
+    lastname: string;
     title: string;
   };
+
+}
+
+const docData = {
+  fontSize: '12pt',
+  strokeWidth: 2,
+  strokeLength: '516',
 }
 export default function MyDoc(props: documentProps) {
 
   return (
   <BlobDocument>
-    <BlobPage style={styles.page} size='LETTER' wrap>
+    <BlobPage style={styles.page} size='A4' wrap>
       <View>
         <View>
-          <Text style={styles.firstName}>{props.info.name}</Text>
+          <Text style={styles.firstName}>{`${props.info.firstname} ${props.info.lastname}`}</Text>
           <Text style={styles.profession}>{props.info.title}</Text>
-          <View style={{display: 'flex', flexDirection: 'row', fontSize: '13pt', fontFamily: 'Inter', margin: '2 auto'}}>
-            {contactInfo.map((item) => (<Text style={{marginRight: 10}}>{item}</Text>))}
+          <View style={{display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto'}}>
+            {contactInfo.map(({ label, src}) => (<Link src={src} style={{marginRight: 10, color: 'black', textDecoration: 'none'}}>{label}</Link>))}
           </View>
           <View style={{marginTop: 22}}>
             <Education
                 titleStyle={styles.title}
                 schoolStyle={styles.subtitle}
                 lineStyle={styles.line}
-                strokeWidth={strokeWidth}
+                strokeWidth={docData.strokeWidth}
+                strokeLength={docData.strokeLength}
+                fontSize={docData.fontSize}
                 data={education}
             />
             <Skills
                 titleStyle={styles.title}
                 schoolStyle={styles.subtitle}
                 lineStyle={styles.line}
-                strokeWidth={strokeWidth}
+                strokeWidth={docData.strokeWidth}
+                strokeLength={docData.strokeLength}
+                fontSize={docData.fontSize}
                 data={skill}
             />
             <Experience
@@ -106,7 +118,9 @@ export default function MyDoc(props: documentProps) {
                 positionStyle={styles.subtitle}
                 lineStyle={styles.line}
                 dateStyle={styles.dateStyle}
-                strokeWidth={strokeWidth}
+                strokeWidth={docData.strokeWidth}
+                strokeLength={docData.strokeLength}
+                fontSize={docData.fontSize}
                 data={experience}
             />
             <Projects
@@ -114,7 +128,9 @@ export default function MyDoc(props: documentProps) {
                 projectStyle={styles.subtitle}
                 lineStyle={styles.line}
                 dateStyle={styles.dateStyle}
-                strokeWidth={strokeWidth}
+                strokeWidth={docData.strokeWidth}
+                strokeLength={docData.strokeLength}
+                fontSize={docData.fontSize}
                 data={projects}
             />
           </View>

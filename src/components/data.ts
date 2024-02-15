@@ -1,5 +1,17 @@
 
-export const contactInfo = ['oyerindei13@gmail.com', '09011774616', 'iyanu.vercel.app']
+export const contactInfo = [
+  {
+    label: 'oyerindei13@gmail.com',
+    src: 'https://oyerinde13@gmail.com'
+}, 
+{
+  label: '09011774616',
+  src: 'https://09011774616'
+}, 
+{
+  label: 'iyanu.vercel.app',
+  src: 'http://iyanu.vercel.app'
+}]
 
 export const education = [{
   school: 'ALX Holberton',
