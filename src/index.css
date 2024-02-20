@@ -6,16 +6,38 @@
 * {
     box-sizing: border-box;
     outline: none;
+    height: 100%;
 }
+
+.form-control::selection {
+  background-color: rgba(20, 20, 20, 0.1);
+
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.section-title {
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  font-size: 1.35em;
+}
+
 .page {
     width: max-content;
-    border: 1px solid black;
+    height: max-content;
+    border-radius: 2px;
+    box-shadow: 5px rgba(202, 202, 202, 0.25);
+    /*border: 1px solid black;*/
 }
 
 /* Container for the input group */
 .input-group {
     position: relative;
-    margin-bottom: 20px;
   }
   
   /* Text input style */
@@ -33,12 +55,11 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
-  
 
 
 .form-label {
   font-family: Poppins;
-  font-size: 0.85em;
+  font-size: 0.83em;
   font-weight: 500;
   color: #757579;
 }
@@ -48,29 +69,35 @@
     border-color: #007bff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
-  
-  
-  .main {
-    display: flex;
-    display: grid;
-    grid-template-columns: 40% 60%;
-    gap: 1em;
-    place-items: center;
-    padding: 3em;
-    height: 100vh;
-  }
 
-  .section-title {
-    margin-bottom: 0.9em;
-    font-weight: 500;
-    font-size: 1.2em;
+  .pdf-parent {
+    display: grid;
+    overflow-x: hidden;
+    background-color: rgb(219, 215, 215);
+    overflow-y: scroll;
   }
+  
 
   .flex-item {
     flex-basis: calc(50% - 10px); /* 50% width with a little space between items */
   }
-  @media screen and (max-width: 600px) {
+
+  .pdf-preview-placeholder {
+    width: 42.4vw; /* 80% of the viewport width */
+    height: calc(42.4vw * 1.41428); /* Calculate height based on width to maintain A4 aspect ratio */
+    background-color: white;
+    color: white;
+    content: "";
+  }
+
+
+  @media screen and (max-width: 700px) {
     .desktop {
       display: none;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 100%;
     }
   }

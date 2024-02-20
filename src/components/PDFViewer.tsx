@@ -1,20 +1,31 @@
 // PdfSection.tsx
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BlobProvider } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
 import { Document as DocumentView, Page as PageView } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import MyDoc from "./PDF";
+import ResizableDiv from "./Placeholder";
 
 interface PdfSectionProps {
   handleScreenResize: () => number;
   info: any;
   className: string;
+  scaleFactor: number;
+ 
 }
 
 export default function PdfSection(props: PdfSectionProps) {
     const [numPages, setNumPages] = useState(1)
     const [pageNum, setPageNum] = useState(1)
+    const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
+
+
+
+
+    const isLoading = renderedPageNumber !== pageNum;
+
 
 
   function nextPage() {
@@ -31,36 +42,42 @@ export default function PdfSection(props: PdfSectionProps) {
 
   return (
     <div className={props.className}>
-      <BlobProvider document={<MyDoc info={props.info} />}>
-        {({ blob, loading, error }) => {
-          if (loading) {
-            return null;
-          }
-
-          if (error) {
-            return <div>Error: {error.message}</div>;
-          }
-
-          return (
-            <div>
-              <div className="flex gap-4">
+      <div className="flex gap-4 mb-5">
                 <button onClick={prevPage}>Previous</button>
                 <button onClick={nextPage}>Next</button>
               </div>
+      <BlobProvider document={<MyDoc info={props.info} />}>
+
+        {({ blob, error }) => {
+         
+          if (error) { return null }
+
+          else { return (
+            <div>
               <DocumentView
                 className="page"
+                noData={(() => <ResizableDiv scaleFactor={props.scaleFactor}/>)}
                 file={blob}
+                onLoad={() => null}
+                loading={() => <ResizableDiv scaleFactor={props.scaleFactor}/>}
                 onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+               
               >
-                <PageView
-                  pageNumber={pageNum}
-                  scale={props.handleScreenResize()}
-                />
-              </DocumentView>
+                    <PageView
+                    noData={() => <ResizableDiv scaleFactor={props.scaleFactor}/>}
+                    onLoad={() => null}
+                    loading={() => <ResizableDiv scaleFactor={props.scaleFactor} />}
+              pageNumber={pageNum}
+              scale={props.handleScreenResize()}
+
+              onRenderSuccess={() => setRenderedPageNumber(pageNum)}
+            />
+              </DocumentView> 
             </div>
           );
-        }}
+        }}}
       </BlobProvider>
+      
     </div>
   );
 }

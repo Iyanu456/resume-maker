@@ -1,5 +1,4 @@
-
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import InputLabel from "./InputLabel"
 
 interface personalProps {
@@ -9,15 +8,18 @@ interface personalProps {
         value: string;
         type: string;
         handleChange: (e: ChangeEvent<HTMLInputElement>) => any;
-    }[]
+    }[];
+    formStyle: string;
 }
 
 
 export default function PersonalDetails(props: personalProps) {
+    const [inputFilled, setInputFilled] = useState(null)
+
     return (
-        <form className='grid h-[fit-content] mt-0' onSubmit={(e) => e.preventDefault()}>
-            <h2 className="section-title">Personal Details</h2>
-            <div className='flex gap-3 mx-auto flex-item flex-wrap'>
+        <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
+            <h1 className="section-title"><b>Your Details</b></h1>
+            <div className='grid gap-4 grid-cols-2 '>
             {props.data.map((item) => (
                 <InputLabel 
                 label={item.label}

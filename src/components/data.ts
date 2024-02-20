@@ -54,9 +54,6 @@ export const projects = [{
   date: '2022',
   features: [
     'Worked with developers to deliver complex frontend designs for production',
-    'Worked with backend developers to integrate backend functions with my code',
-    'Built single-page-application utilizing React.js, jQuery, and Bootsrap',
-    'Worked with developers to deliver complex frontend designs for production',
   ]
 },
 {

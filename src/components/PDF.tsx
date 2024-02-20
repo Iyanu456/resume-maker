@@ -73,7 +73,9 @@ interface documentProps {
     firstname: string;
     lastname: string;
     title: string;
+    education: any;
   };
+  contactInfo?: {}[];
 
 }
 
@@ -102,7 +104,7 @@ export default function MyDoc(props: documentProps) {
                 strokeWidth={docData.strokeWidth}
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
-                data={education}
+                data={props.info.education}
             />
             <Skills
                 titleStyle={styles.title}

@@ -1,13 +1,13 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import MyDoc from './components/PDF';
-import PersonalDetails from './components/PersonalDetailsForm';
+import PersonalDetails from './components/forms/PersonalDetailsForm';
+import EducationForm from './components/forms/EducationForm';
 import PdfSection from './components/PDFViewer';
-//import { generateFormData } from './formData';
-
+import { generateFormData } from './formData';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -15,7 +15,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const App = () => {
-
   const [userDisplayedInfo, setUserDisplayedInfo] = useState({
     firstname: '',
     lastname: '',
@@ -30,11 +29,17 @@ const App = () => {
     title: '',
     email: '',
     phoneNo: '',
-  });
 
+    education: [{
+      school: '',
+    degree: '',
+    duration: '',
+    }],
+  });
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const scaleFactor = 1.6;
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,10 +57,7 @@ const App = () => {
     };
   }, [timeoutId]);
 
-
-  
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: string): void => {
-
     const value = e.target.value;
     setUserDisplayedInfo((prevUserInfo) => ({ ...prevUserInfo, [field]: value }));
 
@@ -73,67 +75,88 @@ const App = () => {
     setTimeoutId(newTimeoutId);
   };
 
-function handleScreenResize(): number {
-  // Use a formula or any logic you prefer to calculate the scale based on the window width
-  return screenWidth / 1600; // You can adjust this formula based on your requirements
-}
+  const handleScreenResize = (): number => {
+    // Use a formula or any logic you prefer to calculate the scale based on the window width
+    console.log(screenWidth / 2300);
+    return (screenWidth / 2300) * scaleFactor; // You can adjust this formula based on your requirements
+  };
 
-var info = {
-  firstname: pdfRenderedProps.firstname,
-  lastname: pdfRenderedProps.lastname,
-  title: pdfRenderedProps.title,
-  email: pdfRenderedProps.email,
-  phoneNo: pdfRenderedProps.phoneNo,
-}
+  const info = {
+    firstname: pdfRenderedProps.firstname,
+    lastname: pdfRenderedProps.lastname,
+    title: pdfRenderedProps.title,
+    email: pdfRenderedProps.email,
+    phoneNo: pdfRenderedProps.phoneNo,
+    education: pdfRenderedProps.education
+  };
 
-//const formData = generateFormData(userDisplayedInfo, handleChange);
-var formData = [{
-  label: 'First Name',
-  id: 'firstnameInput',
-  value: userDisplayedInfo.firstname,
-  type: 'text',
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'firstname'),
-},
-{
-  label: 'Last Name',
-  id: 'lastnameInput',
-  value: userDisplayedInfo.lastname,
-  type: 'text',
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'lastname'),
-},
-{
-  label: 'Email',
-  id: 'emailInput', // Corrected id for uniqueness
-  value: userDisplayedInfo.email,
-  type: 'text',
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'email'),
-},
-{
-  label: 'Phone No',
-  id: 'phoneNoInput', // Corrected id for uniqueness
-  value: userDisplayedInfo.phoneNo,
-  type: 'text',
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e, 'phoneNo'),
-},
-]
 
+  const [educationArray, setEducationArray] = useState([
+    { school: '', degree: '', duration: '' },
+  ])
+
+  const handleEducationSave = (index: number, data: any) => {
+    setPdfRenderedProps((prevProps) => {
+      const newEducationArray = [...prevProps.education];
+      newEducationArray[index] = data;
+
+      return {
+        ...prevProps,
+        education: newEducationArray,
+      };
+    });
+  };
+
+  // Add a new form and corresponding education object
+  const handleAddEducation = () => {
+    setPdfRenderedProps((prevProps) => {
+      const newEducationArray = [...prevProps.education, { school: '', degree: '', duration: '' }];
+
+      return {
+        ...prevProps,
+        education: newEducationArray,
+      };
+    });
+  };
+
+  // Render EducationForm components based on the pdfRenderedProps
+  const educationForms = pdfRenderedProps.education.map((data, index) => (
+    <EducationForm
+      key={index}
+      formStyle='mx-auto w-[100%] h-[max-content] px-[2.2em]'
+      index={index}
+      data={data}
+      onSave={handleEducationSave}
+    />
+  ));
 
   return (
-    <div className='main'>
-      <div className='grid place-items-center'>
-        <PersonalDetails data={formData} />
-          <PDFDownloadLink document={<MyDoc info={info}/>}>
+    <div className='grid'>
+      <div className='main'>
+        <div className='grid w-auto py-[2em] place-items-center overflow-y-scroll'>
+          <PersonalDetails
+            formStyle='mx-auto w-[100%] pt-[3em] px-[2.2em] h-[max-content]'
+            onFirstNameChange={(e) => handleChange(e, 'firstname')}
+            onLastNameChange={(e) => handleChange(e, 'lastname')}
+          />
+          <hr className='w-[100%] my-[1.8em]'/>
+          {educationForms}
+          <button onClick={handleAddEducation}>Add Education</button>
+          <hr className='w-[100%] my-[1.8em]'/>
+          {/*<PDFDownloadLink document={<MyDoc info={info}/>}>
             Download
-          </PDFDownloadLink>
-        
-      </div>
+          </PDFDownloadLink>*/}
+        </div>
 
-        <PdfSection 
-        className='pt-[2em] mb-[2em]  desktop'
-          handleScreenResize={handleScreenResize}
-          info={info}
-        
-        />
+        <div className='pdf-parent grid place-items-center desktop'>
+          <PdfSection
+            className='grid pt-[4em] pb-[6em] desktop'
+            handleScreenResize={handleScreenResize}
+            info={info}
+            scaleFactor={scaleFactor}
+          />
+        </div>
+      </div>
     </div>
   );
 };
