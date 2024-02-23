@@ -79,4 +79,4 @@ export const projects = [{
   ]
 }]
 
-export const skill = ['Python', 'C Programming language', 'HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Flask']
+export const skill = [{skill: 'Python'}, {skill: 'C Programming language'}, {skill: 'HTML'}, {skill: 'CSS'}, {skill: 'JavaScript'}, {skill: 'React'}, {skill: 'Next.js'}, {skill: 'Flask'}]

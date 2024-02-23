@@ -3,7 +3,9 @@ import { View, Line, Svg, Text } from '@react-pdf/renderer';
 interface skillsProps {
     titleStyle: any,
     schoolStyle: any,
-    data: string[],
+    data: {
+        skill: string;
+      }[];
     lineStyle: any,
     strokeWidth: number;
     strokeLength: string;
@@ -25,7 +27,7 @@ const Skills: React.FC<skillsProps> = (props) => {
             />
             </Svg>
             <View style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-                {props.data.map((skill) => {
+                {props.data.map(({ skill }) => {
                     return (
                         <Text style={{fontFamily: 'Inter', fontWeight: 'semibold'}}>{`• ${skill}    `}</Text>
                     )

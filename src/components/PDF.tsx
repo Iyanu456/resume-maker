@@ -12,16 +12,20 @@ import interBold from '../assets/fonts/Inter-Bold.ttf'
 import interSemiBold from '../assets/fonts/Inter-SemiBold.ttf'
 
 
-Font.register({ family: 'Poppins', fonts: [
-  {src: poppinsRegular, fontWeight: 'normal'},
-  {src: poppinsBold, fontWeight: 'bold'},
-  {src: poppinsSemiBold, fontWeight: 'semibold'}
-]});
-Font.register({ family: 'Inter', fonts: [
-  {src: interRegular, fontWeight: 'normal'},
-  {src: interBold, fontWeight: 'bold'},
-  {src: interSemiBold, fontWeight: 'semibold'}
-]});
+Font.register({
+  family: 'Poppins', fonts: [
+    { src: poppinsRegular, fontWeight: 'normal' },
+    { src: poppinsBold, fontWeight: 'bold' },
+    { src: poppinsSemiBold, fontWeight: 'semibold' }
+  ]
+});
+Font.register({
+  family: 'Inter', fonts: [
+    { src: interRegular, fontWeight: 'normal' },
+    { src: interBold, fontWeight: 'bold' },
+    { src: interSemiBold, fontWeight: 'semibold' }
+  ]
+});
 
 
 
@@ -33,21 +37,21 @@ const styles = StyleSheet.create({
     padding: '20, 40',
   },
   lastName: {
-    fontSize: '30pt', 
+    fontSize: '30pt',
     fontFamily: 'Poppins',
     letterSpacing: '1.1pt',
-    
+
   },
   firstName: {
-    fontSize: '23pt', 
+    fontSize: '23pt',
     fontFamily: 'Poppins',
     margin: 'auto',
     fontWeight: 'semibold',
-    maxWidth: '70%',
-  }, 
+    
+    },
   profession: {
     textAlign: 'center',
-    fontSize: '16pt', 
+    fontSize: '16pt',
     fontFamily: 'Inter',
     marginBottom: 15,
   },
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
   line: {
     marginBottom: 2,
   },
-  dateStyle: {margin: 'auto 0 auto auto', fontFamily: 'Inter'}
+  dateStyle: { margin: 'auto 0 auto auto', fontFamily: 'Inter' }
 });
 
 
@@ -87,26 +91,29 @@ const docData = {
 export default function MyDoc(props: documentProps) {
 
   return (
-  <BlobDocument>
-    <BlobPage style={styles.page} size='A4' wrap>
-      <View>
+    <BlobDocument>
+      <BlobPage style={styles.page} size='A4' wrap>
         <View>
-          <Text style={styles.firstName}>{`${props.info.firstname} ${props.info.lastname}`}</Text>
-          <Text style={styles.profession}>{props.info.title}</Text>
-          <View style={{display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto'}}>
-            {contactInfo.map(({ label, src}) => (<Link src={src} style={{marginRight: 10, color: 'black', textDecoration: 'none'}}>{label}</Link>))}
-          </View>
-          <View style={{marginTop: 22}}>
-            <Education
-                titleStyle={styles.title}
-                schoolStyle={styles.subtitle}
-                lineStyle={styles.line}
-                strokeWidth={docData.strokeWidth}
-                strokeLength={docData.strokeLength}
-                fontSize={docData.fontSize}
-                data={props.info.education}
-            />
-            <Skills
+          <View>
+            <Text style={styles.firstName}>{`${props.info.firstname} ${props.info.lastname}`}</Text>
+            <Text style={styles.profession}>{props.info.title}</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto' }}>
+              {contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
+            </View>
+            <View style={{ marginTop: 22 }}>
+
+              {props.info.education.some(education => Object.values(education).some(value => value !== '')) && (
+                <Education
+                  titleStyle={styles.title}
+                  schoolStyle={styles.subtitle}
+                  lineStyle={styles.line}
+                  strokeWidth={docData.strokeWidth}
+                  strokeLength={docData.strokeLength}
+                  fontSize={docData.fontSize}
+                  data={props.info.education}
+                />
+              )}
+              <Skills
                 titleStyle={styles.title}
                 schoolStyle={styles.subtitle}
                 lineStyle={styles.line}
@@ -114,8 +121,8 @@ export default function MyDoc(props: documentProps) {
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
                 data={skill}
-            />
-            <Experience
+              />
+              <Experience
                 titleStyle={styles.title}
                 positionStyle={styles.subtitle}
                 lineStyle={styles.line}
@@ -124,8 +131,8 @@ export default function MyDoc(props: documentProps) {
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
                 data={experience}
-            />
-            <Projects
+              />
+              <Projects
                 titleStyle={styles.title}
                 projectStyle={styles.subtitle}
                 lineStyle={styles.line}
@@ -134,11 +141,11 @@ export default function MyDoc(props: documentProps) {
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
                 data={projects}
-            />
+              />
+            </View>
           </View>
         </View>
-      </View>
-    </BlobPage>
-  </BlobDocument>
+      </BlobPage>
+    </BlobDocument>
   )
 };

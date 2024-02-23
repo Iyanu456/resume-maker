@@ -15,15 +15,15 @@ export default function PersonalDetails(props: personalProps) {
 
     return (
         <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
-            <h1 className="section-title"><b>Your Details</b></h1>
-            <div className="flex flex-col gap-4">
+            <h1 className="section-title"><b>Personal Information</b></h1>
+            <div className="flex flex-col gap-1">
                 <InputLabel 
                 label='Job Title'
                 type='text'
                 value={props.value}
                 handleChange={props.onTitleChange}
                 />
-                <div className="flex gap-5">
+              
                 <InputLabel 
                 label='First Name'
                 type='text'
@@ -36,7 +36,6 @@ export default function PersonalDetails(props: personalProps) {
                 value={props.value}
                 handleChange={props.onLastNameChange}
                 />
-                </div>
                 <InputLabel 
                 label='Email'
                 type='text'

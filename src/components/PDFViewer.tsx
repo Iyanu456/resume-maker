@@ -42,10 +42,10 @@ export default function PdfSection(props: PdfSectionProps) {
 
   return (
     <div className={props.className}>
-      <div className="flex gap-4 mb-5">
+      {/*<div className="flex gap-4 mb-5">
                 <button onClick={prevPage}>Previous</button>
                 <button onClick={nextPage}>Next</button>
-              </div>
+  </div>*/}
       <BlobProvider document={<MyDoc info={props.info} />}>
 
         {({ blob, error }) => {
