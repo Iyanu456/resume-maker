@@ -5,9 +5,9 @@ interface projectProps {
     projectStyle: any,
     data: {
         project: string; 
+        about: string;
         description: string;
-        features: string[];
-        date: string;
+        duration: string;
     }[],
     lineStyle: any,
     dateStyle: any,
@@ -30,21 +30,19 @@ export default function Projects(props: projectProps) {
                 stroke="rgb(0,0,0)"
             />
             </Svg>
-            {props.data.map(({ project, description, features, date }) => {
+            {props.data.map(({ project, about, description, duration }) => {
                 return (
                     <View style={{marginBottom: 10}}>
                         <View style={{display: 'flex', flexDirection: 'row', marginBottom: 2}}>
                                 <View style={{display: 'flex', flexDirection: 'row'}}>
-                                    <Text style={props.projectStyle}>{`${project} - `}</Text>
-                                    <Text>{description}</Text>
+                                    <Text style={props.projectStyle}>{ project !=="" ? `${project} - ` : null }</Text>
+                                    <Text>{about}</Text>
                                 </View>
-                            <Text style={{margin: 'auto 0 auto auto', fontFamily: 'Inter', fontWeight: 'semibold'}}>{`${date}`}</Text>
+                            <Text style={{margin: 'auto 0 auto auto', fontFamily: 'Inter', fontWeight: 'semibold'}}>{`${duration}`}</Text>
                         </View>
-                        {features.map((item) => {
-                            return (
-                                <Text style={{maxWidth: '80%'}}>{`• ${item}`}</Text>
-                            )
-                        })}
+                        
+                                <Text style={{maxWidth: '80%'}}>{ description != "" ? `• ${description}` : null }</Text>
+                        
                     </View>
                 )
             })}

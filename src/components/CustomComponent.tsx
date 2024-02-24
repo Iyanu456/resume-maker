@@ -1,31 +1,31 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import InputLabel from "./InputLabel";
 
-interface dataProps {
+interface skillProps {
   formStyle?: string;
   index: any; // Unique index to identify the form
   data: {
     skill: string;
   };
   title?: string;
-  onSave: (index: number, data: any) => void;
+  onSave: (field: any, index: number, data: any) => void;
 }
 
-const customForm: React.FC<dataProps> = (props) => {
+const SkillForm: React.FC<skillProps> = (props) => {
   const { index, data } = props;
-  const [customData, setCustomData] = useState(data);
+  const [skillData, setSkillData] = useState(data);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      props.onSave(index, customData);
+      props.onSave('skill', index, skillData);
     }, 500); // Adjust the timeout duration as needed
 
     // Clear the timeout on component unmount or when educationData changes
     return () => clearTimeout(timeoutId);
-  }, [customData, index, props]);
+  }, [skillData, index, props]);
 
   const handleInputChange = (field: string, value: string) => {
-    setCustomData((prevData) => ({
+    setSkillData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -33,15 +33,15 @@ const customForm: React.FC<dataProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>{props.title}</b></h1>
+    <h1 className="section-title"><b>Skills</b></h1>
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel
-          label="School"
+          label="skill"
           type="text"
-          value={customData.skill}
+          value={skillData.skill}
           handleChange={(e) => {
-            handleInputChange("school", e.target.value);
+            handleInputChange("skill", e.target.value);
           }}
           />
       </div>
@@ -50,4 +50,4 @@ const customForm: React.FC<dataProps> = (props) => {
   );
 };
 
-export default customForm;
+export default SkillForm;

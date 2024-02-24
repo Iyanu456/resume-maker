@@ -1,19 +1,19 @@
 import { View, Line, Svg, Text } from '@react-pdf/renderer';
 
 interface experienceProps {
-    titleStyle: any;
-    positionStyle: any;
+    titleStyle?: any;
+    positionStyle?: any;
     data: {
-        position: string; 
+        jobTitle: string; 
         company: string; 
-        duty: string[]; 
-        date: string; 
+        description: string; 
+        duration: string; 
     }[],
-    lineStyle: any;
-    dateStyle: any;
-    strokeWidth: number;
-    strokeLength: string;
-    fontSize: string;
+    lineStyle?: any;
+    dateStyle?: any;
+    strokeWidth?: number;
+    strokeLength?: string;
+    fontSize?: string;
 }
 
 const Experience: React.FC<experienceProps> = (props) => {
@@ -30,21 +30,19 @@ const Experience: React.FC<experienceProps> = (props) => {
                 stroke="rgb(0,0,0)"
             />
             </Svg>
-            {props.data.map(({ position, company, duty, date }) => {
+            {props.data.map(({ jobTitle, company, description, duration }) => {
                 return (
                     <View style={{marginBottom: 10}}>
                         <View style={{display: 'flex', flexDirection: 'row', marginBottom: 2}}>
                                 <View style={{display: 'flex', flexDirection: 'row'}}>
-                                    <Text style={props.positionStyle}>{`${position} - `}</Text>
+                                    <Text style={props.positionStyle}>{ jobTitle !== "" ? `${jobTitle} - ` : null }</Text>
                                     <Text>{company}</Text>
                                 </View>
-                            <Text style={props.dateStyle}>{`${date}`}</Text>
+                            <Text style={props.dateStyle}>{`${duration}`}</Text>
                         </View>
-                        {duty.map((item) => {
-                            return (
-                                <Text style={{maxWidth: '75%'}}>{`• ${item}`}</Text>
-                            )
-                        })}
+                                {description !== "" && (
+                                <Text style={{maxWidth: '75%'}}>{`• ${description}`}</Text>)}
+                         
                     </View>
                 )
             })}

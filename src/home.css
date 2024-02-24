@@ -25,8 +25,9 @@
     border-radius: 0.75em;
     height: fit-content;
     width: fit-content;
-
+    padding-bottom: 5em;
 }
+
 
 /*grid place-items-center h-[100px] w-[400px] bg-white rounded-[0.75em]*/
 

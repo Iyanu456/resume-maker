@@ -26,10 +26,10 @@ export const education = [{
 }]
 
 export const experience = [{
-  position: 'Frontend Developer Internship',
+  jobTitle: 'Frontend Developer Internship',
   company: 'Hack4Naija',
-  date: '1990 - present',
-  duty: [
+  duration: '1990 - present',
+  description: [
     'Worked with developers to deliver complex frontend designs for production',
     'Worked with backend developers to integrate backend functions with my code',
     'Built single-page-application utilizing React.js, jQuery, and Bootsrap',
@@ -50,9 +50,9 @@ export const experience = [{
 
 export const projects = [{
   project: 'LlamaGPT',
-  description: 'Personal AI Assistant',
+  about: 'Personal AI Assistant',
   date: '2022',
-  features: [
+  description: [
     'Worked with developers to deliver complex frontend designs for production',
   ]
 },

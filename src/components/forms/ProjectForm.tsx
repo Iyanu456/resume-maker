@@ -1,32 +1,33 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import InputLabel from "../InputLabel";
 
-interface EducationFormProps {
+interface formProps {
   formStyle: string;
   index: any; // Unique index to identify the form
   data: {
-    school: string;
-    degree: string;
+    project: string;
+    about: string;
     duration: string;
+    description: string;
   };
   onSave: (field: string, index: number, data: any) => void;
 }
 
-const EducationForm: React.FC<EducationFormProps> = (props) => {
+const ProjectForm: React.FC<formProps> = (props) => {
   const { index, data } = props;
-  const [educationData, setEducationData] = useState(data);
+  const [projectData, setProjectData] = useState(data);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      props.onSave('education', index, educationData);
+      props.onSave('project', index, projectData);
     }, 500); // Adjust the timeout duration as needed
 
-    // Clear the timeout on component unmount or when educationData changes
+    // Clear the timeout on component unmount or when projectData changes
     return () => clearTimeout(timeoutId);
-  }, [educationData, index, props]);
+  }, [projectData, index, props]);
 
   const handleInputChange = (field: string, value: string) => {
-    setEducationData((prevData) => ({
+    setProjectData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -34,31 +35,39 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>Education</b></h1>
+    <h1 className="section-title"><b>Projects</b></h1>
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel
-          label="School"
+          label="Project Name"
           type="text"
-          value={educationData.school}
+          value={projectData.project}
           handleChange={(e) => {
-            handleInputChange("school", e.target.value);
+            handleInputChange("project", e.target.value);
           }}
         />
           <InputLabel
-            label="Degree"
+            label="Short Description"
             type="text"
-            value={educationData.degree}
+            value={projectData.about}
             handleChange={(e) => {
-              handleInputChange("degree", e.target.value);
+              handleInputChange("about", e.target.value);
             }}
           />
           <InputLabel
-            label="Duration"
+            label="duration"
             type="text"
-            value={educationData.duration}
+            value={projectData.duration}
             handleChange={(e) => {
               handleInputChange("duration", e.target.value);
+            }}
+            />
+          <InputLabel
+            label="description"
+            type="text"
+            value={projectData.description}
+            handleChange={(e) => {
+              handleInputChange("description", e.target.value);
             }}
           />
       </div>
@@ -67,4 +76,4 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
   );
 };
 
-export default EducationForm
+export default ProjectForm

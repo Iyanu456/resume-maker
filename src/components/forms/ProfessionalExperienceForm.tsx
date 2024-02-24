@@ -1,32 +1,33 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import InputLabel from "../InputLabel";
 
-interface EducationFormProps {
+interface formProps {
   formStyle: string;
   index: any; // Unique index to identify the form
   data: {
-    school: string;
-    degree: string;
+    jobTitle: string;
+    company: string;
     duration: string;
+    description: string;
   };
   onSave: (field: string, index: number, data: any) => void;
 }
 
-const EducationForm: React.FC<EducationFormProps> = (props) => {
+const ExperienceForm: React.FC<formProps> = (props) => {
   const { index, data } = props;
-  const [educationData, setEducationData] = useState(data);
+  const [experienceData, setExperienceData] = useState(data);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      props.onSave('education', index, educationData);
+      props.onSave('experience', index, experienceData);
     }, 500); // Adjust the timeout duration as needed
 
-    // Clear the timeout on component unmount or when educationData changes
+    // Clear the timeout on component unmount or when experienceData changes
     return () => clearTimeout(timeoutId);
-  }, [educationData, index, props]);
+  }, [experienceData, index, props]);
 
   const handleInputChange = (field: string, value: string) => {
-    setEducationData((prevData) => ({
+    setExperienceData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -34,31 +35,39 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>Education</b></h1>
+    <h1 className="section-title"><b>Professional Experience</b></h1>
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel
-          label="School"
+          label="Job Title"
           type="text"
-          value={educationData.school}
+          value={experienceData.jobTitle}
           handleChange={(e) => {
-            handleInputChange("school", e.target.value);
+            handleInputChange("jobTitle", e.target.value);
           }}
         />
           <InputLabel
-            label="Degree"
+            label="Company"
             type="text"
-            value={educationData.degree}
+            value={experienceData.company}
             handleChange={(e) => {
-              handleInputChange("degree", e.target.value);
+              handleInputChange("company", e.target.value);
             }}
           />
           <InputLabel
-            label="Duration"
+            label="duration"
             type="text"
-            value={educationData.duration}
+            value={experienceData.duration}
             handleChange={(e) => {
               handleInputChange("duration", e.target.value);
+            }}
+            />
+          <InputLabel
+            label="description"
+            type="text"
+            value={experienceData.description}
+            handleChange={(e) => {
+              handleInputChange("description", e.target.value);
             }}
           />
       </div>
@@ -67,4 +76,4 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
   );
 };
 
-export default EducationForm
+export default ExperienceForm

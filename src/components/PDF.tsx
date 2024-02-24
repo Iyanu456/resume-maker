@@ -78,6 +78,9 @@ interface documentProps {
     lastname: string;
     title: string;
     education: any;
+    experience: any;
+    skill: any;
+    project: any;
   };
   contactInfo?: {}[];
 
@@ -100,7 +103,7 @@ export default function MyDoc(props: documentProps) {
             <View style={{ display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto' }}>
               {contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
             </View>
-            <View style={{ marginTop: 22 }}>
+            <View style={{ display: 'flex', flexDirection: 'column', gap: '8', marginTop: 22 }}>
 
               {props.info.education.some(education => Object.values(education).some(value => value !== '')) && (
                 <Education
@@ -113,6 +116,7 @@ export default function MyDoc(props: documentProps) {
                   data={props.info.education}
                 />
               )}
+              {props.info.skill.some(skill => Object.values(skill).some(value => value !== '')) && (
               <Skills
                 titleStyle={styles.title}
                 schoolStyle={styles.subtitle}
@@ -120,8 +124,9 @@ export default function MyDoc(props: documentProps) {
                 strokeWidth={docData.strokeWidth}
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
-                data={skill}
-              />
+                data={props.info.skill}
+              />)}
+              {props.info.experience.some(experience => Object.values(experience).some(value => value !== '')) && (
               <Experience
                 titleStyle={styles.title}
                 positionStyle={styles.subtitle}
@@ -130,8 +135,9 @@ export default function MyDoc(props: documentProps) {
                 strokeWidth={docData.strokeWidth}
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
-                data={experience}
-              />
+                data={props.info.experience}
+              />)}
+              {props.info.project.some(project => Object.values(project).some(value => value !== '')) && (
               <Projects
                 titleStyle={styles.title}
                 projectStyle={styles.subtitle}
@@ -140,8 +146,8 @@ export default function MyDoc(props: documentProps) {
                 strokeWidth={docData.strokeWidth}
                 strokeLength={docData.strokeLength}
                 fontSize={docData.fontSize}
-                data={projects}
-              />
+                data={props.info.project}
+              />)}
             </View>
           </View>
         </View>
