@@ -81,8 +81,8 @@ interface documentProps {
     experience: any;
     skill: any;
     project: any;
+    contactInfo: any;
   };
-  contactInfo?: {}[];
 
 }
 
@@ -101,7 +101,7 @@ export default function MyDoc(props: documentProps) {
             <Text style={styles.firstName}>{`${props.info.firstname} ${props.info.lastname}`}</Text>
             <Text style={styles.profession}>{props.info.title}</Text>
             <View style={{ display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto' }}>
-              {contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
+              {props.info.contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
             </View>
             <View style={{ display: 'flex', flexDirection: 'column', gap: '8', marginTop: 22 }}>
 

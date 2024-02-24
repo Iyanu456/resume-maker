@@ -5,7 +5,9 @@ import CustomForm from "./components/CustomComponent";
 import ExperienceForm from "./components/forms/ProfessionalExperienceForm";
 import PdfSection from "./components/PDFViewer";
 import ProjectForm from "./components/forms/ProjectForm";
+import ContactForm from "./components/forms/ContactForm";
 import "./home.css";
+//import { contactInfo } from "./components/data";
 
 // Define types for user input and PDF rendering data
 interface UserInfo {
@@ -36,6 +38,12 @@ interface ProjectInfo {
     duration: string;
   }
 
+interface ContactInfoProps {
+    name: string;
+    label: string;
+    src: string;
+}
+
 interface RenderedProps {
   firstname: string;
   lastname: string;
@@ -46,6 +54,7 @@ interface RenderedProps {
   skill: { skill: string }[];
   experience: experienceInfo[];
   project: ProjectInfo[];
+  contactInfo: ContactInfoProps[];
 }
 
 export default function Home(): JSX.Element {
@@ -53,7 +62,7 @@ export default function Home(): JSX.Element {
   const [userDisplayedInfo, setUserDisplayedInfo] = useState<UserInfo>({
     firstname: "",
     lastname: "",
-    title: "Web Developer",
+    title: "",
     email: "",
     phoneNo: "",
   });
@@ -76,6 +85,7 @@ export default function Home(): JSX.Element {
 
     experience: [{ jobTitle: "", company: "", description: "", duration: "" }],
     project: [{ project: "", about: "", description: "", duration: "" }],
+    contactInfo: [{name: "", label: "", src: ""}]
   });
 
   // State for tracking screen width
@@ -122,6 +132,7 @@ export default function Home(): JSX.Element {
     skill: pdfRenderedProps.skill,
     experience: pdfRenderedProps.experience,
     project: pdfRenderedProps.project,
+    contactInfo: pdfRenderedProps.contactInfo,
   };
 
   // Function to handle input change
@@ -244,6 +255,16 @@ export default function Home(): JSX.Element {
     />
   ));
 
+  const contactForm = pdfRenderedProps.contactInfo.map((data, index) => (
+    <ContactForm
+      key={index}
+      formStyle=""
+      index={index}
+      contactInfo={data}
+      onSave={handleDataSave}
+    />
+  ));
+
   // JSX for rendering the main component
   return (
     <div className="relative h-[100vh] overflow-y-hidden">
@@ -267,6 +288,8 @@ export default function Home(): JSX.Element {
               formStyle="form-card pb-[1em]"
               onFirstNameChange={(e) => handleChange(e, "firstname")}
               onLastNameChange={(e) => handleChange(e, "lastname")}
+              onTitleChange={(e) => handleChange(e, "title")}
+              onSave={handleDataSave}
             />
 
             {/* Education Forms */}
@@ -286,6 +309,9 @@ export default function Home(): JSX.Element {
             </div>
             <div className="form-card">
                 {projectForm}
+            </div>
+            <div className="form-card">
+                {contactForm}
             </div>
           </div>
         </div>

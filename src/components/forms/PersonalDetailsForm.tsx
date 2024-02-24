@@ -12,6 +12,7 @@ interface personalProps {
 
 
 export default function PersonalDetails(props: personalProps) {
+    
 
     return (
         <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
@@ -35,12 +36,6 @@ export default function PersonalDetails(props: personalProps) {
                 type='text'
                 value={props.value}
                 handleChange={props.onLastNameChange}
-                />
-                <InputLabel 
-                label='Email'
-                type='text'
-                value={props.value}
-                handleChange={props.onTitleChange}
                 />
             </div>
         </form>
