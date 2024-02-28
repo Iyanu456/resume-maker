@@ -10,7 +10,8 @@ interface formProps {
     duration: string;
     description: string;
   };
-  onSave: (field: string, index: number, data: any) => void;
+  onSave: (field: string, index: number, data: any) => any;
+  debounceTime: number;
 }
 
 const ProjectForm: React.FC<formProps> = (props) => {
@@ -20,7 +21,7 @@ const ProjectForm: React.FC<formProps> = (props) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       props.onSave('project', index, projectData);
-    }, 500); // Adjust the timeout duration as needed
+    }, props.debounceTime); // Adjust the timeout duration as needed
 
     // Clear the timeout on component unmount or when projectData changes
     return () => clearTimeout(timeoutId);
@@ -35,7 +36,6 @@ const ProjectForm: React.FC<formProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>Projects</b></h1>
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel

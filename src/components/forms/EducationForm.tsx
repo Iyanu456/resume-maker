@@ -9,7 +9,8 @@ interface EducationFormProps {
     degree: string;
     duration: string;
   };
-  onSave: (field: string, index: number, data: any) => void;
+  onSave: (field: string, index: number, data: any) => any;
+  debounceTime: number;
 }
 
 const EducationForm: React.FC<EducationFormProps> = (props) => {
@@ -19,7 +20,7 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       props.onSave('education', index, educationData);
-    }, 500); // Adjust the timeout duration as needed
+    }, props.debounceTime); // Adjust the timeout duration as needed
 
     // Clear the timeout on component unmount or when educationData changes
     return () => clearTimeout(timeoutId);
@@ -34,7 +35,7 @@ const EducationForm: React.FC<EducationFormProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>Education</b></h1>
+    
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel

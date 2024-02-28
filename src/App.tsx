@@ -31,7 +31,11 @@ const App = () => {
     email: '',
     phoneNo: '',
 
-    education: [],
+    education: [{
+      school: '',
+    degree: '',
+    duration: '',
+    }],
   });
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -105,23 +109,25 @@ const App = () => {
   };
 
   // Add a new form and corresponding education object
-  const handleAddEducation = () => {
-
-     // Check if the current education has any non-empty values
-    const currentEducation = pdfRenderedProps.education[pdfRenderedProps.education.length - 1];
-    const isCurrentEducationBlank = Object.values(currentEducation).every(value => value === '');
-
-
-    if (!isCurrentEducationBlank) {
+  const handleAddItem = (field: string, newArray: any) => {
     setPdfRenderedProps((prevProps) => {
-      const newEducationArray = [...prevProps.education, { school: '', degree: '', duration: '' }];
-
+      const newItemArray = [...prevProps[field], newArray];
+  
       return {
         ...prevProps,
-        education: newEducationArray,
+        [field]: newItemArray,
       };
     });
-  }
+  };
+  
+  const handleAddData = (field: string) => {
+    // Check if the current item has any non-empty values
+    const currentItem = pdfRenderedProps[field][pdfRenderedProps[field].length - 1];
+    const isCurrentItemBlank = Object.values(currentItem).every(value => value === '');
+  
+    if (!isCurrentItemBlank) {
+      handleAddItem(field);
+    }
   };
 
   // Render EducationForm components based on the pdfRenderedProps
@@ -150,7 +156,7 @@ const App = () => {
           <h1 className="section-title ml-0 mr-auto"><b>Education</b></h1>
           {educationForms}
 
-          <button onClick={handleAddEducation}>Add Education</button>
+          <button onClick={() => {handleAddItem('education', { school: '', degree: '', duration: '' })}}>Add Education</button>
           <hr className='w-[100%] my-[1.8em]'/>
           {/*<PDFDownloadLink document={<MyDoc info={info}/>}>
             Download

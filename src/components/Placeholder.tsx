@@ -25,7 +25,7 @@ const ResizableDiv = (props: scale) => {
     };
   }, []);
 
-  const scale = 2.734 / props.scaleFactor
+  const scale = 2.738 / props.scaleFactor
   const calculateProportionalSize = () => {
     // Calculate the proportional height based on the current width and A4 aspect ratio
     const scaledHeight = windowSize.width / A4AspectRatio;

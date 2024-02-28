@@ -28,6 +28,27 @@
     padding-bottom: 5em;
 }
 
+.btn-dotted {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 0.94em;
+    border-radius: 4em;
+    padding: 0.5em 1.5em;
+    border: 3px solid rgb(179, 179, 179);
+    border-style: dashed;
+}
+
+.btn-primary {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 0.94em;
+    border-radius: 4em;
+    padding: 0.6em 1.5em;
+    background-color: rgb(28, 36, 107);
+    color: white;
+}
+
+
 
 /*grid place-items-center h-[100px] w-[400px] bg-white rounded-[0.75em]*/
 

@@ -74,14 +74,13 @@ const styles = StyleSheet.create({
 
 interface documentProps {
   info: {
-    firstname: string;
-    lastname: string;
-    title: string;
-    education: any;
-    experience: any;
-    skill: any;
-    project: any;
-    contactInfo: any;
+    
+    education?: any;
+    experience?: any;
+    skill?: any;
+    project?: any;
+    contactInfo?: any;
+    personalInfo?: any;
   };
 
 }
@@ -98,10 +97,11 @@ export default function MyDoc(props: documentProps) {
       <BlobPage style={styles.page} size='A4' wrap>
         <View>
           <View>
-            <Text style={styles.firstName}>{`${props.info.firstname} ${props.info.lastname}`}</Text>
-            <Text style={styles.profession}>{props.info.title}</Text>
+            {props.info.personalInfo.map(({ fullname, jobTitle }) => ( <>
+            <Text style={styles.firstName}>{`${fullname}`}</Text>
+            <Text style={styles.profession}>{jobTitle}</Text></>))}
             <View style={{ display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto' }}>
-              {props.info.contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
+              {props.info.contactInfo.map(({ name, label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
             </View>
             <View style={{ display: 'flex', flexDirection: 'column', gap: '8', marginTop: 22 }}>
 

@@ -1,7 +1,7 @@
 // PdfSection.tsx
 import React, { useState, useRef } from "react";
 import { BlobProvider } from "@react-pdf/renderer";
-import { pdf } from "@react-pdf/renderer";
+import { pdf, PDFDownloadLink } from "@react-pdf/renderer";
 import { Document as DocumentView, Page as PageView } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -46,6 +46,7 @@ export default function PdfSection(props: PdfSectionProps) {
                 <button onClick={prevPage}>Previous</button>
                 <button onClick={nextPage}>Next</button>
   </div>*/}
+  
       <BlobProvider document={<MyDoc info={props.info} />}>
 
         {({ blob, error }) => {

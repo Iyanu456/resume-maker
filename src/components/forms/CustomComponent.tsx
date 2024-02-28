@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
-import InputLabel from "./InputLabel";
+import InputLabel from "../InputLabel";
 
 interface skillProps {
   formStyle?: string;
@@ -8,7 +8,8 @@ interface skillProps {
     skill: string;
   };
   title?: string;
-  onSave: (field: any, index: number, data: any) => void;
+  onSave: (field: any, index: number, data: any) => any;
+  debounceTime: number;
 }
 
 const SkillForm: React.FC<skillProps> = (props) => {
@@ -18,7 +19,7 @@ const SkillForm: React.FC<skillProps> = (props) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       props.onSave('skill', index, skillData);
-    }, 500); // Adjust the timeout duration as needed
+    }, props.debounceTime); // Adjust the timeout duration as needed
 
     // Clear the timeout on component unmount or when educationData changes
     return () => clearTimeout(timeoutId);
@@ -33,7 +34,6 @@ const SkillForm: React.FC<skillProps> = (props) => {
 
   return (
     <>
-    <h1 className="section-title"><b>Skills</b></h1>
     <form className={props.formStyle} onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-1">
         <InputLabel

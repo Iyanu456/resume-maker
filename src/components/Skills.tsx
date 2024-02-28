@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { View, Line, Svg, Text } from '@react-pdf/renderer';
 
 interface skillsProps {
