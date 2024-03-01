@@ -13,31 +13,33 @@ interface PdfSectionProps {
   info: any;
   className: string;
   scaleFactor: number;
+  onLoadSuccess: (num: number) => number;
+  
  
 }
 
 export default function PdfSection(props: PdfSectionProps) {
-    const [numPages, setNumPages] = useState(1)
-    const [pageNum, setPageNum] = useState(1)
-    const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
+    //const [numPages, setNumPages] = useState(1)
+    //const [pageNum, setPageNum] = useState(1)
+    //const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
 
 
 
 
-    const isLoading = renderedPageNumber !== pageNum;
+    //const isLoading = renderedPageNumber !== pageNum;
 
 
 
-  function nextPage() {
-    if (pageNum >= numPages) setPageNum(pageNum);
-    else setPageNum(pageNum + 1);
-  }
+  //function nextPage() {
+  //  if (pageNum >= numPages) setPageNum(pageNum);
+  //  else setPageNum(pageNum + 1);
+  //}
 
 
-  function prevPage() {
-    if (pageNum > 0 && pageNum === 1) setPageNum(pageNum);
-    else setPageNum(pageNum - 1);
-  }
+  //function prevPage() {
+  //  if (pageNum > 0 && pageNum === 1) setPageNum(pageNum);
+  //  else setPageNum(pageNum - 1);
+  //}
 
 
   return (
@@ -61,17 +63,17 @@ export default function PdfSection(props: PdfSectionProps) {
                 file={blob}
                 onLoad={() => null}
                 loading={() => <ResizableDiv scaleFactor={props.scaleFactor}/>}
-                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                onLoadSuccess={props.onLoadSuccess}
                
               >
                     <PageView
                     noData={() => <ResizableDiv scaleFactor={props.scaleFactor}/>}
                     onLoad={() => null}
                     loading={() => <ResizableDiv scaleFactor={props.scaleFactor} />}
-              pageNumber={pageNum}
+              pageNumber={props.pageNum}
               scale={props.handleScreenResize()}
 
-              onRenderSuccess={() => setRenderedPageNumber(pageNum)}
+              onRenderSuccess={props.onRenderSuccess}
             />
               </DocumentView> 
             </div>

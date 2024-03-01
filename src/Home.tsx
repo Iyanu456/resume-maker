@@ -11,6 +11,7 @@ import Accordion from "./Accordion";
 import Accordion2 from "./Accordion2";
 import SkillForm from "./components/forms/CustomComponent";
 import "./home.css";
+import Icon from "./Icon";
 
 interface personalInfoProps {
   fullname: string;
@@ -53,6 +54,20 @@ interface RenderedProps {
 }
 
 export default function Home(): JSX.Element {
+  const [numPages, setNumPages] = useState(1);
+  const [pageNum, setPageNum] = useState(1);
+  const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
+
+  function nextPage() {
+    if (pageNum >= numPages) setPageNum(pageNum);
+    else setPageNum(pageNum + 1);
+  }
+
+  function prevPage() {
+    if (pageNum > 0 && pageNum === 1) setPageNum(pageNum);
+    else setPageNum(pageNum - 1);
+  }
+
   // State for tracking screen width
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
@@ -288,9 +303,9 @@ export default function Home(): JSX.Element {
         <div className="flex flex-col gap-2 h-[100%] overflow-y-hidden bg-grey pr-[1em]">
           <div className="form-section min-w-[400px] relative rounded-[0.75em] overflow-x-hidden">
             <div className="flex px-[1.2em] py-[1.6em] w-[400px] bg-white border-[1px] rounded-[0.6em] sticky top-0 z-30 shadow-lg">
-              <p className="my-auto">
+              <h2 className="my-auto">
                 <b>Resume</b>
-              </p>
+              </h2>
               <PDFDownloadLink
                 className="ml-auto mr-0 my-auto btn-primary"
                 document={<MyDoc info={info} />}
@@ -304,30 +319,40 @@ export default function Home(): JSX.Element {
         </div>
 
         {/* PDF Section */}
-       
-        <div className="w-auto flex bg-white flex-col justify-center center-align w-[max-content] h-[100%] overflow-y-hidden px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
+
+        <div className="w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] overflow-y-hidden px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
+        <div className="grid w-[fit-content] h-[fit-content] mx-auto mt-4 mb-4">
+        <div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
+              <Icon
+                onClick={() => prevPage()}
+                src="arrow-right-3.svg"
+                className="m-auto p-2 rotate-180"
+              />
+              <div className="flex m-auto gap-2 text-sm">
+                <p className="pl-1 ">{pageNum}</p> <p>/</p> <p className="pr-1">{numPages}</p> 
+              </div>
+              <Icon
+                onClick={() => nextPage()}
+                src="arrow-right-3.svg"
+                className="m-auto p-2"
+              />
+        </div>
+        </div>
           <div className="m-auto grid place-items-center w-[fit-content] h-[fit-content] overflow-y-scroll">
-          
             <PdfSection
-              className=" pt-[2em] m-auto"
+              className="m-auto mt-[-1em]"
               handleScreenResize={handleScreenResize}
               info={info}
               scaleFactor={scaleFactor}
+              numPages={numPages}
+              pageNum={pageNum}
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              onRenderSuccess={() => setRenderedPageNumber(pageNum)}
             />
           </div>
         </div>
 
-        <div>
-        <div className="flex px-[1.2em] py-[0.7em] w-[100%] rounded-[0.6em] sticky top-0 z-30">
-          <div className="m-auto px-1 py-2 shadow-md bg-white rounded-3">
-          <p className="my-auto">
-                <b>Page 1</b>
-              </p>
-          </div>
-              
-          </div>
-        </div>
-
+        
       </div>
     </div>
   );

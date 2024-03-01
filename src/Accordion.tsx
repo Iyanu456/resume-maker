@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import './accordion.css'
+import Icon from './Icon';
 
 interface accordionProps {
     accordionData: {title: string, content: any}[];
@@ -31,11 +32,13 @@ const Accordion = (props: accordionProps) => {
       {props.accordionData.map((section, index) => (
         <div key={index} className="accordion-section">
           <div
-            className={`accordion-header ${activeIndex === index ? 'active' : ''}`}
+            className={`flex accordion-header ${activeIndex === index ? 'active' : ''}`}
             style={activeIndex === index ? customStyle : {}}
             onClick={() => handleAccordionClick(index)}
           >
+            <Icon src="edit-2.svg" className="mr-3" />
             <h1 className="section-title"><b>{section.title}</b></h1>
+            <Icon className={`ml-auto mr-0 pr-2 `} src={ `${activeIndex === index ? 'arrow-down-1.svg' : 'arrow-right-3.svg'}`} height='20px' width='20px' />
           </div>
           {activeIndex === index && (
             <div className="accordion-content">{section.content}</div>

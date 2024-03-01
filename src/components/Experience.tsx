@@ -18,7 +18,7 @@ interface experienceProps {
 
 const Experience: React.FC<experienceProps> = (props) => {
     return (
-        <View style={{marginBottom: 15, fontSize: `${props.fontSize}`, lineHeight: '1.6pt'}}>
+        <View style={{marginBottom: 10, fontSize: `${props.fontSize}`, lineHeight: '1.6pt'}}>
             <Text style={props.titleStyle}>Professional Experience</Text>
             <Svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <Line
