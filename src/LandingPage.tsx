@@ -6,9 +6,9 @@ export default function LandingPage() {
             <div className="nav flex py-[1.2em] px-[2em] relative z-20 top-0 bottom-auto border-b-2">
                 <b>Sketch.cv</b>
             </div>
-            <div className="hero grid place-items-center h-[fit-contents] pt-[5em]">
+            <div className="hero grid place-items-center h-[fit-contents] pt-[2em] md:pt-[5em]">
                 <div className="max-w-[65%] text-center">
-                    <h2 className="hero-heading text-[2.7em] md:text-[3.6em]">
+                    <h2 className="hero-heading text-[2.3em] md:text-[3.6em]">
                         Create a free <span className="purple">Resume</span> in minutes
                     </h2>
                     <p className="text-[1.2em] m-auto pt-1 text-grey">
@@ -20,7 +20,7 @@ export default function LandingPage() {
                         <button className="btn bg-black text-white py-[0.6em] px-[2.2em] rounded-[0.75em]">
                             Get Started
                         </button>
-                        <button className="btn-outline py-[0.6em] px-[2.2em] rounded-[0.75em]">
+                        <button className="btn-outline py-[0.6em] px-[2.2em] rounded-[0.75em] hidden md:block">
                             Sign in
                         </button>
                     </div>
