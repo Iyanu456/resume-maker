@@ -5,6 +5,7 @@ import Home from './Home.tsx'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Accordion from './Accordion2.tsx'
+import LandingPage from './LandingPage.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -12,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/app" element={<App />} />
-        <Route path="/acc" element={<Accordion />} />
+        <Route path="/landing" element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

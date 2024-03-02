@@ -299,10 +299,10 @@ export default function Home(): JSX.Element {
       </div>
 
       {/* Main content */}
-      <div className="home flex flex-wrap justify-center center-align h-[100%] px-[2em] pt-[2em]">
-        <div className="flex flex-col gap-2 h-[100%] overflow-y-hidden bg-grey pr-[1em]">
-          <div className="form-section min-w-[400px] relative rounded-[0.75em] overflow-x-hidden">
-            <div className="flex px-[1.2em] py-[1.6em] w-[400px] bg-white border-[1px] rounded-[0.6em] sticky top-0 z-30 shadow-lg">
+      <div className="home flex flex-wrap justify-center center-align h-[100%] px-[1em] pt-[2em]">
+        <div className="flex flex-col gap-2 h-[100%] overflow-y-hidden bg-grey md:pr-[1em]">
+          <div className="form-section w-[100%] md:min-w-[400px] relative rounded-[0.75em] overflow-x-hidden">
+            <div className="flex px-[1.2em] py-[1.6em] w-[100%] bg-white border-[1px] rounded-[0.6em] sticky top-0 z-30 shadow-lg">
               <h2 className="my-auto">
                 <b>Resume</b>
               </h2>
@@ -321,7 +321,7 @@ export default function Home(): JSX.Element {
         {/* PDF Section */}
 
         <div className="w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] overflow-y-hidden px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
-        <div className="grid w-[fit-content] h-[fit-content] mx-auto mt-4 mb-4">
+        <div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
         <div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
               <Icon
                 onClick={() => prevPage()}
@@ -340,7 +340,7 @@ export default function Home(): JSX.Element {
         </div>
           <div className="m-auto grid place-items-center w-[fit-content] h-[fit-content] overflow-y-scroll">
             <PdfSection
-              className="m-auto mt-[-1em]"
+              className="m-auto"
               handleScreenResize={handleScreenResize}
               info={info}
               scaleFactor={scaleFactor}

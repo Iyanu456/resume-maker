@@ -50,6 +50,8 @@
 
 
 
+
+
 /*grid place-items-center h-[100px] w-[400px] bg-white rounded-[0.75em]*/
 
 .form-card {
@@ -64,4 +66,10 @@
 .home::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 56px;
+  }
+
+  @media screen and (max-width: 520px) {
+    .form-section {
+        width: 99.5%;
+    }
   }

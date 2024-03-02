@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@100..900&display=swap');
+
+
+.hero-heading {
+    font-family: 'DM Serif Text';
+    font-weight: 500;
+}
+
+.btn {
+    font-family: Poppins;
+    font-weight: 500;
+}
+
+.btn-outline {
+    font-family: Poppins;
+    font-weight: 500;
+    border:2px solid black;
+}
+
+.purple {
+    color: #6816b6;
+}
+
+.dm-serif-text {
+    font-family: 'DM Serif Text';
+}
