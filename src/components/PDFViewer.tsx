@@ -1,7 +1,7 @@
 // PdfSection.tsx
-import React, { useState, useRef } from "react";
+//import React, { useState, useRef } from "react";
 import { BlobProvider } from "@react-pdf/renderer";
-import { pdf, PDFDownloadLink } from "@react-pdf/renderer";
+//import { pdf, PDFDownloadLink } from "@react-pdf/renderer";
 import { Document as DocumentView, Page as PageView } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -13,7 +13,10 @@ interface PdfSectionProps {
   info: any;
   className: string;
   scaleFactor: number;
-  onLoadSuccess: (num: number) => number;
+  pageNum: number;
+  numPages: number;
+  onLoadSuccess: (num: any) => any;
+  onRenderSuccess: () => void;
   
  
 }

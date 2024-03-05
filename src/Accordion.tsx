@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import { useState } from 'react';
 import './accordion.css'
 import Icon from './Icon';
 
@@ -38,7 +38,7 @@ const Accordion = (props: accordionProps) => {
           >
             <Icon src="edit-2.svg" className="mr-3" />
             <h1 className="section-title"><b>{section.title}</b></h1>
-            <Icon className={`ml-auto mr-0 pr-2 sm:hidden`} src={ `${activeIndex === index ? 'arrow-down-1.svg' : 'arrow-right-3.svg'}`} height='20px' width='20px' />
+            <Icon className={`ml-auto mr-0 pr-2 md:hidden`} src={ `${activeIndex === index ? 'arrow-down-1.svg' : 'arrow-right-3.svg'}`} height='20px' width='20px' />
           </div>
           {activeIndex === index && (
             <div className="accordion-content">{section.content}</div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { pdf, PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDoc from "./components/PDF";
 import PersonalDetails from "./components/forms/PersonalDetailsForm";
 import EducationForm from "./components/forms/EducationForm";

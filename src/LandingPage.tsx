@@ -26,7 +26,7 @@ export default function LandingPage() {
                     </div>
                 </div>
             </div>
-            <div className="grid place-items-center mt-[5em] relative">
+            <div className="grid place-items-center mt-[5em] relative px-5">
                 <div className="shadow-2xl border-[2px] w-[fit-contents] p-1 rounded-[0.8em] md:max-w-[75vw]">
                     <div className=" bg-white w-[fit-contents] p-3 rounded-[0.75em] ">
                         <img src="resume-maker-screenshoot2.PNG" />

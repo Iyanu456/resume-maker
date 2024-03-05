@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./accordion2.css";
-import Icon from "./Icon";
+//import Icon from "./Icon";
 
 interface accordion2Props {
   onAdd: (field: string, defaultObject: any) => any;
