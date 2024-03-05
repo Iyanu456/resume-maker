@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import  { pdfjs } from 'react-pdf'
 import MyDoc from "./components/PDF";
 import PersonalDetails from "./components/forms/PersonalDetailsForm";
 import EducationForm from "./components/forms/EducationForm";
@@ -12,6 +13,12 @@ import SkillForm from "./components/forms/SkillForm";
 import "./home.css";
 import Icon from "./Icon";
 import PDFViewer from "./components/PDFViewer";
+
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
 interface personalInfoProps {
   fullname: string;
@@ -347,7 +354,7 @@ export default function Home(): JSX.Element {
               numPages={numPages}
               pageNum={pageNum}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-            //onRenderSuccess={() => setRenderedPageNumber(pageNum)}
+              //onRenderSuccess={() => setPageNum(pageNum)}
             />
           </div>
         </div>
