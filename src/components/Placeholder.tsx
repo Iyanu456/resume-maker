@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const A4AspectRatio = 1.414; // Aspect ratio of A4 paper
 interface scale {

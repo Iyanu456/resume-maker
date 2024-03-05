@@ -8,7 +8,7 @@ import ProjectForm from "./components/forms/ProjectForm";
 import ContactForm from "./components/forms/ContactForm";
 import Accordion from "./Accordion";
 import Accordion2 from "./Accordion2";
-import SkillForm from "./components/forms/CustomComponent";
+import SkillForm from "./components/forms/SkillForm";
 import "./home.css";
 import Icon from "./Icon";
 import PDFViewer from "./components/PDFViewer";
@@ -56,7 +56,7 @@ interface RenderedProps {
 export default function Home(): JSX.Element {
   const [numPages, setNumPages] = useState(1);
   const [pageNum, setPageNum] = useState(1);
-  const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
+  //const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
 
   function nextPage() {
     if (pageNum >= numPages) setPageNum(pageNum);
@@ -321,23 +321,23 @@ export default function Home(): JSX.Element {
         {/* PDF Section */}
 
         <div className="w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] overflow-y-hidden px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
-        <div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
-        <div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
+          <div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
+            <div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
               <Icon
                 onClick={() => prevPage()}
                 src="arrow-right-3.svg"
                 className="m-auto p-2 rotate-180"
               />
               <div className="flex m-auto gap-2 text-sm">
-                <p className="pl-1 ">{pageNum}</p> <p>/</p> <p className="pr-1">{numPages}</p> 
+                <p className="pl-1 ">{pageNum}</p> <p>/</p> <p className="pr-1">{numPages}</p>
               </div>
               <Icon
                 onClick={() => nextPage()}
                 src="arrow-right-3.svg"
                 className="m-auto p-2"
               />
-        </div>
-        </div>
+            </div>
+          </div>
           <div className="m-auto grid place-items-center w-[fit-content] h-[fit-content] overflow-y-scroll">
             <PDFViewer
               className="m-auto"
@@ -347,12 +347,12 @@ export default function Home(): JSX.Element {
               numPages={numPages}
               pageNum={pageNum}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-              //onRenderSuccess={() => setRenderedPageNumber(pageNum)}
+            //onRenderSuccess={() => setRenderedPageNumber(pageNum)}
             />
           </div>
         </div>
 
-        
+
       </div>
     </div>
   );

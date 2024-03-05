@@ -100,9 +100,9 @@ interface DocumentProps {
     }[];
     contactInfo?: {
       // Define the structure of the contactInfo object
-      name: string;
+      name?: string;
       label: string;
-      src: string;
+      src?: string;
     }[];
     personalInfo?: {
       // Define the structure of the personalInfo object
@@ -129,7 +129,7 @@ export default function MyDoc(props: DocumentProps) {
             <Text style={styles.firstName}>{`${fullname}`}</Text>
             <Text style={styles.profession}>{jobTitle}</Text></>))}
             <View style={{ display: 'flex', flexDirection: 'row', fontSize: '12pt', fontFamily: 'Inter', margin: '2 auto' }}>
-              {props.info.contactInfo && props.info.contactInfo.map(({ name, label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
+              {props.info.contactInfo && props.info.contactInfo.map(({ label, src }) => (<Link src={src} style={{ marginRight: 10, color: 'black', textDecoration: 'none' }}>{label}</Link>))}
             </View>
             <View style={{ display: 'flex', flexDirection: 'column', gap: '8', marginTop: 22 }}>
 
