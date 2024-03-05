@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import InputLabel from "../InputLabel";
 
 interface contactFormProps {

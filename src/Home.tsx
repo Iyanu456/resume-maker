@@ -4,7 +4,6 @@ import MyDoc from "./components/PDF";
 import PersonalDetails from "./components/forms/PersonalDetailsForm";
 import EducationForm from "./components/forms/EducationForm";
 import ExperienceForm from "./components/forms/ProfessionalExperienceForm";
-import PdfSection from "./components/PDFViewer";
 import ProjectForm from "./components/forms/ProjectForm";
 import ContactForm from "./components/forms/ContactForm";
 import Accordion from "./Accordion";
@@ -12,6 +11,7 @@ import Accordion2 from "./Accordion2";
 import SkillForm from "./components/forms/CustomComponent";
 import "./home.css";
 import Icon from "./Icon";
+import PDFViewer from "./components/PDFViewer";
 
 interface personalInfoProps {
   fullname: string;
@@ -339,7 +339,7 @@ export default function Home(): JSX.Element {
         </div>
         </div>
           <div className="m-auto grid place-items-center w-[fit-content] h-[fit-content] overflow-y-scroll">
-            <PdfSection
+            <PDFViewer
               className="m-auto"
               handleScreenResize={handleScreenResize}
               info={info}
@@ -347,7 +347,7 @@ export default function Home(): JSX.Element {
               numPages={numPages}
               pageNum={pageNum}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-              onRenderSuccess={() => setRenderedPageNumber(pageNum)}
+              //onRenderSuccess={() => setRenderedPageNumber(pageNum)}
             />
           </div>
         </div>

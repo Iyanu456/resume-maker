@@ -11,17 +11,17 @@ import ResizableDiv from "./Placeholder";
 interface PdfSectionProps {
   handleScreenResize: () => number;
   info: any;
-  className: string;
+  className?: string;
   scaleFactor: number;
   pageNum: number;
   numPages: number;
-  onLoadSuccess: (num: any) => any;
-  onRenderSuccess: () => void;
+  onLoadSuccess?: (num: any) => any;
+  onRenderSuccess?: () => void;
   
  
 }
 
-export default function PdfSection(props: PdfSectionProps) {
+export default function PDFViewer(props: PdfSectionProps) {
     //const [numPages, setNumPages] = useState(1)
     //const [pageNum, setPageNum] = useState(1)
     //const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
@@ -76,7 +76,7 @@ export default function PdfSection(props: PdfSectionProps) {
               pageNumber={props.pageNum}
               scale={props.handleScreenResize()}
 
-              onRenderSuccess={props.onRenderSuccess}
+              //onRenderSuccess={props.onRenderSuccess}
             />
               </DocumentView> 
             </div>
