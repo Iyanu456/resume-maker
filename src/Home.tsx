@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { Page, View, Document, Text } from '@react-pdf/renderer';
 import  { pdfjs } from 'react-pdf'
 import MyDoc from "./components/PDF";
 import PersonalDetails from "./components/forms/PersonalDetailsForm";
@@ -63,6 +64,7 @@ interface RenderedProps {
 export default function Home(): JSX.Element {
   const [numPages, setNumPages] = useState(1);
   const [pageNum, setPageNum] = useState(1);
+  //const [activeIndex, setActiveIndex] = useState<number | null>(null);
   //const [renderedPageNumber, setRenderedPageNumber] = useState(Number);
 
   function nextPage() {
@@ -147,6 +149,30 @@ export default function Home(): JSX.Element {
     });
   };
 
+  
+  const handleDeleteItem = (field: string, index: number) => {
+    if (index === 0) {
+      // Do not allow deletion of the first item
+      return;
+    }
+  
+    setPdfRenderedProps((prevProps: any) => {
+      const newArray = [...prevProps[field]];
+      newArray.splice(index, 1);
+      //handleAccordionClick(index);
+      //setActiveIndex(null);
+      //console.log(newArray)
+      
+  
+      return {
+        ...prevProps,
+        [field]: newArray,
+      };
+    });
+  };
+  
+  
+
   const accordionData = [
     {
       title: "Personal Details",
@@ -202,6 +228,8 @@ export default function Home(): JSX.Element {
               ),
             }))}
             onAdd={handleAddItem}
+            onDelete={handleDeleteItem}
+            //onAccordionClose={handleAccordionClose}
             field="education"
             defaultObject={{
               school: "",
@@ -297,6 +325,79 @@ export default function Home(): JSX.Element {
     },
   ];
 
+// Mapping array for React components to DOM elements
+const validDomItem = [
+  ['Document', 'div'],
+  ['Page', 'div'],
+  ['Text', 'p'],
+];
+
+// Function to convert React component tree to HTML
+const convertToHTML = (element) => {
+  if (!element) {
+    return null;
+  }
+
+  const { type, props } = element;
+  const children = React.Children.map(props.children, convertToHTML);
+
+  const mapping = validDomItem.find(([reactType]) => reactType === type);
+
+  if (mapping) {
+    const [reactType, domType] = mapping;
+    const htmlElement = document.createElement(domType);
+
+    for (const prop in props) {
+      if (prop !== 'children' && props.hasOwnProperty(prop)) {
+        htmlElement[prop] = props[prop];
+      }
+    }
+
+    children.forEach((child) => {
+      if (child) {
+        htmlElement.appendChild(child);
+      }
+    });
+
+    return htmlElement;
+  }
+
+  // Fallback for unknown components
+  if (typeof type === 'string') {
+    const fallbackElement = document.createElement('div');
+    fallbackElement.innerHTML = `Unknown component: ${type}`;
+    return fallbackElement;
+  }
+
+  // Fallback for non-string types (e.g., fragments)
+  if (Array.isArray(children) && children.length > 0) {
+    return children.length === 1 ? children[0] : children;
+  }
+
+  return null;
+};
+
+
+const TestDoc = () => (
+  <Document>
+    <Page>
+      
+        <Text>Hello</Text>
+    
+    </Page>
+  </Document>
+)
+
+// Convert the TestDoc component to HTML
+const testDocHTML = convertToHTML(<TestDoc />);
+
+// Log the HTML structure to the console if not null
+if (testDocHTML) {
+  console.log(testDocHTML.outerHTML || testDocHTML.innerHTML);
+}
+
+const resumeHTML = convertToHTML(<TestDoc />);
+console.log(resumeHTML.outerHTML);
   // JSX for rendering the main component
   return (
     <div className="relative h-[100vh] overflow-y-hidden">
@@ -320,8 +421,9 @@ export default function Home(): JSX.Element {
               >
                 Download
               </PDFDownloadLink>
+              <button onClick={() => console.log(testDocHTML.innerHTML)}>DOM</button>
             </div>
-            <Accordion accordionData={accordionData} />
+            <Accordion accordionData={accordionData} /*activeIndex={activeIndex} handleAccordionClick={handleAccordionClick}*//>
           </div>
         </div>
 
