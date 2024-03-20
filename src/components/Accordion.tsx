@@ -4,7 +4,7 @@ import Icon from '../Icon';
 
 interface AccordionProps {
   accordionData: { title: string, content: any }[];
-  onAccordionClose?: () => void;  // Add the prop
+  //onAccordionClose?: () => void;  // Add the prop
 }
 
 const Accordion: React.FC<AccordionProps> = (props) => {
