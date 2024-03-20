@@ -72,7 +72,11 @@ const Accordion: React.FC<AccordionProps> = (props) => {
         </div>
       ))}
       <div className={`mt-[1em] grid ${activeIndex === null || isLargeScreen === false ? 'hidden' : ''}`}>
-      <button className='ml-auto mr-4 md:mr-0 btn-primary px-[2em]'  onClick={() => setActiveIndex(null)}>Back</button>
+      <button className='ml-auto mr-4 md:mr-0 btn-primary px-[1.5em] flex gap-1'  onClick={() => setActiveIndex(null)}>
+        <Icon src='/arrow-left.svg' /> 
+        <p>Back</p>
+      </button>
+        
       </div>
       
     </div>

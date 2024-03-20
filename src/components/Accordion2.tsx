@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Icon from '../Icon';
 import './styles/accordion2.css';
 
 interface Accordion2Props {
@@ -66,7 +67,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
               onClick={() => handleDeleteItem(index)}
               className="accordion-btn mr-0 ml-auto"
             >
-              Delete
+              <Icon src='/trash.svg' />
             </button>)}
           </div>
           {activeIndex === index && (
@@ -76,9 +77,11 @@ const Accordion2: React.FC<Accordion2Props> = ({
                 <div className="mr-0 ml-auto flex gap-2">
                   <button
                     onClick={handleAccordionClose}
-                    className="accordion-btn"
+                    className="accordion-btn btn-primary flex gap-1"
                   >
-                    Save
+                    
+                    <Icon src='/tick-circle.svg' height='60px' width='20'/>
+                    <p>Save</p>
                   </button>
                 </div>
               </div>
@@ -94,7 +97,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
           onClick={handleAddNewItem}
           className="flex gap-1 md:min-w-[40%] btn accordion-btn mx-auto btn-dotted"
         >
-          Add New <img src="add.svg" className="h-[20px] w-[20px]" alt="Add" />
+          Add New <img src="add.svg" className=" h-[20px] w-[20px]" alt="Add" />
         </button>
       </div>
     </div>
