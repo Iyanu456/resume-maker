@@ -31,4 +31,10 @@
     display: none;
   }
   
+  .btn-grp {
+    padding: 1.2em 1.4em;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 2em;
+  }
   

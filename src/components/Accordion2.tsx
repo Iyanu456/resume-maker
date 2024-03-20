@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './accordion2.css';
+import React, { useState, useRef } from 'react';
+import './styles/accordion2.css';
 
 interface Accordion2Props {
   onAdd: (field: string, defaultObject: any) => void;
@@ -7,8 +7,8 @@ interface Accordion2Props {
   defaultObject: any;
   field: string;
   accordionData: { title: string; content: any }[];
-  onAccordionClose: () => void;  // Add the prop
-  placeholder: string;
+  onAccordionClose?: () => void;  // Add the prop
+  placeholder?: string;
 }
 
 const Accordion2: React.FC<Accordion2Props> = ({
@@ -21,6 +21,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
   placeholder,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const addNewRef = useRef<HTMLButtonElement>(null); // Create a ref for the "Add New" button
 
   const handleAccordionClick = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -28,12 +29,16 @@ const Accordion2: React.FC<Accordion2Props> = ({
 
   const handleAccordionClose = () => {
     setActiveIndex(null);
-    onAccordionClose();  // Call the prop function to reset in the parent component
+    //onAccordionClose();  // Call the prop function to reset in the parent component
   };
 
   const handleAddNewItem = () => {
     onAdd(field, defaultObject);
     setActiveIndex(null);
+    // Scroll to the "Add New" button
+    if (addNewRef.current) {
+      addNewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const handleDeleteItem = (index: number) => {
@@ -44,7 +49,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
   };
 
   return (
-    <>
+    <div className='bg-white'>
       {accordionData.map((section, index) => (
         <div
           key={index}
@@ -83,17 +88,18 @@ const Accordion2: React.FC<Accordion2Props> = ({
           )}
         </div>
       ))}
-      {activeIndex === null && (
-        <div className="grid place-items-center mb-[-0.6em]">
-          <button
-            onClick={handleAddNewItem}
-            className="flex gap-1 min-w-[40%] btn accordion-btn mx-auto btn-dotted"
-          >
-            Add New <img src="add.svg" className="h-[20px] w-[20px]" alt="Add" />
-          </button>
-        </div>
-      )}
-    </>
+      <div className={`grid place-items-center mb-[-0.6em] ${
+            activeIndex !== null ? "hidden" : ""
+          }`}>
+        <button
+          ref={addNewRef} // Attach the ref to the "Add New" button
+          onClick={handleAddNewItem}
+          className="flex gap-1 min-w-[40%] btn accordion-btn mx-auto btn-dotted"
+        >
+          Add New <img src="add.svg" className="h-[20px] w-[20px]" alt="Add" />
+        </button>
+      </div>
+    </div>
   );
 };
 
