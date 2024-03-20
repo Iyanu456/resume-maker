@@ -12,12 +12,6 @@ const Accordion: React.FC<AccordionProps> = (props) => {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const selectedRef = useRef<HTMLDivElement>(null); // Create a ref for the selected item
 
-  const customStyle = {
-    borderRadius: '0.8em 0.8em 0 0',
-    borderBottom: '0',
-    paddingBottom: '0.5em',
-  };
-
   const handleAccordionClick = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
