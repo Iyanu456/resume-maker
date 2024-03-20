@@ -61,10 +61,10 @@ interface RenderedProps {
 }
 
 export default function Home(): JSX.Element {
-	const [numPages, setNumPages] = useState(1);
-	const [pageNum, setPageNum] = useState(1);
+	//const [numPages, setNumPages] = useState(1);
+	//const [pageNum, setPageNum] = useState(1);
 
-	function nextPage() {
+	/*function nextPage() {
 		if (pageNum >= numPages) setPageNum(pageNum);
 		else setPageNum(pageNum + 1);
 	}
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element {
 	function prevPage() {
 		if (pageNum > 0 && pageNum === 1) setPageNum(pageNum);
 		else setPageNum(pageNum - 1);
-	}
+	}*/
 
 	// State for data to be rendered in the PDF
 	const [pdfRenderedProps, setPdfRenderedProps] = useState<RenderedProps>({
@@ -331,16 +331,16 @@ export default function Home(): JSX.Element {
 					<div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
 						<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
 							<Icon
-								onClick={() => prevPage()}
+								//onClick={() => prevPage()}
 								src="arrow-right-3.svg"
 								className="m-auto p-2 rotate-180"
 							/>
 							<div className="flex m-auto gap-2 text-sm">
-								<p className="pl-1 ">{pageNum}</p> <p>/</p>{" "}
-								<p className="pr-1">{numPages}</p>
+								<p className="pl-1 ">1</p> <p>/</p>{" "}
+								<p className="pr-1">1</p>
 							</div>
 							<Icon
-								onClick={() => nextPage()}
+								//onClick={() => nextPage()}
 								src="arrow-right-3.svg"
 								className="m-auto p-2"
 							/>

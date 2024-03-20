@@ -17,8 +17,6 @@ const Accordion2: React.FC<Accordion2Props> = ({
   defaultObject,
   field,
   accordionData,
-  onAccordionClose,
-  placeholder,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const addNewRef = useRef<HTMLButtonElement>(null); // Create a ref for the "Add New" button

@@ -21,10 +21,10 @@ const Accordion: React.FC<AccordionProps> = (props) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const handleAccordionClose = () => {
+  //const handleAccordionClose = () => {
     setActiveIndex(null);
     //onAccordionClose();  // Call the prop function to reset in the parent component
-  };
+  //};
 
   useEffect(() => {
     // Scroll to the selected item when it becomes active
