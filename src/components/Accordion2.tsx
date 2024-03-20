@@ -92,7 +92,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
         <button
           ref={addNewRef} // Attach the ref to the "Add New" button
           onClick={handleAddNewItem}
-          className="flex gap-1 min-w-[40%] btn accordion-btn mx-auto btn-dotted"
+          className="flex gap-1 md:min-w-[40%] btn accordion-btn mx-auto btn-dotted"
         >
           Add New <img src="add.svg" className="h-[20px] w-[20px]" alt="Add" />
         </button>

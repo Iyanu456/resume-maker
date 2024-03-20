@@ -305,10 +305,10 @@ export default function Home(): JSX.Element {
 			</div>
 
 			{/* Main content */}
-			<div className="home flex flex-wrap justify-center center-align h-[100%] px-[0.1em] pt-[2em] fixed left-0 right-0">
+			<div className="home md:flex flex-wrap justify-center center-align h-[100%] md:px-[0.1em] pt-[2em] fixed left-0 right-0">
 				<div className="flex flex-col gap-2 h-full overflow-y-auto bg-grey md:pr-[1em]">
-					<div className="form-section w-[100%] md:min-w-[400px] relative rounded-[0.75em] overflow-x-hidden">
-						<div className="flex px-[1.2em] py-[1.6em] w-[100%] bg-white border-[1px] rounded-[0.6em] sticky top-0 z-30 shadow-lg">
+					<div className="form-section w-[100%] md:min-w-[400px] relative md:rounded-[0.75em] overflow-x-hidden">
+						<div className="flex px-[1.2em] py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
 							<h2 className="my-auto">
 								<b>Resume</b>
 							</h2>

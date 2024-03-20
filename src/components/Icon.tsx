@@ -6,8 +6,8 @@ interface IconProps {
     onClick?: (e?: any | null) => any;
 }
 
-const DEFAULT_WIDTH = "20px"; // Set your default width
-const DEFAULT_HEIGHT = "20px"; // Set your default height
+const DEFAULT_WIDTH = "10px"; // Set your default width
+const DEFAULT_HEIGHT = "10px"; // Set your default height
 
 export default function Icon(props: IconProps) {
     const width = props.width || DEFAULT_WIDTH;

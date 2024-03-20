@@ -68,8 +68,31 @@
     border-radius: 56px;
   }
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 768px) {
     .form-section {
         width: 99.5%;
+        border-radius: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        gap: 1em;
+        overflow-y: scroll;
+        
+        height: fit-content;
+        width: fit-content;
+        padding-bottom: 5em;
     }
+
+    .form-card {
+        padding: 1.7em 1.4em;
+        width: 100%;
+        background-color: white;
+        border-radius: 0.8em;
+        box-shadow:  none;
+    }
+
+    .home, .bg-grey {
+        background-color: #f1f1f1;
+    }
+    
   }

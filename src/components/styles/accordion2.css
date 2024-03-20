@@ -63,3 +63,26 @@
   padding: 0.8em 1.4em;
   border-radius: 1.5em;
 }
+
+@media screen and (max-width: 768px) {
+  .accordion-section2:first-child::before {
+    display: grid;
+    margin: 0 -1.4em 1em -1.4em;
+    content: " ";
+    width: 120%;
+    height: 2px;
+    background-color: rgb(235, 234, 234);
+    color: black;
+  }
+
+  .accordion-section2::after {
+    display: grid;
+    margin: 1em -1.4em;
+    content: " ";
+    width: 120%;
+    height: 2px;
+    background-color: rgb(235, 234, 234);
+    color: black;
+  }
+
+}
