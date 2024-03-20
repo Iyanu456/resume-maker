@@ -4,7 +4,7 @@ import Icon from '../Icon';
 
 interface AccordionProps {
   accordionData: { title: string, content: any }[];
-  //onAccordionClose?: () => void;  // Add the prop
+  onAccordionClose?: () => void;  // Add the prop
 }
 
 const Accordion: React.FC<AccordionProps> = (props) => {
@@ -22,7 +22,7 @@ const Accordion: React.FC<AccordionProps> = (props) => {
   };
 
   //const handleAccordionClose = () => {
-    setActiveIndex(null);
+    //setActiveIndex(null);
     //onAccordionClose();  // Call the prop function to reset in the parent component
   //};
 
