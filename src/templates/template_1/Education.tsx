@@ -1,4 +1,3 @@
-import { visibility } from 'html2canvas/dist/types/css/property-descriptors/visibility';
 import { Div } from '../../Div';
 
 interface EducationProps {
