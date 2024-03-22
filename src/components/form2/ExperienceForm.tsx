@@ -42,6 +42,7 @@ export default function ExperienceForm(props: experienceProps) {
                                 )
                             }
                             label="Job Title"
+                            placeholder="Enter Job Title"
                         />
                     </div>
                     <div>
@@ -56,7 +57,8 @@ export default function ExperienceForm(props: experienceProps) {
                                     e.target.value
                                 )
                             }
-                            label="Company"
+                            label="Employer"
+                            placeholder="Enter employer"
                         />
                     </div>
                     <div>
@@ -73,6 +75,7 @@ export default function ExperienceForm(props: experienceProps) {
                                 )
                             }
                             label="Description"
+                            placeholder="Describe your role & achievements"
                         />
                     </div>
                     <div>

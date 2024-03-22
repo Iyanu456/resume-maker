@@ -41,6 +41,7 @@ export default function EducationForm(props: educationProps) {
 								e.target.value
 							)
 						}
+						placeholder='Enter School / University'
 					/>
 
 					<InputLabel
@@ -55,6 +56,7 @@ export default function EducationForm(props: educationProps) {
 								e.target.value
 							)
 						}
+						placeholder='Enter Degree / Field Of Study'
 					/>
 
 					<div>

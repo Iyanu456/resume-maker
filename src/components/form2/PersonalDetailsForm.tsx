@@ -28,6 +28,7 @@ export default function PersonalDetailsForm(props: personalProps) {
 									e.target.value
 								)
 							}	
+							placeholder="Enter your first and last name"
 						/>
 					
 					
@@ -43,6 +44,7 @@ export default function PersonalDetailsForm(props: personalProps) {
 									e.target.value
 								)
 							}
+							placeholder="Enter Job Title"
 						/>
 					
 				</div>

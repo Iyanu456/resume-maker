@@ -69,7 +69,7 @@ export default function MyDoc(props: DocumentProps) {
 
 	return (
 		<Div
-			style={{ padding: "25pt 40pt", fontSize: "11pt", display: "flex" }}>
+			style={{ padding: "30pt 40pt", fontSize: "11pt", display: "flex" }}>
 			<Div
 				style={{
 					display: "flex",

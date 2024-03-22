@@ -43,7 +43,8 @@ export default function ProjectForm(props: projectProps) {
                                 e.target.value
                             )
                         }
-                        label="Project Name"
+                        label="Project Title"
+                        placeholder='Enter project title'
                     />
                 </div>
                 <div>
@@ -58,7 +59,8 @@ export default function ProjectForm(props: projectProps) {
                                 e.target.value
                             )
                         }
-                        label="Short description"
+                        label="Sub title"
+                        placeholder='Enter sub Title'
                     />
                 </div>
                 <div>
@@ -73,7 +75,8 @@ export default function ProjectForm(props: projectProps) {
                                 e.target.value
                             )
                         }
-                        label="About project"
+                        label="Description"
+                        placeholder='Describe the project & its outcomes'
                     />
                 </div>
                 <div>
