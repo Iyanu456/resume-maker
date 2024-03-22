@@ -4,23 +4,25 @@ import './styles/accordion2.css';
 
 interface Accordion2Props {
   onAdd: (field: string, defaultObject: any) => void;
-  onDelete: (field: string, index: number) => void;
+  onDelete?: (field: string, index: number) => void;
   defaultObject: any;
   field: string;
-  accordionData: { title: string; content: any }[];
-  onAccordionClose?: () => void;  // Add the prop
+  accordionData: { title: string; content: any; visible: boolean }[];
+  onToggleVisibility: (field: any, index: number) => void;
+  onAccordionClose?: () => void;  
   placeholder?: string;
 }
 
 const Accordion2: React.FC<Accordion2Props> = ({
   onAdd,
-  onDelete,
+  //onDelete,
   defaultObject,
   field,
   accordionData,
+  onToggleVisibility
 }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const addNewRef = useRef<HTMLButtonElement>(null); // Create a ref for the "Add New" button
+  const addNewRef = useRef<HTMLButtonElement>(null);
 
   const handleAccordionClick = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -28,24 +30,25 @@ const Accordion2: React.FC<Accordion2Props> = ({
 
   const handleAccordionClose = () => {
     setActiveIndex(null);
-    //onAccordionClose();  // Call the prop function to reset in the parent component
+  };
+
+  const handleToggleVisibility = (index: number) => {
+    handleAccordionClick(index);
+    onToggleVisibility(field, index);
   };
 
   const handleAddNewItem = () => {
     onAdd(field, defaultObject);
     setActiveIndex(null);
-    // Scroll to the "Add New" button
     if (addNewRef.current) {
       addNewRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  const handleDeleteItem = (index: number) => {
+  /*const handleDeleteItem = (index: number) => {
     onDelete(field, index);
     handleAccordionClick(index);
-    //setActiveIndex(null)
-    //handleAccordionClose();
-  };
+  };*/
 
   return (
     <div className='bg-white'>
@@ -63,12 +66,22 @@ const Accordion2: React.FC<Accordion2Props> = ({
             onClick={() => handleAccordionClick(index)}
           >
             <p className='accordion2-title'><b>{section.title}</b></p>
-            {index !== 0 && (<button
-              onClick={() => handleDeleteItem(index)}
-              className="accordion-btn mr-0 ml-auto"
+            {/*index !== 0 && (
+              <>
+                <button
+                  onClick={() => handleDeleteItem(index)}
+                  className="accordion-btn mr-0 ml-auto"
+                >
+                  <Icon src='/trash.svg' />
+                </button>
+              </>
+            )*/}
+            <button
+              onClick={() => handleToggleVisibility(index)}
+              className="accordion-btn mr-0 ml-auto grid"
             >
-              <Icon src='/trash.svg' />
-            </button>)}
+              <Icon src={`${section.visible ? '/eye.svg' : 'eye-slash.svg'}`} className='my-auto mr-[0.4em]'/>
+            </button>
           </div>
           {activeIndex === index && (
             <div className="flex flex-col gap-[1em]">
@@ -79,7 +92,6 @@ const Accordion2: React.FC<Accordion2Props> = ({
                     onClick={handleAccordionClose}
                     className="accordion-btn btn-primary flex gap-1"
                   >
-                    
                     <Icon src='/tick-circle.svg' height='60px' width='20'/>
                     <p>Save</p>
                   </button>
@@ -90,10 +102,10 @@ const Accordion2: React.FC<Accordion2Props> = ({
         </div>
       ))}
       <div className={`grid place-items-center mb-[-0.6em] ${
-            activeIndex !== null ? "hidden" : ""
-          }`}>
+        activeIndex !== null ? "hidden" : ""
+      }`}>
         <button
-          ref={addNewRef} // Attach the ref to the "Add New" button
+          ref={addNewRef}
           onClick={handleAddNewItem}
           className="flex gap-1 md:min-w-[40%] btn accordion-btn mx-auto btn-dotted"
         >

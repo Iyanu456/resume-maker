@@ -6,6 +6,7 @@ interface skillsProps {
   schoolStyle: any,
   data: {
     skill: string;
+    visible: boolean;
   }[];
   lineStyle: any,
   strokeWidth: number;
@@ -28,8 +29,9 @@ const Skills: React.FC<skillsProps> = (props) => {
         />
       </svg>
       <Div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '8pt'}}>
-        {props.data.map(({ skill }, index) => {
+        {props.data.map(({ skill, visible }, index) => {
           if (skill === "") return null;
+          if (visible === false) return null;
           return (
             <p  key={index} style={{fontFamily: 'Inter', fontWeight: 'semibold'}}>{`• ${skill}`}&nbsp;&nbsp;</p>
           )

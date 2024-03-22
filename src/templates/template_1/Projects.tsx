@@ -2,13 +2,14 @@ import { Div } from '../../Div';
 
 interface projectProps {
   titleStyle: any,
-  projectStyle: any,
+  projectStyle?: any,
   data: {
     project: string; 
     about: string;
     description: string;
     duration: string;
-  }[],
+    visible: boolean;
+  }[] | any,
   lineStyle: any,
   dateStyle: any,
   strokeWidth: number;
@@ -31,8 +32,10 @@ export default function Projects(props: projectProps) {
         />
       </svg>
       <Div style={{display: 'flex', flexDirection: 'column', gap: '5pt'}} >
-      {props.data.map(({ project, about, description, duration }, index) => {
+      {props.data.map(({ project, about, description, duration, visible }: { project:string, about:string, description:string, duration:string, visible:boolean }, index: number) => {
         if (project === "" && about === "" && description === "" && duration === "") return null;
+        if (project === "" && about === "" && description === "" && duration === "" && visible === true) return null;
+        if (visible === false) return null;
         return (
           <Div style={{marginBottom: 10}} key={index} >
             <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2}}>

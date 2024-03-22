@@ -8,7 +8,8 @@ interface ExperienceProps {
         company: string; 
         description: string; 
         duration: string; 
-    }[],
+        visible: boolean; 
+    }[] | any,
     lineStyle?: any;
     dateStyle?: any;
     strokeWidth?: number;
@@ -31,8 +32,9 @@ const Experience: React.FC<ExperienceProps> = (props) => {
             />
             </svg>
             <Div style={{display: 'flex', flexDirection: 'column', gap: '5pt'}} >
-            {props.data.map(({ jobTitle, company, description, duration }, index) => {
+            {props.data.map(({ jobTitle, company, description, duration, visible }: { jobTitle: string, company:string, description:string, duration:string, visible:boolean }, index: number) => {
                 if (jobTitle === "" && description === "" && duration === "") return null; 
+                if (visible === false) return null;
                 return (
                     <Div style={{marginBottom: 10}} key={index} >
                         <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2}}>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import InputLabel from "../InputLabel";
 interface experienceProps {
     data: {
@@ -15,6 +16,14 @@ interface experienceProps {
     index: any;
 }
 export default function ExperienceForm(props: experienceProps) {
+    useEffect(() => {
+        const allFieldsEmpty = Object.values(props.data).every(field => field === '');
+        if (allFieldsEmpty) {
+            props.handleChange('experience', props.index, 'visible', false);
+        } else {
+            props.handleChange('experience', props.index, 'visible', true);
+        }
+    }, [props.data]);
     return (
         <form onSubmit={(e) => e.preventDefault()}>
             {/* Personal Info Form */}

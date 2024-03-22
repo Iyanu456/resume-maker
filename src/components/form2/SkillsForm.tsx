@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import InputLabel from "../InputLabel";
 
 interface skillsProps {
@@ -13,6 +14,14 @@ interface skillsProps {
 	index?: any;
 }
 export default function SkillForm(props: skillsProps) {
+	useEffect(() => {
+        const allFieldsEmpty = Object.values(props.data).every(field => field === '');
+        if (allFieldsEmpty) {
+            props.handleChange('skill', props.index, 'visible', false);
+        } else {
+            props.handleChange('skill', props.index, 'visible', true);
+        }
+    }, [props.data]);
 	return (
 		<form onSubmit={(e) => e.preventDefault()}>
 			{/* Personal Info Form */}

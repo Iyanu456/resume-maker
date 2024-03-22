@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import InputLabel from "../InputLabel";
 
 interface educationProps {
@@ -15,6 +16,14 @@ interface educationProps {
 	index: any;
 }
 export default function EducationForm(props: educationProps) {
+	useEffect(() => {
+        const allFieldsEmpty = Object.values(props.data).every(field => field === '');
+        if (allFieldsEmpty) {
+            props.handleChange('education', props.index, 'visible', false);
+        } else {
+            props.handleChange('education', props.index, 'visible', true);
+        }
+    }, [props.data]);
 	return (
 		<form onSubmit={(e) => e.preventDefault()}>
 			{/* Personal Info Form */}

@@ -29,6 +29,7 @@ interface EducationInfo {
 	school: string;
 	degree: string;
 	duration: string;
+	visible: boolean;
 }
 
 interface experienceInfo {
@@ -36,6 +37,7 @@ interface experienceInfo {
 	company: string;
 	description: string;
 	duration: string;
+	visible: boolean;
 }
 
 interface ProjectInfo {
@@ -43,18 +45,20 @@ interface ProjectInfo {
 	about: string;
 	description: string;
 	duration: string;
+	visible: boolean;
 }
 
 interface ContactInfoProps {
 	name: string;
 	label: string;
 	src: string;
+	visible: boolean;
 }
 
 interface RenderedProps {
 	personalInfo: personalInfoProps[];
 	education: EducationInfo[];
-	skill: { skill: string }[];
+	skill: { skill: string, visible: boolean }[];
 	experience: experienceInfo[];
 	project: ProjectInfo[];
 	contactInfo: ContactInfoProps[];
@@ -77,13 +81,13 @@ export default function Home(): JSX.Element {
 	// State for data to be rendered in the PDF
 	const [pdfRenderedProps, setPdfRenderedProps] = useState<RenderedProps>({
 		personalInfo: [{ fullname: "", jobTitle: "" }],
-		education: [{ school: "", degree: "", duration: "" }],
-		skill: [{ skill: "" }],
+		education: [{ school: "", degree: "", duration: "", visible: true }],
+		skill: [{ skill: "", visible: true }],
 		experience: [
-			{ jobTitle: "", company: "", description: "", duration: "" },
+			{ jobTitle: "", company: "", description: "", duration: "", visible: true },
 		],
-		project: [{ project: "", about: "", description: "", duration: "" }],
-		contactInfo: [{ name: "", label: "", src: "" }],
+		project: [{ project: "", about: "", description: "", duration: "", visible: false }],
+		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
 
 	const handleChange = (
@@ -96,6 +100,29 @@ export default function Home(): JSX.Element {
 		updatedData[category][index][field] = value;
 		setPdfRenderedProps(updatedData);
 	};
+
+	type ArrayKeys = keyof typeof pdfRenderedProps;
+
+const toggleVisibility = (field: ArrayKeys, index: number): void => {
+  setPdfRenderedProps((prevState) => {
+    const updatedArray = prevState[field].map((item, i) => {
+      if (i === index && 'visible' in item) {
+        return {
+          ...item,
+          visible: !item.visible,
+        };
+      }
+      return item;
+    });
+    return {
+      ...prevState,
+      [field]: updatedArray,
+    };
+  });
+};
+
+	
+	
 
 	// Function to add a new form and corresponding education object
 	const handleAddItem = (field: string, defaultObject?: any) => {
@@ -185,16 +212,19 @@ export default function Home(): JSX.Element {
 										//debounceTime={debounceTime}
 									/>
 								),
+								visible: data.visible,
 							})
 						)}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
+						onToggleVisibility={toggleVisibility}
 						//onAccordionClose={handleAccordionClose}
 						field="education"
 						defaultObject={{
 							school: "",
 							degree: "",
 							duration: "",
+							visible: true,
 						}}
 					/>
 				</>
@@ -219,12 +249,14 @@ export default function Home(): JSX.Element {
 										//debounceTime={debounceTime}
 									/>
 								),
+								visible: data.visible,
 							})
 						)}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
+						onToggleVisibility={toggleVisibility}
 						field="skill"
-						defaultObject={{ skill: "" }}
+						defaultObject={{ skill: "", visible: true, }}
 					/>
 				</>
 			),
@@ -247,16 +279,19 @@ export default function Home(): JSX.Element {
 										//debounceTime={debounceTime}
 									/>
 								),
+								visible: data.visible,
 							})
 						)}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
+						onToggleVisibility={toggleVisibility}
 						field="experience"
 						defaultObject={{
 							jobTitle: "",
 							company: "",
 							description: "",
 							duration: "",
+							visible: true,
 						}}
 					/>
 				</>
@@ -276,20 +311,24 @@ export default function Home(): JSX.Element {
 										index={index}
 										data={data}
 										handleChange={handleChange}
+										//onToggleVisibility={}
 										//onSave={handleDataSave}
 										//debounceTime={debounceTime}
 									/>
 								),
+								visible: data.visible,
 							})
 						)}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
+						onToggleVisibility={toggleVisibility}
 						field="project"
 						defaultObject={{
 							project: "",
 							about: "",
 							description: "",
 							duration: "",
+							visible: true,
 						}}
 					/>
 				</>
