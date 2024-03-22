@@ -1,5 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import InputLabel from "../InputLabel";
+import { Editor } from 'draft-js';
+import { EditorState } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import EditorConvertToHTML from '../../TextEditor';
 
 interface projectProps {
     data: {
@@ -13,12 +17,20 @@ interface projectProps {
         userDetails: string,
         index: any,
         field: string,
-        event: any
+        event?: any,
     ) => any;
+    state: any;
     index: any;
 }
 
 export default function ProjectForm(props: projectProps) {
+    
+    const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+
+    const onEditorStateChange = (editorState: EditorState) => {
+        setEditorState(editorState);
+      };
+    
     useEffect(() => {
         const allFieldsEmpty = Object.values(props.data).every(field => field === '');
         if (allFieldsEmpty) {
@@ -30,7 +42,7 @@ export default function ProjectForm(props: projectProps) {
 
     return (
         <form onSubmit={(e) => e.preventDefault()}>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2 md:gap-3">
                 <div>
                     <InputLabel
                         type="text"
@@ -66,22 +78,6 @@ export default function ProjectForm(props: projectProps) {
                 <div>
                     <InputLabel
                         type="text"
-                        value={props.data.description}
-                        handleChange={(e) =>
-                            props.handleChange(
-                                "project",
-                                props.index,
-                                "description",
-                                e.target.value
-                            )
-                        }
-                        label="Description"
-                        placeholder='Describe the project & its outcomes'
-                    />
-                </div>
-                <div>
-                    <InputLabel
-                        type="text"
                         value={props.data.duration}
                         handleChange={(e) =>
                             props.handleChange(
@@ -94,6 +90,16 @@ export default function ProjectForm(props: projectProps) {
                         label="Duration"
                     />
                 </div>
+                
+                           
+                            
+                            <EditorConvertToHTML 
+                            userDetails="project"
+                            index={props.index}
+                            field={'description'}
+                            handleChange={props.handleChange}
+                            />
+                          
             </div>
         </form>
     );

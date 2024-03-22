@@ -1,4 +1,5 @@
 import { Div } from '../../Div';
+import parse from "html-react-parser";
 
 interface projectProps {
   titleStyle: any,
@@ -45,7 +46,9 @@ export default function Projects(props: projectProps) {
               </Div>
               <p style={{margin: 'auto 0 auto auto', fontFamily: 'Inter'}}>{`${duration}`}</p>
             </Div>
-            <p style={{maxWidth: '80%'}}>{ description != "" ? `• ${description}` : null }</p>
+            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+              {parse(description)}
+            </Div>
           </Div>
         )
       })}

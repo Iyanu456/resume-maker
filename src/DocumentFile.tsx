@@ -15,7 +15,7 @@ export const PDFDocument = ({ component }: docProps) => {
 		<>
 			{
 				<Document>
-					<Page>{reactPDFComponent}</Page>
+					<Page wrap>{reactPDFComponent}</Page>
 				</Document>
 			}
 		</>

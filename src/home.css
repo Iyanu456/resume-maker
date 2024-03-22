@@ -3,13 +3,26 @@
     scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     scroll-padding: 0;
+    list-style: none;
 }
+
+li {
+    list-style-type: '• ';
+   
+  }
+
+  ul {
+    padding-left: 11.5px !important;
+  }
 
 *::-webkit-scrollbar-track {
     background-clip: padding-box;
   border-radius: 10px;
   z-index: 1;
   box-sizing: border-box;
+}
+::marker {
+    padding-left: 11.5pt;
 }
 
 .home, .bg-grey {
@@ -93,6 +106,16 @@
 
     .home, .bg-grey {
         background-color: #f1f1f1;
+    }
+
+    .btn-dotted {
+        font-family: Poppins;
+        font-weight: 800;
+        font-size: 0.94em;
+        border-radius: 4em;
+        padding: 0.5em 1.5em;
+        border: 0px solid rgb(179, 179, 179);
+        border-style: none;
     }
     
   }

@@ -11,7 +11,12 @@ import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
 import Icon from "./Icon";
+//import EditorConvertToHTML from "./TextEditor";
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./home.css";
+import ReactDOMServer from "react-dom/server";
+import { convertToReactPDFComponents } from "./convertToReactPdf";
 
 RegisterFont();
 
@@ -58,7 +63,7 @@ interface ContactInfoProps {
 interface RenderedProps {
 	personalInfo: personalInfoProps[];
 	education: EducationInfo[];
-	skill: { skill: string, visible: boolean }[];
+	skill: { skill: string; visible: boolean }[];
 	experience: experienceInfo[];
 	project: ProjectInfo[];
 	contactInfo: ContactInfoProps[];
@@ -84,12 +89,27 @@ export default function Home(): JSX.Element {
 		education: [{ school: "", degree: "", duration: "", visible: true }],
 		skill: [{ skill: "", visible: true }],
 		experience: [
-			{ jobTitle: "", company: "", description: "", duration: "", visible: true },
+			{
+				jobTitle: "",
+				company: "",
+				description: "",
+				duration: "",
+				visible: true,
+			},
 		],
-		project: [{ project: "", about: "", description: "", duration: "", visible: false }],
+		project: [
+			{
+				project: "",
+				about: "",
+				description: "",
+				duration: "",
+				visible: false,
+			},
+		],
 		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
 
+	//function that handles input change in input fields
 	const handleChange = (
 		category: string,
 		index: number,
@@ -103,28 +123,26 @@ export default function Home(): JSX.Element {
 
 	type ArrayKeys = keyof typeof pdfRenderedProps;
 
-const toggleVisibility = (field: ArrayKeys, index: number): void => {
-  setPdfRenderedProps((prevState) => {
-    const updatedArray = prevState[field].map((item, i) => {
-      if (i === index && 'visible' in item) {
-        return {
-          ...item,
-          visible: !item.visible,
-        };
-      }
-      return item;
-    });
-    return {
-      ...prevState,
-      [field]: updatedArray,
-    };
-  });
-};
+	//toogles the visibility of an item in the list of Accordion2 component
+	const toggleVisibility = (field: ArrayKeys, index: number): void => {
+		setPdfRenderedProps((prevState) => {
+			const updatedArray = prevState[field].map((item, i) => {
+				if (i === index && "visible" in item) {
+					return {
+						...item,
+						visible: !item.visible,
+					};
+				}
+				return item;
+			});
+			return {
+				...prevState,
+				[field]: updatedArray,
+			};
+		});
+	};
 
-	
-	
-
-	// Function to add a new form and corresponding education object
+	// Function to add a new form and corresponding object
 	const handleAddItem = (field: string, defaultObject?: any) => {
 		setPdfRenderedProps((prevProps: any) => {
 			const newItemArray = [...prevProps[field], { ...defaultObject }];
@@ -136,6 +154,7 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 		});
 	};
 
+	//deletes an item from the corresponding object
 	const handleDeleteItem = (field: string, index: number) => {
 		if (index === 0) {
 			// Do not allow deletion of the first item
@@ -156,6 +175,8 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 		});
 	};
 
+	//array usedto populate the Accordion Compnent
+	//note Accordion and Accordion2 components are two different components with different functionalities
 	const accordionData = [
 		{
 			title: "Personal Details",
@@ -256,7 +277,7 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
 						field="skill"
-						defaultObject={{ skill: "", visible: true, }}
+						defaultObject={{ skill: "", visible: true }}
 					/>
 				</>
 			),
@@ -311,6 +332,7 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 										index={index}
 										data={data}
 										handleChange={handleChange}
+										state={pdfRenderedProps}
 										//onToggleVisibility={}
 										//onSave={handleDataSave}
 										//debounceTime={debounceTime}
@@ -336,6 +358,8 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 		},
 	];
 
+	//const rawTextRepresentation = ReactDOMServer.renderToString(convertToReactPDFComponents(<MyDoc info={pdfRenderedProps} />));
+
 	return (
 		<div className="relative h-[100svh] overflow-y-hidden">
 			{/* Navigation */}
@@ -344,10 +368,10 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 			</div>
 
 			{/* Main content */}
-			<div className="home md:flex flex-wrap justify-center center-align h-[100%] md:px-[0.1em] pt-[2em] fixed left-0 right-0">
+			<div className="home md:flex flex-wrap justify-center center-align h-[100%] md:px-[0.1em] pt-[1em] md:pt-[2em] md:fixed left-0 right-0">
 				<div className="flex flex-col gap-2 h-full overflow-y-auto bg-grey md:pr-[1em]">
 					<div className="form-section w-[100%] md:min-w-[400px] relative md:rounded-[0.75em] overflow-x-hidden">
-						<div className="flex px-[1.2em] py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
+						<div className="flex px-[1.2em] py-[1.2em] md:py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
 							<h2 className="my-auto">
 								<b>Resume</b>
 							</h2>
@@ -361,6 +385,9 @@ const toggleVisibility = (field: ArrayKeys, index: number): void => {
 								accordionData
 							} /*activeIndex={activeIndex} handleAccordionClick={handleAccordionClick}*/
 						/>
+						{/*rawTextRepresentation*/}
+						
+						
 					</div>
 				</div>
 

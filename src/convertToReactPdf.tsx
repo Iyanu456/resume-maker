@@ -9,21 +9,52 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   svg: Svg,
   line: Line,
   span: Text,
-  //Document: Document,
-  //Page: Page,
+  strong: ({ children }: { children: ReactNode }) => {
+    console.log("<ul>", children);
+    return (
+      <Text style={{fontWeight: 'semibold'}}>
+        {children}
+      </Text>
+    );
+  },
+  b: ({ children }: { children: ReactNode }) => {
+    console.log("<ul>", children);
+    return (
+      <Text style={{fontWeight: 'semibold'}}>
+        {children}
+      </Text>
+    );
+  },
+  ul: ({ children }: { children: ReactNode }) => {
+    console.log("<ul>", children);
+    return (
+      <View style={{flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+        {children}
+      </View>
+    );
+  },
+  li: ({ children }: { children: ReactNode }) => {
+    console.log("<li>", children);
+    const [content] = React.Children.toArray(children);
+    return (
+      <View style={{flexDirection: 'row', gap: '5pt'}}>
+        <Text style={{fontSize: '11pt'}}>•</Text>
+        <Text style={{fontSize: '11pt'}}>{content}</Text>
+      </View>
+        
+     
+    );
+  },
   // Add more mappings as needed
 };
 
 export const convertToReactPDFComponents = (element: any): ReactNode => {
   try {
     if (!element) {
-      return null
-      //throw new Error("Element is null or undefined.");
-      
+      return null;
     }
 
     if (typeof element.type === "function") {
-      // If the element is a functional component, create an element from it and convert the result
       const functionalElement = element.type(element.props);
       return convertToReactPDFComponents(functionalElement);
     }
@@ -33,7 +64,6 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
       const Component = htmlToReactPDFMapping[type] || type;
 
       if (!Component) {
-        //return null
         throw new Error(`No mapping found for component type: ${type}`);
       }
 
@@ -67,7 +97,8 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
 
     return <>{children}</>;
   } catch (error: any) {
-    //console.error("Error in convertToReactPDFComponents:", error.message);
-    return (/*<Text>Error in convertToReactPDFComponents</Text>;*/ null)
+    console.error(`Error in convertToReactPDFComponents: ${error.message}`);
+    console.log("Element causing error:", element);
+    return null;
   }
 };
