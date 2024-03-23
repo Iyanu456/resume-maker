@@ -40,15 +40,16 @@ const EditorConvertToHTML: React.FC = (props) => {
         toolbarClassName={`w-[${componentWidth}px]`}
         editorState={editorState}
         wrapperClassName="w-[100%]"
-        editorStyle={{maxWidth: `${componentWidth} px`, fontSize: '11pt'}}
+        editorStyle={{maxWidth: `${componentWidth} px`, fontSize: '11pt', fontFamily: 'Inter'}}
         editorClassName="border-[1px] px-2"
         onEditorStateChange={onEditorStateChange}
+        stripPastedStyles={true}
         toolbar={{
           inline: { options: ['bold'] },
           list: { options:['unordered'] },
           textAlign: { options: [], },
-          fontSize: { className: 'hidden' },
-          fontFamily: { className: 'hidden' },
+          fontSize: { options: ['11'], className: 'hidden' },
+          fontFamily: { options: [], className: 'hidden' },
           link: { inDropdown: true, className: 'hidden' },
           history: { inDropdown: true, className: 'hidden' },
           emoji: { emojis:[], className: 'hidden'},

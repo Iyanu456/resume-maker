@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, Text, Link, Svg, Line } from "@react-pdf/renderer"; // Import React components from your library
+import { View, Text, Link, Svg, Line, Page } from "@react-pdf/renderer";
 
 const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   div: View,
@@ -9,46 +9,24 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   svg: Svg,
   line: Line,
   span: Text,
-  strong: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
-    return (
-      <Text style={{fontWeight: 'semibold'}}>
-        {children}
-      </Text>
-    );
-  },
-  b: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
-    return (
-      <Text style={{fontWeight: 'semibold'}}>
-        {children}
-      </Text>
-    );
-  },
-  ul: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
-    return (
-      <View style={{flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
-        {children}
-      </View>
-    );
-  },
-  li: ({ children }: { children: ReactNode }) => {
-    console.log("<li>", children);
-    const [content] = React.Children.toArray(children);
-    return (
-      <View style={{flexDirection: 'row', gap: '5pt'}}>
-        <Text style={{fontSize: '11pt'}}>•</Text>
-        <Text style={{fontSize: '11pt'}}>{content}</Text>
-      </View>
-        
-     
-    );
-  },
-  // Add more mappings as needed
+  strong: ({ children }: { children: ReactNode }) => (
+    <Text style={{ fontWeight: 'bold' }}>{children}</Text>
+  ),
+  b: ({ children }: { children: ReactNode }) => (
+    <Text style={{ fontWeight: 'bold' }}>{children}</Text>
+  ),
+  ul: ({ children }: { children: ReactNode }) => (
+    <View style={{ flexDirection: 'column', marginTop: 8, fontSize: 11 }}>{children}</View>
+  ),
+  li: ({ children }: { children: ReactNode }) => (
+    <View style={{ flexDirection: 'row', marginTop: 5 }}>
+      <Text style={{ fontSize: 11 }}>•</Text>
+      <Text style={{ fontSize: 11 }}>{children}</Text>
+    </View>
+  ),
 };
 
-export const convertToReactPDFComponents = (element: any): ReactNode => {
+export const convertToReactPDFComponents = (element: any, styles?: React.CSSProperties): ReactNode => {
   try {
     if (!element) {
       return null;
@@ -61,7 +39,8 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
 
     if (typeof element === "object") {
       const { type, props } = element;
-      const Component = htmlToReactPDFMapping[type] || type;
+      const Component = props.className === "page" ? Page : (htmlToReactPDFMapping[type] || type);
+      
 
       if (!Component) {
         throw new Error(`No mapping found for component type: ${type}`);
@@ -69,18 +48,23 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
 
       const children =
         props.children !== null
-          ? React.Children.map(props.children, convertToReactPDFComponents)
+          ? React.Children.map(props.children, (child) => convertToReactPDFComponents(child, props.style))
           : null;
 
       const styleProps = props.style ? { style: props.style } : {};
       const hrefProps = props.href ? { src: props.href } : {};
 
       // Extract additional attributes like height, width, and position
-      const { height, width, x, y, ...otherProps } = props;
+      const { height, width, x, y, wrap, ...otherProps } = props;
       const positionProps = { height, width, x, y };
 
+      // Conditionally add wrap attribute if wrap prop is true
+      //props.className === "wrap" ? { wrap: wrap, ...otherProps } : (htmlToReactPDFMapping[type] || type);
+      
+      const componentProps = wrap ? { wrap, ...otherProps } : otherProps;
+
       return (
-        <Component {...styleProps} {...hrefProps} {...positionProps} {...otherProps}>
+        <Component {...styleProps} {...hrefProps} {...positionProps} {...componentProps}>
           {children}
         </Component>
       );
@@ -92,7 +76,7 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
 
     const children = React.Children.map(
       element,
-      convertToReactPDFComponents
+      (child) => convertToReactPDFComponents(child, styles)
     );
 
     return <>{children}</>;

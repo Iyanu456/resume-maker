@@ -20,9 +20,9 @@ interface projectProps {
 
 export default function Projects(props: projectProps) {
   return (
-    <Div style={{marginBottom: 15, marginTop: -10, fontSize: `${props.fontSize}`}}>
+    <Div style={{marginBottom: 15, marginTop: -10, fontSize: `${props.fontSize}`, width: `180mm`}}>
       <p style={props.titleStyle}>Projects</p>
-      <svg height="10" width={props.strokeLength} style={props.lineStyle}>
+      <svg height="10" width={'200pt'} style={props.lineStyle}>
         <line
           x1="0"
           y1="0"
@@ -46,8 +46,10 @@ export default function Projects(props: projectProps) {
               </Div>
               <p style={{margin: 'auto 0 auto auto', fontFamily: 'Inter'}}>{`${duration}`}</p>
             </Div>
-            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '370pt', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+              
               {parse(description)}
+              
             </Div>
           </Div>
         )

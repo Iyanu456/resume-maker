@@ -1,17 +1,23 @@
 import React from "react";
 
-interface DivProps {
-	children: React.ReactNode;
+
+
+interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
 	style?: React.CSSProperties;
+  className?: string;
+  wrap?: boolean;
 }
 
-const Div: React.FC<DivProps> = ({ children, style }) => {
+const Div: React.FC<DivProps> = ({ children, style, className, wrap }) => {
 	const divStyle: React.CSSProperties = {
 		display: "grid",
 		...style, // Merging passed style with default style
 	};
 
-	return <div style={divStyle}>{children}</div>;
+  let myAttr = {'wrap': wrap}
+
+	return <div {...myAttr} className={className} style={divStyle}>{children}</div>;
 };
 
 

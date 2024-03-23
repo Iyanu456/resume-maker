@@ -1,5 +1,5 @@
 import { convertToReactPDFComponents } from "./convertToReactPdf";
-import { Document, Page } from "@react-pdf/renderer";
+import { Document, Page, View } from "@react-pdf/renderer";
 
 
 
@@ -15,7 +15,8 @@ export const PDFDocument = ({ component }: docProps) => {
 		<>
 			{
 				<Document>
-					<Page wrap>{reactPDFComponent}</Page>
+					<Page style={{ padding: '30pt 40pt', fontSize: "11pt", flexDirection: 'column'}} wrap>{reactPDFComponent}</Page>
+
 				</Document>
 			}
 		</>
