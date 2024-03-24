@@ -1,5 +1,5 @@
 import { convertToReactPDFComponents } from "./convertToReactPdf";
-import { Document, Page, View } from "@react-pdf/renderer";
+import { Document, Page } from "@react-pdf/renderer";
 
 
 
