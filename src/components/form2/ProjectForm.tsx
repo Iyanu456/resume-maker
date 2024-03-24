@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import InputLabel from "../InputLabel";
 import { Editor } from 'draft-js';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+//import { EditorState } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditorConvertToHTML from '../../TextEditor';
+import TextArea from '../../templates/template_1/TextArea'
 
 interface projectProps {
     data: {
@@ -29,7 +32,9 @@ export default function ProjectForm(props: projectProps) {
 
     const onEditorStateChange = (editorState: EditorState) => {
         setEditorState(editorState);
-      };
+        props.handleChange('project', props.index, 'description', draftToHtml(convertToRaw(editorState.getCurrentContent())));
+      }
+
     
     useEffect(() => {
         const allFieldsEmpty = Object.values(props.data).every(field => field === '');
@@ -92,13 +97,21 @@ export default function ProjectForm(props: projectProps) {
                 </div>
                 
                            
-                            
-                            <EditorConvertToHTML 
-                            userDetails="project"
-                            index={props.index}
-                            field={'description'}
-                            handleChange={props.handleChange}
-                            />
+                           
+
+                        <div >
+                        <TextArea
+                            name="description"
+                            value={props.data.description}
+                            onChange={(e) =>
+                                props.handleChange(
+                                    "project",
+                                    props.index,
+                                    "description",
+                                    e.target.value
+                                )}
+                        />
+                        </div>
                           
             </div>
         </form>

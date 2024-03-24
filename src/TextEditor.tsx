@@ -38,12 +38,13 @@ const EditorConvertToHTML: React.FC = (props) => {
       <Editor
       placeholder='Enter Description here'
         toolbarClassName={`w-[${componentWidth}px]`}
-        editorState={editorState}
+        editorState={props.editorState}
         wrapperClassName="w-[100%]"
         editorStyle={{maxWidth: `${componentWidth} px`, fontSize: '11pt', fontFamily: 'Inter'}}
         editorClassName="border-[1px] px-2"
-        onEditorStateChange={onEditorStateChange}
+        onEditorStateChange={props.onEditorStateChange}
         stripPastedStyles={true}
+        //defaultEditorState={props.description}
         toolbar={{
           inline: { options: ['bold'] },
           list: { options:['unordered'] },

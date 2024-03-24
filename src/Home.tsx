@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterFont } from "./RegisteredFonts";
 import { pdfjs } from "react-pdf";
 import MyDoc from "./templates/template_1/Template1";
@@ -17,6 +17,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./home.css";
 import ReactDOMServer from "react-dom/server";
 import { convertToReactPDFComponents } from "./convertToReactPdf";
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 RegisterFont();
 
@@ -109,6 +111,12 @@ export default function Home(): JSX.Element {
 		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
 
+	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+	const [projectForms, setProjectForms] = useState([]);
+
+	
+	  
+
 	//function that handles input change in input fields
 	const handleChange = (
 		category: string,
@@ -120,6 +128,24 @@ export default function Home(): JSX.Element {
 		updatedData[category][index][field] = value;
 		setPdfRenderedProps(updatedData);
 	};
+
+	const onEditorStateChange = (newEditorState: EditorState, editorProjectIndex: number) => {
+		setEditorState(newEditorState);
+		// Update the corresponding project description in pdfRenderedProps
+		const updatedPdfRenderedProps = {
+		  ...pdfRenderedProps,
+		  project: pdfRenderedProps.project.map((project, i) => {
+			if (i === editorProjectIndex) {
+			  return {
+				...project,
+				description: draftToHtml(convertToRaw(newEditorState.getCurrentContent())),
+			  };
+			}
+			return project;
+		  }),
+		};
+		setPdfRenderedProps(updatedPdfRenderedProps);
+	  };
 
 	type ArrayKeys = keyof typeof pdfRenderedProps;
 
@@ -333,6 +359,11 @@ export default function Home(): JSX.Element {
 										data={data}
 										handleChange={handleChange}
 										state={pdfRenderedProps}
+										//onEditorStateChange={onEditorStateChange}
+										onEditorStateChange={(newEditorState) =>
+											handleEditorStateChange(newEditorState, index)
+										  }
+										editorState={projectForms[index]}
 										//onToggleVisibility={}
 										//onSave={handleDataSave}
 										//debounceTime={debounceTime}
