@@ -1,4 +1,6 @@
 import { Div } from '../../Div';
+import parse from "html-react-parser";
+import { convertToHTML } from './convertToHTML';
 
 interface ExperienceProps {
     titleStyle?: any;
@@ -19,7 +21,7 @@ interface ExperienceProps {
 
 const Experience: React.FC<ExperienceProps> = (props) => {
     return (
-        <Div style={{marginBottom: 10, fontSize: `${props.fontSize}`}}>
+        <Div style={{marginBottom: 10, fontSize: `${props.fontSize}`, width: '515pt'}}>
             <p style={props.titleStyle}>Professional Experience</p>
             <svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <line
@@ -44,8 +46,10 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                                 </Div>
                             <p style={props.dateStyle}>{`${duration}`}</p>
                         </Div>
-                                {description !== "" && (
-                                <p style={{maxWidth: '75%'}}>{`• ${description}`}</p>)}
+                        <Div style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+                            {parse(convertToHTML(description))}
+                        </Div>
+                               
                          
                     </Div>
                 )

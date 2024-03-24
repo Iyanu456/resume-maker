@@ -4,11 +4,13 @@ import './textarea.css';
 
 interface TextAreaProps {
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  label?: string;
+  placeholder?: string;
 }
 
 export default function TextArea(props: TextAreaProps): JSX.Element {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-  const [value, setValue] = useState<string>("• ");
+  const [value, setValue] = useState<string>("");
   const [enableBulletPoint, setEnableBulletPoint] = useState<boolean>(true);
   const maxHeight = 300; // Maximum height in pixels
 
@@ -48,7 +50,8 @@ export default function TextArea(props: TextAreaProps): JSX.Element {
   };
 
   return (
-    <div className="App">
+    <div className="App pt-2">
+      <p className="form-label text-xs">{props.label}</p>
       <div className='toolbar border-[1.3px] my-2 py-[0.5em] px-3 flex gap-1 center-align rounded-md'>
         <button onClick={handleToggleBulletPoint} className='tool grid border p-[0.12em]'
         style={{backgroundColor: `${enableBulletPoint ? "#f7f7f7" : 'white'}`}}
@@ -57,6 +60,7 @@ export default function TextArea(props: TextAreaProps): JSX.Element {
         </button>
       </div>
       <textarea
+        placeholder={props.placeholder}
         className="textarea rounded-md"
         value={value}
         ref={textAreaRef}

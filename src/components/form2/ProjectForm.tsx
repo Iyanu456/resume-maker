@@ -99,6 +99,7 @@ export default function ProjectForm(props: projectProps) {
 				<div>
 					<TextArea
 						label="description"
+                        placeholder="Enter project description here"
 						//value={props.data.description}
 						onChange={(e) =>
 							props.handleChange(

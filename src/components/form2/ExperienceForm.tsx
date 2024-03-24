@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import InputLabel from "../InputLabel";
+import TextArea from "../../templates/template_1/TextArea";
 interface experienceProps {
     data: {
         jobTitle: string;
@@ -61,23 +62,7 @@ export default function ExperienceForm(props: experienceProps) {
                             placeholder="Enter employer"
                         />
                     </div>
-                    <div>
-                        {" "}
-                        <InputLabel
-                            type="text"
-                            value={props.data.description}
-                            handleChange={(e) =>
-                                props.handleChange(
-                                    "experience",
-                                    props.index,
-                                    "description",
-                                    e.target.value
-                                )
-                            }
-                            label="Description"
-                            placeholder="Describe your role & achievements"
-                        />
-                    </div>
+                    
                     <div>
                         {" "}
                         <InputLabel
@@ -94,6 +79,21 @@ export default function ExperienceForm(props: experienceProps) {
                             label="Duration"
                         />
                     </div>
+                    <div>
+					<TextArea
+						label="description"
+                        placeholder="Enter description here"
+						//value={props.data.description}
+						onChange={(e) =>
+							props.handleChange(
+								"experience",
+								props.index,
+								"description",
+								e.target.value
+							)
+						}
+					/>
+				</div>
                 </div>
          
         </form>
