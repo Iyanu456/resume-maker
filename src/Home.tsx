@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RegisterFont } from "./RegisteredFonts";
 import { pdfjs } from "react-pdf";
 import MyDoc from "./templates/template_1/Template1";
@@ -12,13 +12,13 @@ import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
 import Icon from "./Icon";
 //import EditorConvertToHTML from "./TextEditor";
-import { Editor } from 'react-draft-wysiwyg';
+//import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./home.css";
-import ReactDOMServer from "react-dom/server";
-import { convertToReactPDFComponents } from "./convertToReactPdf";
-import { EditorState, convertToRaw } from 'draft-js';
-import draftToHtml from 'draftjs-to-html';
+//import ReactDOMServer from "react-dom/server";
+//import { convertToReactPDFComponents } from "./convertToReactPdf";
+//import { EditorState, convertToRaw } from 'draft-js';
+//import draftToHtml from 'draftjs-to-html';
 
 RegisterFont();
 
@@ -111,8 +111,8 @@ export default function Home(): JSX.Element {
 		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
 
-	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
-	const [projectForms, setProjectForms] = useState([]);
+	//const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+	//const [projectForms, setProjectForms] = useState([]);
 
 	
 	  
@@ -129,7 +129,7 @@ export default function Home(): JSX.Element {
 		setPdfRenderedProps(updatedData);
 	};
 
-	const onEditorStateChange = (newEditorState: EditorState, editorProjectIndex: number) => {
+	/*const onEditorStateChange = (newEditorState: EditorState, editorProjectIndex: number) => {
 		setEditorState(newEditorState);
 		// Update the corresponding project description in pdfRenderedProps
 		const updatedPdfRenderedProps = {
@@ -145,7 +145,7 @@ export default function Home(): JSX.Element {
 		  }),
 		};
 		setPdfRenderedProps(updatedPdfRenderedProps);
-	  };
+	  };*/
 
 	type ArrayKeys = keyof typeof pdfRenderedProps;
 
@@ -360,10 +360,6 @@ export default function Home(): JSX.Element {
 										handleChange={handleChange}
 										state={pdfRenderedProps}
 										//onEditorStateChange={onEditorStateChange}
-										onEditorStateChange={(newEditorState) =>
-											handleEditorStateChange(newEditorState, index)
-										  }
-										editorState={projectForms[index]}
 										//onToggleVisibility={}
 										//onSave={handleDataSave}
 										//debounceTime={debounceTime}

@@ -1,5 +1,6 @@
 import { Div } from '../../Div';
 import parse from "html-react-parser";
+import { convertToHTML } from './convertToHTML';
 
 interface projectProps {
   titleStyle: any,
@@ -17,6 +18,8 @@ interface projectProps {
   strokeLength: string;
   fontSize: string;
 }
+
+
 
 export default function Projects(props: projectProps) {
   return (
@@ -46,9 +49,9 @@ export default function Projects(props: projectProps) {
               </Div>
               <p style={{margin: 'auto 0 auto auto', fontFamily: 'Inter'}}>{`${duration}`}</p>
             </Div>
-            <p /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
-              {description}
-            </p>
+            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+              {parse(convertToHTML(description))}
+            </Div>
           </Div>
         )
       })}
