@@ -11,3 +11,17 @@
     background-color: #f7f7f7;
 
   }
+
+.ql-editor > * {
+  font-family: 'Inter';
+  font-size: 1.15em;
+  }
+
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 0;
+}
+
+.ql-editor::placeholder {
+  font-family: 'Inter';
+  font-size: 1.15em;
+  }

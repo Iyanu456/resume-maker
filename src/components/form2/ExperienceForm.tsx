@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import InputLabel from "../InputLabel";
-import TextArea from "../../templates/template_1/TextArea";
+import TextArea from "../../templates/template_1/TextEditor";
 interface experienceProps {
     data: {
         jobTitle: string;

@@ -46,7 +46,7 @@
   
   /* Text input style */
   .form-control {
-    font-size: 1;
+    font-size: 1em;
     padding: 1.2em 0.8em;
     display: flex;
     align-content: center;

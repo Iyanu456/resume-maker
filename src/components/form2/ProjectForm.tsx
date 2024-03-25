@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import InputLabel from "../InputLabel";
 //import { Editor } from 'draft-js';
 //import { EditorState, convertToRaw } from "draft-js";
@@ -6,7 +6,7 @@ import InputLabel from "../InputLabel";
 //import { EditorState } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 //import EditorConvertToHTML from '../../TextEditor';
-import TextArea from "../../templates/template_1/TextArea";
+import TextEditor from "../../templates/template_1/TextEditor";
 
 interface projectProps {
 	data: {
@@ -27,6 +27,7 @@ interface projectProps {
 }
 
 export default function ProjectForm(props: projectProps) {
+	const [editorValue, setEditorValue] = useState("")
 	//const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 
 	/*const onEditorStateChange = (editorState: EditorState) => {
@@ -97,19 +98,24 @@ export default function ProjectForm(props: projectProps) {
 				</div>
 
 				<div>
-					<TextArea
-						label="description"
-                        placeholder="Enter project description here"
-						//value={props.data.description}
-						onChange={(e) =>
-							props.handleChange(
-								"project",
-								props.index,
-								"description",
-								e.target.value
-							)
-						}
+					<TextEditor 
+					label="Description"
+					value={editorValue} // Bind the Quill editor value to editorValue state
+					editorContainerClassName="pt-3"
+					editorClassName="md:max-w-[340px]"
+					placeholder="Enter description here"
+					onChange={(value) => {
+						setEditorValue(value); // Update the editorValue state
+						props.handleChange(
+							"project",
+							props.index,
+							"description",
+							value
+						);
+					}}
+					
 					/>
+
 				</div>
 			</div>
 		</form>
