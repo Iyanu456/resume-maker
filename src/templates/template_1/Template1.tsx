@@ -5,7 +5,6 @@ import Experience from "./Experience.tsx";
 import Projects from "./Projects.tsx";
 import { style } from "./data.ts";
 import * as Types from "../../types/usertypes.ts";
-import emailIcon from './assets/email.svg'
 
 
 const docData = {
