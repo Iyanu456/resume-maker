@@ -1,9 +1,10 @@
+import { useState, useEffect } from 'react';
 import { Div } from "../../Div.tsx";
 import Education from "./Education.tsx";
 import Skills from "./Skills.tsx";
 import Experience from "./Experience.tsx";
 import Projects from "./Projects.tsx";
-import { style } from "./data.ts";
+import scaledStyle from "./data.ts";
 import * as Types from "../../types/usertypes.ts";
 
 
@@ -29,6 +30,25 @@ export default function MyDoc(props: RenderedProps) {
 			experience,
 			project,}
 	} = props;
+
+	const [scaleFactor, setScaleFactor] = useState(1);
+
+	useEffect(() => {
+	  function updateScaleFactor() {
+		// Calculate scale factor based on window width or any other relevant metric
+		const width = window.innerWidth;
+		const scaleFactor = width > 1200 ? 1 : width > 768 ? 0.8 : 0.6;
+		setScaleFactor(scaleFactor);
+	  }
+  
+	  updateScaleFactor();
+  
+	  // Event listener to update scale factor on window resize
+	  window.addEventListener('resize', updateScaleFactor);
+	  return () => window.removeEventListener('resize', updateScaleFactor);
+	}, []);
+
+	const style = scaledStyle(props.scale)
 
 	return (
 		<Div 
