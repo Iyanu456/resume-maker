@@ -4,13 +4,20 @@ import { View, Text, Link, Svg, Line } from "@react-pdf/renderer"; // Import Rea
 const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   div: View,
   p: Text,
-  a: Link,
+  a: ({ children }: { children: ReactNode }) => {
+
+    return (
+      <Link style={{color: 'black'}}>
+        {children}
+      </Link>
+    );
+  },
   h1: Text,
   svg: Svg,
   line: Line,
   span: Text,
   strong: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
+    //console.log("<ul>", children);
     return (
       <Text style={{fontWeight: 'semibold'}}>
         {children}
@@ -18,7 +25,7 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
     );
   },
   b: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
+    //console.log("<ul>", children);
     return (
       <Text style={{fontWeight: 'semibold'}}>
         {children}
@@ -26,7 +33,7 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
     );
   },
   ul: ({ children }: { children: ReactNode }) => {
-    console.log("<ul>", children);
+    //console.log("<ul>", children);
     return (
       <View style={{flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
         {children}

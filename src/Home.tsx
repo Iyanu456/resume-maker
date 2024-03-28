@@ -11,6 +11,7 @@ import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
 import Icon from "./Icon";
+import { RenderedProps } from './types/usertypes';
 //import EditorConvertToHTML from "./TextEditor";
 //import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -27,49 +28,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url
 ).toString();
 
-interface personalInfoProps {
-	fullname: string;
-	jobTitle: string;
-}
-
-interface EducationInfo {
-	school: string;
-	degree: string;
-	duration: string;
-	visible: boolean;
-}
-
-interface experienceInfo {
-	jobTitle: string;
-	company: string;
-	description: string;
-	duration: string;
-	visible: boolean;
-}
-
-interface ProjectInfo {
-	project: string;
-	about: string;
-	description: string;
-	duration: string;
-	visible: boolean;
-}
-
-interface ContactInfoProps {
-	name: string;
-	label: string;
-	src: string;
-	visible: boolean;
-}
-
-interface RenderedProps {
-	personalInfo: personalInfoProps[];
-	education: EducationInfo[];
-	skill: { skill: string; visible: boolean }[];
-	experience: experienceInfo[];
-	project: ProjectInfo[];
-	contactInfo: ContactInfoProps[];
-}
 
 export default function Home(): JSX.Element {
 	//const [numPages, setNumPages] = useState(1);
@@ -87,7 +45,7 @@ export default function Home(): JSX.Element {
 
 	// State for data to be rendered in the PDF
 	const [pdfRenderedProps, setPdfRenderedProps] = useState<RenderedProps>({
-		personalInfo: [{ fullname: "", jobTitle: "" }],
+		personalInfo: [{ fullname: "", jobTitle: "", email: "", website: "" }],
 		education: [{ school: "", degree: "", duration: "", visible: true }],
 		skill: [{ skill: "", visible: true }],
 		experience: [
@@ -443,6 +401,7 @@ export default function Home(): JSX.Element {
 						className=" w-[fit-content] h-[fit-content] overflow-y-scroll"
 						style={{
 							width: "210mm",
+							paddingTop: "1em",
 							height: "297mm",
 							border: "1px solid black",
 							fontSize: "16.5pt",

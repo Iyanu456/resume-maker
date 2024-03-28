@@ -5,6 +5,7 @@ import Home from './Home.tsx'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from './LandingPage.tsx';
+import Test from './testcomp.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="/test" element={<Test />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

@@ -4,50 +4,8 @@ import Skills from "./Skills.tsx";
 import Experience from "./Experience.tsx";
 import Projects from "./Projects.tsx";
 import { style } from "./data.ts";
+import * as Types from "../../types/usertypes.ts";
 
-interface DocumentProps {
-	info: {
-		education?: {
-			// Define the structure of the education object
-			school: string;
-			degree: string;
-			duration: string;
-      visible: boolean;
-		}[];
-		experience?: {
-			// Define the structure of the experience object
-			jobTitle: string;
-			company: string;
-			description: string;
-			duration: string;
-			visible: boolean;
-		}[];
-		skill?: {
-			// Define the structure of the skill object
-			skill: string;
-			visible: boolean;
-		}[];
-		project?: {
-			// Define the structure of the project object
-			project: string;
-			about: string;
-			description: string;
-			duration: string;
-			visible: boolean;
-		}[];
-		contactInfo?: {
-			// Define the structure of the contactInfo object
-			name?: string;
-			label: string;
-			src?: string;
-		}[];
-		personalInfo?: {
-			// Define the structure of the personalInfo object
-			fullname: string;
-			jobTitle: string;
-		}[];
-	};
-}
 
 const docData = {
 	fontSize: "11pt",
@@ -55,20 +13,25 @@ const docData = {
 	strokeLength: "516pt",
 };
 
-export default function MyDoc(props: DocumentProps) {
+// Assuming you have types.ts or usertypes.ts where RenderedProps is defined
+export interface RenderedProps {
+	info: Types.RenderedProps
+  }
+
+  
+export default function MyDoc(props: RenderedProps) {
 	const {
-		info: {
+	info: {
 			personalInfo,
 			contactInfo,
 			education,
 			skill,
 			experience,
-			project,
-		},
+			project,}
 	} = props;
 
 	return (
-		<Div
+		<Div 
 			style={{fontSize: "11pt", display: "flex" }}>
 			<Div
 				style={{
@@ -78,11 +41,17 @@ export default function MyDoc(props: DocumentProps) {
 					margin: "auto",
 				}}>
 				{personalInfo &&
-					personalInfo.map(({ fullname, jobTitle }, index) => (
+					personalInfo.map(({ fullname, jobTitle, email, website }, index) => (
+						<>
 						<Div key={index}>
 							<p style={style.firstName}>{fullname}</p>
 							<p style={style.profession}>{jobTitle}</p>
 						</Div>
+						<Div style={{display: 'flex', flexDirection: 'row', gap: '7pt', margin: 'auto'}}>
+							<Div><a>{email}</a></Div>
+							<Div><a>{website}</a></Div>
+						</Div>
+						</>
 					))}
 				<Div
 					style={{
