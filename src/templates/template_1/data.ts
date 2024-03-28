@@ -14,7 +14,6 @@ export const style = {
 		fontSize: "23pt",
 		fontFamily: "Poppins",
 		margin: "auto",
-		fontWeight: 'semibold',
 	},
 	profession: {
 		//textAlign: "center",

@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
-import { View, Text, Link, Svg, Line } from "@react-pdf/renderer"; // Import React components from your library
+import { View, Text, Link, Svg, Line, Image } from "@react-pdf/renderer"; // Import React components from your library
 
 const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   div: View,
   p: Text,
-  a: ({ children }: { children: ReactNode }) => {
+  a: ({ children, ...props }: { children: ReactNode }) => {
 
     return (
-      <Link style={{color: 'black'}}>
+      <Link {...props} style={{color: 'rgb(15, 15, 15)', textDecoration: 'none'}}>
         {children}
       </Link>
     );
@@ -16,6 +16,7 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   svg: Svg,
   line: Line,
   span: Text,
+  img: Image,
   strong: ({ children }: { children: ReactNode }) => {
     //console.log("<ul>", children);
     return (
@@ -81,13 +82,15 @@ export const convertToReactPDFComponents = (element: any): ReactNode => {
 
       const styleProps = props.style ? { style: props.style } : {};
       const hrefProps = props.href ? { src: props.href } : {};
+      const heightProps = props.height ? { src: props.height } : {};
+      const widthProps = props.width ? { src: props.width } : {};
 
       // Extract additional attributes like height, width, and position
       const { height, width, x, y, ...otherProps } = props;
       const positionProps = { height, width, x, y };
 
       return (
-        <Component {...styleProps} {...hrefProps} {...positionProps} {...otherProps}>
+        <Component {...styleProps} {...hrefProps} {...positionProps} {...heightProps} {...widthProps} {...otherProps}>
           {children}
         </Component>
       );

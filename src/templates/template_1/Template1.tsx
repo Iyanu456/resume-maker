@@ -5,6 +5,7 @@ import Experience from "./Experience.tsx";
 import Projects from "./Projects.tsx";
 import { style } from "./data.ts";
 import * as Types from "../../types/usertypes.ts";
+import emailIcon from './assets/email.svg'
 
 
 const docData = {
@@ -47,9 +48,17 @@ export default function MyDoc(props: RenderedProps) {
 							<p style={style.firstName}>{fullname}</p>
 							<p style={style.profession}>{jobTitle}</p>
 						</Div>
-						<Div style={{display: 'flex', flexDirection: 'row', gap: '7pt', margin: 'auto'}}>
-							<Div><a>{email}</a></Div>
-							<Div><a>{website}</a></Div>
+						<Div style={{display: 'flex', flexDirection: 'row', gap: '14pt', margin: 'auto', fontSize: '10.5pt', paddingTop: '4pt'}}>
+							{email !== "" &&
+							<Div style={{display: 'flex', flexDirection: 'row', gap: '3pt'}} >
+								<img src='/email.png' style={{maxHeight: '13pt', maxWidth: '13pt', margin: 'auto'}} />
+								<Div><a >{email}</a></Div>
+							</Div>}
+							{website !== "" &&
+							<Div style={{display: 'flex', flexDirection: 'row', gap: '3pt'}}>
+								<img src='/web.png' style={{maxHeight: '13pt', maxWidth: '13pt', margin: 'auto'}} />
+								<a >{website}</a>
+							</Div>}
 						</Div>
 						</>
 					))}

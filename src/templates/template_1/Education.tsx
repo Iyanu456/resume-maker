@@ -30,8 +30,8 @@ const Education: React.FC<EducationProps> = (props) => {
         else if (visible === false) return null;
         else return (<Div key={index} style={{ display: 'flex', flexDirection: 'row'}}>
           <Div style={{ display: 'flex', flexDirection: 'row' }}>
-            <p style={props.schoolStyle}>{school !== "" ? (`${school}, `) : null }</p>
-            <p>&nbsp;{degree}</p>
+            <p style={props.schoolStyle}>{school}</p>
+            <p>{`${degree !== "" ? (`, ${degree} `) : ""} `}</p>
           </Div>
           <p style={{margin: '0 0 0 auto'}}>{duration}</p>
         </Div>)
