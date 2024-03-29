@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RegisterFont } from "./RegisteredFonts";
 import { pdfjs } from "react-pdf";
 import MyDoc from "./templates/template_1/Template1";
@@ -10,7 +10,7 @@ import Accordion from "./components/Accordion";
 import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
-import Icon from "./Icon";
+//import Icon from "./Icon";
 import { RenderedProps } from "./types/usertypes";
 import { useScaleFactor } from "./ScaleContext";
 //import EditorConvertToHTML from "./TextEditor";
