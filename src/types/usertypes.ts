@@ -5,6 +5,7 @@ export interface PersonalInfoProps {
 	jobTitle: string;
 	email: string;
 	website: string;
+	phone: string;
 }
 
 export interface EducationInfo {

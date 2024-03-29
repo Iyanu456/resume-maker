@@ -40,4 +40,5 @@ export default function scaledStyle(scaleFactor: number) {
 		margin: `${3 * scaleFactor}pt, auto`,
 	},
 	dateStyle: { margin: "auto 0 auto auto", fontFamily: "Inter" },
+	icon: {maxHeight: `${13 * scaleFactor}px`, maxWidth: `${13 * scaleFactor}px`}
 })}

@@ -75,6 +75,20 @@ export default function PersonalDetailsForm(props: personalProps) {
 					}
 					placeholder="Website"
 				/>
+				<InputLabel
+					label="Phone"
+					type="text"
+					value={props.data.phone}
+					handleChange={(e) =>
+						props.handleChange(
+							"personalInfo",
+							props.index,
+							"phone",
+							e.target.value
+						)
+					}
+					placeholder="Phone number"
+				/>
 			</div>
 		</form>
 	);

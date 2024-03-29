@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import InputLabel from "../InputLabel";
-import TextArea from "../../templates/template_1/TextEditor";
+import TextEditor from "../../templates/template_1/TextEditor";
 interface experienceProps {
     data: {
         jobTitle: string;
@@ -17,6 +17,7 @@ interface experienceProps {
     index: any;
 }
 export default function ExperienceForm(props: experienceProps) {
+    const [editorValue, setEditorValue] = useState(props.data.description)
     useEffect(() => {
         const allFieldsEmpty = Object.values(props.data).every(field => field === '');
         if (allFieldsEmpty) {
@@ -80,18 +81,22 @@ export default function ExperienceForm(props: experienceProps) {
                         />
                     </div>
                     <div>
-					<TextArea
-						label="description"
-                        placeholder="Enter description here"
-						//value={props.data.description}
-						onChange={(e) =>
-							props.handleChange(
-								"experience",
-								props.index,
-								"description",
-								e.target.value
-							)
-						}
+					<TextEditor 
+					label="Description"
+					value={editorValue} // Bind the Quill editor value to editorValue state
+					editorContainerClassName="pt-3"
+					editorClassName="md:max-w-[300px]"
+					placeholder="Enter description here"
+					onChange={(value) => {
+						setEditorValue(value); // Update the editorValue state
+						props.handleChange(
+							"experience",
+							props.index,
+							"description",
+							value
+						);
+					}}
+					
 					/>
 				</div>
                 </div>

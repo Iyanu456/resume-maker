@@ -1,6 +1,7 @@
 import { Div } from '../../Div';
 import parse from "html-react-parser";
 import { convertToHTML } from './convertToHTML';
+import { useScaleFactor } from '../../ScaleContext';
 
 interface projectProps {
   titleStyle: any,
@@ -16,14 +17,16 @@ interface projectProps {
   dateStyle: any,
   strokeWidth: number;
   strokeLength: string;
-  fontSize: string;
+  fontSize: any;
 }
 
 
 
 export default function Projects(props: projectProps) {
+  const {scaleFactor} = useScaleFactor()
+
   return (
-    <Div style={{marginBottom: 15, marginTop: -10, fontSize: `${props.fontSize}`, width: '515pt'}}>
+    <Div style={{marginBottom: 15 * scaleFactor, marginTop: -10 * scaleFactor, fontSize: `${props.fontSize * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
       <p style={props.titleStyle}>Projects</p>
       <svg height="10" width={props.strokeLength} style={props.lineStyle}>
         <line
@@ -35,21 +38,21 @@ export default function Projects(props: projectProps) {
           stroke="rgb(0,0,0)"
         />
       </svg>
-      <Div style={{display: 'flex', flexDirection: 'column', gap: '5pt'}} >
+      <Div style={{display: 'flex', flexDirection: 'column', gap: `${5 * scaleFactor}pt`}} >
       {props.data.map(({ project, about, description, duration, visible }: { project:string, about:string, description:string, duration:string, visible:boolean }, index: number) => {
         if (project === "" && about === "" && description === "" && duration === "") return null;
         if (project === "" && about === "" && description === "" && duration === "" && visible === true) return null;
         if (visible === false) return null;
         return (
-          <Div style={{marginBottom: 10}} key={index} >
-            <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2}}>
+          <Div style={{marginBottom: 10 * scaleFactor}} key={index} >
+            <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2 * scaleFactor}}>
               <Div style={{display: 'flex', flexDirection: 'row'}}>
                 <p style={props.projectStyle}>{ project !=="" ? `${project} - ` : null }</p>
                 <p>&nbsp;{about}</p>
               </Div>
               <p style={{margin: 'auto 0 auto auto', fontFamily: 'Inter'}}>{`${duration}`}</p>
             </Div>
-            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: '390pt', display: 'flex', flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: `${390 * scaleFactor}pt`, display: 'flex', flexDirection: 'column', gap: `${8 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
               {parse(convertToHTML(description))}
             </Div>
           </Div>

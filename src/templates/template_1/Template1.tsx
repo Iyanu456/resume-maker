@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 import { Div } from "../../Div.tsx";
 import Education from "./Education.tsx";
 import Skills from "./Skills.tsx";
@@ -7,84 +7,150 @@ import Projects from "./Projects.tsx";
 import scaledStyle from "./data.ts";
 import * as Types from "../../types/usertypes.ts";
 
-
-const docData = {
-	fontSize: "11pt",
-	strokeWidth: 3,
-	strokeLength: "516pt",
-};
-
 // Assuming you have types.ts or usertypes.ts where RenderedProps is defined
 export interface RenderedProps {
-	info: Types.RenderedProps
-  }
+	info: Types.RenderedProps;
+	scale: number;
+}
 
-  
 export default function MyDoc(props: RenderedProps) {
 	const {
-	info: {
+		info: {
 			personalInfo,
 			contactInfo,
 			education,
 			skill,
 			experience,
-			project,}
+			project,
+		},
+		scale,
 	} = props;
 
-	const [scaleFactor, setScaleFactor] = useState(1);
+	const style = scaledStyle(scale);
 
-	useEffect(() => {
-	  function updateScaleFactor() {
-		// Calculate scale factor based on window width or any other relevant metric
-		const width = window.innerWidth;
-		const scaleFactor = width > 1200 ? 1 : width > 768 ? 0.8 : 0.6;
-		setScaleFactor(scaleFactor);
-	  }
-  
-	  updateScaleFactor();
-  
-	  // Event listener to update scale factor on window resize
-	  window.addEventListener('resize', updateScaleFactor);
-	  return () => window.removeEventListener('resize', updateScaleFactor);
-	}, []);
-
-	const style = scaledStyle(props.scale)
+	const docData = {
+		fontSize: `${11 * scale}pt`,
+		strokeWidth: 3 * scale,
+		strokeLength: `${516 * scale}pt`,
+	};
 
 	return (
-		<Div 
-			style={{fontSize: "11pt", display: "flex" }}>
+		<Div style={{ fontSize: `${11 * scale}pt`, display: "flex" }}>
 			<Div
 				style={{
 					display: "flex",
-					gap: "8pt",
+					gap: `${8 * scale}pt`,
 					flexDirection: "column",
 					margin: "auto",
 				}}>
 				{personalInfo &&
-					personalInfo.map(({ fullname, jobTitle, email, website }, index) => (
-						<>
-						<Div key={index}>
-							<p style={style.firstName}>{fullname}</p>
-							<p style={style.profession}>{jobTitle}</p>
-						</Div>
-						<Div style={{display: 'flex', flexDirection: 'row', gap: '14pt', margin: 'auto', fontSize: '10.5pt', paddingTop: '4pt'}}>
-							{email !== "" &&
-							<Div style={{display: 'flex', flexDirection: 'row', gap: '3pt'}} >
-								<img src='/email.png' style={{maxHeight: '13pt', maxWidth: '13pt', margin: 'auto'}} />
-								<Div><a >{email}</a></Div>
-							</Div>}
-							{website !== "" &&
-							<Div style={{display: 'flex', flexDirection: 'row', gap: '3pt'}}>
-								<img src='/web.png' style={{maxHeight: '13pt', maxWidth: '13pt', margin: 'auto'}} />
-								<a >{website}</a>
-							</Div>}
-						</Div>
-						</>
-					))}
+					personalInfo.map(
+						(
+							{ fullname, jobTitle, email, website, phone },
+							index
+						) => (
+							<>
+								<Div key={index}>
+									<p style={style.firstName}>{fullname}</p>
+									<p style={style.profession}>{jobTitle}</p>
+								</Div>
+								<Div
+									style={{
+										display: "flex",
+										flexDirection: "row",
+										gap: `${14 * scale}pt`,
+										margin: "auto",
+										fontSize: "10.5pt",
+										paddingTop: `${4 * scale}pt`,
+									}}>
+									{email !== "" && (
+										<Div
+											style={{
+												display: "flex",
+												flexDirection: "row",
+												gap: `${3 * scale}pt`,
+											}}>
+											<img
+												src="/email.png"
+												style={{
+													maxHeight: `${
+														13 * scale
+													}px`,
+													maxWidth: `${13 * scale}px`,
+													margin: "auto",
+												}}
+											/>
+											<Div>
+												<a
+													style={{
+														fontSize: `${
+															10 * scale
+														}pt`,
+													}}>
+													{email}
+												</a>
+											</Div>
+										</Div>
+									)}
+									{website !== "" && (
+										<Div
+											style={{
+												display: "flex",
+												flexDirection: "row",
+												gap: `${3 * scale}pt`,
+											}}>
+											<img
+												src="/web.png"
+												style={{
+													maxHeight: `${
+														13 * scale
+													}px`,
+													maxWidth: `${13 * scale}px`,
+													margin: "auto",
+												}}
+											/>
+											<a
+												style={{
+													fontSize: `${10 * scale}pt`,
+												}}
+												href={website}>
+												{website}
+											</a>
+										</Div>
+									)}
+									{phone !== "" && (
+										<Div
+											style={{
+												display: "flex",
+												flexDirection: "row",
+												gap: `${3 * scale}pt`,
+											}}>
+											<img
+												src="/phone.png"
+												style={{
+													maxHeight: `${
+														13 * scale
+													}px`,
+													maxWidth: `${13 * scale}px`,
+													margin: "auto",
+												}}
+											/>
+											<a
+												style={{
+													fontSize: `${10 * scale}pt`,
+												}}>
+												{phone}
+											</a>
+										</Div>
+									)}
+								</Div>
+							</>
+						)
+					)}
 				<Div
 					style={{
 						display: "flex",
-						gap: "8pt",
+						gap: `${8 * scale}pt`,
 						flexDirection: "row",
 						margin: "0 auto",
 					}}>
@@ -105,15 +171,16 @@ export default function MyDoc(props: RenderedProps) {
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						gap: "15pt",
-						marginTop: 15,
+						gap: `${15 * scale}pt`,
+						marginTop: 15 * scale,
 					}}>
 					{education &&
-						(education.some((item) =>
-							item.visible &&
-								  Object.values(item)
-										.slice(0, -1)
-										.some((value) => value !== "")
+						(education.some(
+							(item) =>
+								item.visible &&
+								Object.values(item)
+									.slice(0, -1)
+									.some((value) => value !== "")
 						) ? (
 							<Education
 								titleStyle={style.title}
@@ -126,11 +193,12 @@ export default function MyDoc(props: RenderedProps) {
 							/>
 						) : null)}
 					{skill &&
-						(skill.some((item) =>
-							item.visible &&
-								  Object.values(item)
-										.slice(0, -1)
-										.some((value) => value !== "")
+						(skill.some(
+							(item) =>
+								item.visible &&
+								Object.values(item)
+									.slice(0, -1)
+									.some((value) => value !== "")
 						) ? (
 							<Skills
 								titleStyle={style.title}
@@ -143,11 +211,12 @@ export default function MyDoc(props: RenderedProps) {
 							/>
 						) : null)}
 					{experience &&
-						(experience.some((item) =>
-							item.visible &&
-								  Object.values(item)
-										.slice(0, -1)
-										.some((value) => value !== "")
+						(experience.some(
+							(item) =>
+								item.visible &&
+								Object.values(item)
+									.slice(0, -1)
+									.some((value) => value !== "")
 						) ? (
 							<Experience
 								titleStyle={style.title}
@@ -161,11 +230,12 @@ export default function MyDoc(props: RenderedProps) {
 							/>
 						) : null)}
 					{project &&
-						(project.some((item) =>
-							item.visible &&
-								  Object.values(item)
-										.slice(0, -1)
-										.some((value) => value !== "")
+						(project.some(
+							(item) =>
+								item.visible &&
+								Object.values(item)
+									.slice(0, -1)
+									.some((value) => value !== "")
 						) ? (
 							<Projects
 								titleStyle={style.title}

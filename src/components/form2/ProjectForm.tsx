@@ -27,7 +27,7 @@ interface projectProps {
 }
 
 export default function ProjectForm(props: projectProps) {
-	const [editorValue, setEditorValue] = useState("")
+	const [editorValue, setEditorValue] = useState(props.data.description);
 	//const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 
 	/*const onEditorStateChange = (editorState: EditorState) => {
@@ -48,7 +48,7 @@ export default function ProjectForm(props: projectProps) {
 
 	return (
 		<form onSubmit={(e) => e.preventDefault()}>
-			<div className="flex flex-col gap-2 md:gap-3">
+			<div className="flex flex-col gap-2 md:gap-1">
 				<div>
 					<InputLabel
 						type="text"
@@ -98,24 +98,22 @@ export default function ProjectForm(props: projectProps) {
 				</div>
 
 				<div>
-					<TextEditor 
-					label="Description"
-					value={editorValue} // Bind the Quill editor value to editorValue state
-					editorContainerClassName="pt-3"
-					editorClassName="md:max-w-[340px]"
-					placeholder="Enter description here"
-					onChange={(value) => {
-						setEditorValue(value); // Update the editorValue state
-						props.handleChange(
-							"project",
-							props.index,
-							"description",
-							value
-						);
-					}}
-					
+					<TextEditor
+						label="Description"
+						value={editorValue} // Bind the Quill editor value to editorValue state
+						editorContainerClassName=""
+						editorClassName="md:max-w-[300px]"
+						placeholder="Enter description here"
+						onChange={(value) => {
+							setEditorValue(value); // Update the editorValue state
+							props.handleChange(
+								"project",
+								props.index,
+								"description",
+								value
+							);
+						}}
 					/>
-
 				</div>
 			</div>
 		</form>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterFont } from "./RegisteredFonts";
 import { pdfjs } from "react-pdf";
 import MyDoc from "./templates/template_1/Template1";
@@ -11,10 +11,11 @@ import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
 import Icon from "./Icon";
-import { RenderedProps } from './types/usertypes';
+import { RenderedProps } from "./types/usertypes";
+import { useScaleFactor } from "./ScaleContext";
 //import EditorConvertToHTML from "./TextEditor";
 //import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./home.css";
 //import ReactDOMServer from "react-dom/server";
 //import { convertToReactPDFComponents } from "./convertToReactPdf";
@@ -27,7 +28,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	"pdfjs-dist/build/pdf.worker.min.js",
 	import.meta.url
 ).toString();
-
 
 export default function Home(): JSX.Element {
 	//const [numPages, setNumPages] = useState(1);
@@ -45,7 +45,9 @@ export default function Home(): JSX.Element {
 
 	// State for data to be rendered in the PDF
 	const [pdfRenderedProps, setPdfRenderedProps] = useState<RenderedProps>({
-		personalInfo: [{ fullname: "", jobTitle: "", email: "", website: "" }],
+		personalInfo: [
+			{ fullname: "", jobTitle: "", email: "", website: "", phone: "" },
+		],
 		education: [{ school: "", degree: "", duration: "", visible: true }],
 		skill: [{ skill: "", visible: true }],
 		experience: [
@@ -68,12 +70,9 @@ export default function Home(): JSX.Element {
 		],
 		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
-
+	const { scaleFactor } = useScaleFactor();
 	//const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 	//const [projectForms, setProjectForms] = useState([]);
-
-	
-	  
 
 	//function that handles input change in input fields
 	const handleChange = (
@@ -353,15 +352,17 @@ export default function Home(): JSX.Element {
 			</div>
 
 			{/* Main content */}
-			<div className="home md:flex flex-wrap justify-center center-align h-[100%] md:px-[0.1em] pt-[1em] md:pt-[2em] md:fixed left-0 right-0">
+			<div className="home md:flex justify-center center-align h-[100%] md:px-[0.1em] pt-[1em] md:pt-[2em] md:fixed left-0 right-0">
 				<div className="flex flex-col gap-2 h-full overflow-y-auto bg-grey md:pr-[1em]">
-					<div className="form-section w-[100%] md:min-w-[400px] relative md:rounded-[0.75em] overflow-x-hidden">
-						<div className="flex px-[1.2em] py-[1.2em] md:py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
+					<div className="form-section max-[768px]:w-[100%] md:min-w-[340px] min-[941px]:w-[380px] max-[940px]:w-[300px] relative md:rounded-[0.75em] overflow-x-hidden">
+						<div className="min-[870px]:hidden flex px-[1.2em] py-[1.2em] md:py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
 							<h2 className="my-auto">
 								<b>Resume</b>
 							</h2>
 							<Download
-								component={<MyDoc info={pdfRenderedProps} />}
+								component={
+									<MyDoc info={pdfRenderedProps} scale={1} />
+								}
 								className="btn-primary mr-0 ml-auto"
 							/>
 						</div>
@@ -371,16 +372,20 @@ export default function Home(): JSX.Element {
 							} /*activeIndex={activeIndex} handleAccordionClick={handleAccordionClick}*/
 						/>
 						{/*rawTextRepresentation*/}
-						
-						
 					</div>
 				</div>
 
 				{/* PDF Section */}
 
-				<div className="w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
+				<div className="max-[870px]:hidden w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
 					<div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
-						<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
+						<Download
+							component={
+								<MyDoc info={pdfRenderedProps} scale={1} />
+							}
+							className="btn-primary mr-0 ml-auto"
+						/>
+						{/*<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
 							<Icon
 								//onClick={() => prevPage()}
 								src="arrow-right-3.svg"
@@ -394,23 +399,24 @@ export default function Home(): JSX.Element {
 								//onClick={() => nextPage()}
 								src="arrow-right-3.svg"
 								className="m-auto p-2"
-							/>
-						</div>
+						/>
+						</div>*/}
 					</div>
 					<div
 						className=" w-[fit-content] h-[fit-content] overflow-y-scroll"
 						style={{
-							width: "210mm",
-							paddingTop: "1em",
-							height: "297mm",
+							width: `${210 * scaleFactor}mm`,
+							paddingTop: `${1 * scaleFactor}em`,
+							paddingBottom: `${1 * scaleFactor}em`,
+							height: `${297 * scaleFactor}mm`,
 							border: "1px solid black",
-							fontSize: "16.5pt",
+							fontSize: `${16.5 * scaleFactor}pt`,
 							fontFamily: "Inter",
 							wordBreak: "break-word",
 							margin: "auto",
-							marginTop: "2em",
+							marginTop: `${1 * scaleFactor}em`,
 						}}>
-						<MyDoc info={pdfRenderedProps} />
+						<MyDoc info={pdfRenderedProps} scale={scaleFactor} />
 					</div>
 				</div>
 			</div>

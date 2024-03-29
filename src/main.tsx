@@ -2,17 +2,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './Home.tsx'
+//import { useState, useEffect, createContext, useContext } from 'react'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from './LandingPage.tsx';
+import { ScaleProvider } from './ScaleContext.tsx'
+
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/landing" element={<LandingPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ScaleProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/landing" element={<LandingPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ScaleProvider>
   </React.StrictMode>,
 )

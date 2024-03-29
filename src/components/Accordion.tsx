@@ -62,7 +62,7 @@ const Accordion: React.FC<AccordionProps> = (props) => {
             //onClick={props.onClick}
           >
             <Icon src="edit-2.svg" className="mr-3" />
-            <h1 className="section-title font-black">{section.title}</h1>
+            <h1 className="section-title font-black max-[940px]:text-[0.97em]">{section.title}</h1>
             <Icon className={`ml-auto mr-0 pr-2 md:block`} src={`${activeIndex === index ? 'arrow-down-1.svg' : 'arrow-right-3.svg'}`} height='20px' width='20px' />
           </div>
           {activeIndex === index && (

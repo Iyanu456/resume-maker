@@ -102,9 +102,9 @@
 
 
   @media screen and (max-width: 920px) {
-    .desktop {
+    /*.desktop {
       display: none;
-    }
+    }*/
 
     .main {
       display: grid;
