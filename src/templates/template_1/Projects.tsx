@@ -45,14 +45,14 @@ export default function Projects(props: projectProps) {
         if (visible === false) return null;
         return (
           <Div style={{marginBottom: 10 * scaleFactor}} key={index} >
-            <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2 * scaleFactor}}>
+            <Div style={{display: 'flex', flexDirection: 'row'}}>
               <Div style={{display: 'flex', flexDirection: 'row'}}>
                 <p style={props.projectStyle}>{ project !=="" ? `${project} - ` : null }</p>
                 <p>&nbsp;{about}</p>
               </Div>
               <p style={{margin: 'auto 0 auto auto', fontFamily: 'Inter'}}>{`${duration}`}</p>
             </Div>
-            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: `${390 * scaleFactor}pt`, display: 'flex', flexDirection: 'column', gap: `${8 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
+            <Div /*</Div>dangerouslySetInnerHTML={{ __html: description }}*/ style={{maxWidth: `${390 * scaleFactor}pt`, display: 'flex', flexDirection: 'column', gap: `${1 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
               {parse(convertToHTML(description))}
             </Div>
           </Div>

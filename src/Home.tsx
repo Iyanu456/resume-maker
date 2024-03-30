@@ -376,14 +376,15 @@ export default function Home(): JSX.Element {
 				</div>
 
 				{/* PDF Section */}
-
-				<div className="max-[870px]:hidden w-auto flex flex-col bg-white justify-center center-align w-[max-content] h-[100%] px-[1.5em] pb-[2.4em] rounded-[0.75em] desktop">
-					<div className="grid w-[fit-content] h-[fit-content] sticky mx-auto mt-4 mb-4">
+				
+				<div className="max-[870px]:hidden w-[fit-content] flex flex-col justify-center center-align w-[max-content] pb-[2.4em] rounded-[0.75em] desktop h-[100%]">
+					
+					<div className="grid h-[fit-content] w-[100%] bg-white py-[1.5em] rounded-t-[0.6em]">
 						<Download
 							component={
 								<MyDoc info={pdfRenderedProps} scale={1} />
 							}
-							className="btn-primary mr-0 ml-auto"
+							className="btn-primary m-auto"
 						/>
 						{/*<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
 							<Icon
@@ -402,14 +403,16 @@ export default function Home(): JSX.Element {
 						/>
 						</div>*/}
 					</div>
+					<div className="overflow-y-scroll bg-white mt-0  mb-auto p-[1em] pt-0 rounded-b-[0.6em] shadow-md">
 					<div
 						className=" w-[fit-content] h-[fit-content] overflow-y-scroll"
 						style={{
 							width: `${210 * scaleFactor}mm`,
 							paddingTop: `${1 * scaleFactor}em`,
 							paddingBottom: `${1 * scaleFactor}em`,
-							height: `${297 * scaleFactor}mm`,
-							border: "1px solid black",
+							height: `auto`,
+							minHeight: `${297 * scaleFactor}mm`,
+							border: "1px solid #ccc",
 							fontSize: `${16.5 * scaleFactor}pt`,
 							fontFamily: "Inter",
 							wordBreak: "break-word",
@@ -417,6 +420,7 @@ export default function Home(): JSX.Element {
 							marginTop: `${1 * scaleFactor}em`,
 						}}>
 						<MyDoc info={pdfRenderedProps} scale={scaleFactor} />
+					</div>
 					</div>
 				</div>
 			</div>

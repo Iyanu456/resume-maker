@@ -36,7 +36,7 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   ul: ({ children }: { children: ReactNode }) => {
     //console.log("<ul>", children);
     return (
-      <View style={{flexDirection: 'column', gap: '8pt', fontSize: '11pt'}}>
+      <View style={{flexDirection: 'column', gap: '8pt', fontSize: '11pt', paddingLeft: '4pt'}}>
         {children}
       </View>
     );
