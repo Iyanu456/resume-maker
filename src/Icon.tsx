@@ -3,6 +3,7 @@ interface IconProps {
     width?: string;
     height?: string;
     className?: string;
+    style?: any;
     onClick?: (e?: any | null) => any;
 }
 
@@ -15,7 +16,7 @@ export default function Icon(props: IconProps) {
 
     return (
         <button onClick={props.onClick} className={props.className}>
-            <img src={props.src} height={height} width={width} />
+            <img src={props.src} height={height} width={width} style={props.style}/>
         </button>
     );
 }

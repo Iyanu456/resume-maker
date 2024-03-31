@@ -4,7 +4,7 @@ import './styles/accordion2.css';
 
 interface Accordion2Props {
   onAdd: (field: string, defaultObject: any) => void;
-  onDelete?: (field: string, index: number) => void;
+  onDelete: (field: string, index: number) => void;
   defaultObject: any;
   field: string;
   accordionData: { title: string; content: any; visible: boolean }[];
@@ -15,7 +15,7 @@ interface Accordion2Props {
 
 const Accordion2: React.FC<Accordion2Props> = ({
   onAdd,
-  //onDelete,
+  onDelete,
   defaultObject,
   field,
   accordionData,
@@ -45,10 +45,10 @@ const Accordion2: React.FC<Accordion2Props> = ({
     }
   };
 
-  /*const handleDeleteItem = (index: number) => {
+  const handleDeleteItem = (index: number) => {
     onDelete(field, index);
     handleAccordionClick(index);
-  };*/
+  };
 
   return (
     <div className='bg-white'>
@@ -65,7 +65,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
             }`}
             onClick={() => handleAccordionClick(index)}
           >
-            <p className='accordion2-title'><b>{section.title}</b></p>
+            <p className='accordion2-title'><b>{section.title === "" ? 'Click here to add new content' : section.title}</b></p>
             {/*index !== 0 && (
               <>
                 <button
@@ -84,17 +84,31 @@ const Accordion2: React.FC<Accordion2Props> = ({
             </button>
           </div>
           {activeIndex === index && (
-            <div className="flex flex-col gap-[1em]">
+            <div className="flex  flex-col gap-[1em]">
               <div className="">{section.content}</div>
-              <div className="btn-grp flex">
-                <div className="mr-0 ml-auto flex gap-2">
+              <div className="flex ">
+                <div className="w-[100%] flex gap-2 justify-center center-align">
+                {index !== 0 && (
+            
+                <button
+                  onClick={() => handleDeleteItem(index)}
+                  className=" ml-0 mr-auto"
+                >
+                  <b className='m-auto text-[0.95 em]'>Delete</b>
+                </button>
+              
+            )}
+                  <div className='flex mr-0 ml-auto  gap-3 justify-center center-align'>
+                    <p>Back</p>
+                    <p>|</p>
                   <button
                     onClick={handleAccordionClose}
-                    className="accordion-btn btn-primary flex gap-1"
+                    className="accordion-btn btn-primary flex gap-1 justify-center center-align"
                   >
-                    <Icon src='/tick-circle.svg' height='60px' width='20'/>
+                    <Icon src='/tick-circle.svg' className="my-auto" style={{maxheight: '18px', maxWidth: '18px'}} />
                     <p>Save</p>
                   </button>
+                  </div>
                 </div>
               </div>
             </div>

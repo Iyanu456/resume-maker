@@ -5,20 +5,20 @@
 
 .accordion-section2:first-child::before {
   display: grid;
-  margin: 0 -1.4em 1em -1.4em;
+  margin: 0 -1.4em 1em -1.9em;
   content: " ";
   width: 120%;
-  height: 7px;
+  height: 4px;
   background-color: rgb(219, 219, 219);
   color: black;
 }
 
 .accordion-section2::after {
   display: grid;
-  margin: 1em -1.4em;
+  margin: 1em -1.4em 1em -1.9em;
   content: " ";
   width: 120%;
-  height: 7px;
+  height: 4px;
   background-color: rgb(219, 219, 219);
   color: black;
 }
@@ -34,7 +34,7 @@
 }
 
 .accordion2-title {
-  color: rgb(80, 76, 76);
+  color: rgb(126, 125, 125);
 }
 
 .accordion-header.active {

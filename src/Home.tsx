@@ -158,6 +158,14 @@ export default function Home(): JSX.Element {
 		});
 	};
 
+	function truncateText(text: string, maxLength: number) {
+		if (text.length <= maxLength) {
+			return text;
+		} else {
+			return text.substring(0, maxLength) + '...';
+		}
+	}
+
 	//array usedto populate the Accordion Compnent
 	//note Accordion and Accordion2 components are two different components with different functionalities
 	const accordionData = [
@@ -205,7 +213,7 @@ export default function Home(): JSX.Element {
 					<Accordion2
 						accordionData={pdfRenderedProps.education.map(
 							(data, index) => ({
-								title: `Education ${index + 1}`,
+								title: `${truncateText(data.school, 24)}`,
 								content: (
 									<EducationForm
 										//formStyle=""
@@ -242,7 +250,7 @@ export default function Home(): JSX.Element {
 					<Accordion2
 						accordionData={pdfRenderedProps.skill.map(
 							(data, index) => ({
-								title: `Skill ${index + 1}`,
+								title: `${truncateText(data.skill, 24)}`,
 								content: (
 									<SkillForm
 										//formStyle=""
@@ -272,7 +280,7 @@ export default function Home(): JSX.Element {
 					<Accordion2
 						accordionData={pdfRenderedProps.experience.map(
 							(data, index) => ({
-								title: `Professional Experience ${index + 1}`,
+								title: `${truncateText(data.jobTitle, 24)}`,
 								content: (
 									<ExperienceForm
 										//formStyle=""
@@ -308,7 +316,7 @@ export default function Home(): JSX.Element {
 					<Accordion2
 						accordionData={pdfRenderedProps.project.map(
 							(data, index) => ({
-								title: `Project ${index + 1}`,
+								title: `${truncateText(data.project, 24)}`,
 								content: (
 									<ProjectForm
 										//formStyle=""
