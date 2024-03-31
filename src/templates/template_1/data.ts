@@ -21,24 +21,24 @@ export default function scaledStyle(scaleFactor: number) {
 	profession: {
 		//textAlign: "center",
 		fontSize: `${13 * scaleFactor}pt`,
-		fontFamily: "Inter",
+		fontFamily: "Calibri",
         margin: 'auto',
 		//marginBottom: "30pt",
 	},
 	title: {
 		fontSize: `${11.8 * scaleFactor}pt`,
-		fontFamily: "Inter",
+		fontFamily: "Calibri",
 		//marginBottom: "5",
 		fontWeight: "bold",
 	},
 	subtitle: {
 		fontSize: `${11 * scaleFactor}pt`,
-		fontFamily: "Inter",
+		fontFamily: "Calibri",
 		fontWeight: "bold",
 	},
 	line: {
 		margin: `${3 * scaleFactor}pt, auto`,
 	},
-	dateStyle: { margin: "auto 0 auto auto", fontFamily: "Inter" },
+	dateStyle: { margin: "auto 0 auto auto", fontFamily: "Calibri" },
 	icon: {maxHeight: `${13 * scaleFactor}px`, maxWidth: `${13 * scaleFactor}px`}
 })}

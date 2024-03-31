@@ -31,6 +31,13 @@
   font-size: 1.05em;
 }
 
+.danger {
+  color: rgb(226, 85, 85);
+}
+.secondary {
+  color: #7c7c7c;
+}
+
 .page {
     width: max-content;
     height: max-content;

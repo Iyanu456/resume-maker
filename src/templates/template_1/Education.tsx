@@ -1,4 +1,5 @@
 import { Div } from '../../Div';
+import { useScaleFactor } from '../../ScaleContext';
 
 interface EducationProps {
   titleStyle: any;
@@ -11,8 +12,10 @@ interface EducationProps {
 }
 
 const Education: React.FC<EducationProps> = (props) => {
+  const {scaleFactor} = useScaleFactor()
+
   return (
-    <Div style={{ marginBottom: 15, fontSize: `${props.fontSize}`}}>
+    <Div style={{ marginBottom: 15 * scaleFactor, fontSize: `${parseInt(props.fontSize) * scaleFactor}`}}>
       <p style={props.titleStyle}>Education</p>
       <svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <line
@@ -24,7 +27,7 @@ const Education: React.FC<EducationProps> = (props) => {
                 stroke="rgb(0,0,0)"
             />
             </svg>
-      <Div style={{display: 'flex', flexDirection: 'column', gap: '5pt'}} >
+      <Div style={{display: 'flex', flexDirection: 'column', gap: `${1 * scaleFactor}pt`, fontFamily: 'Calibri'}} >
       {props.data && props.data.map(({ school, degree, duration, visible }: { school: string; degree: string; duration: string, visible: boolean }, index: number) => {
         if (school === "" && degree === "" && duration === "" ) return null;
         else if (visible === false) return null;

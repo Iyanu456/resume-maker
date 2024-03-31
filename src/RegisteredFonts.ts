@@ -16,4 +16,11 @@ export const RegisterFont = () => {
 			{ src: "/Inter-Bold.ttf", fontWeight: "bold" },
 		],
 	});
+	Font.register({
+		family: "Calibri",
+		fonts: [
+			{ src: "/Calibri.ttf", fontWeight: "normal" },
+			{ src: "/Calibri-bold.ttf", fontWeight: "bold" },
+		],
+	});
 };

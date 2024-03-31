@@ -17,13 +17,13 @@ interface ExperienceProps {
     dateStyle?: any;
     strokeWidth?: any;
     strokeLength?: string;
-    fontSize?: any;
+    fontSize: string;
 }
 
 const Experience: React.FC<ExperienceProps> = (props) => {
     const {scaleFactor} = useScaleFactor()
     return (
-        <Div style={{marginBottom: 10 * scaleFactor, fontSize: `${props.fontSize * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
+        <Div style={{marginBottom: 10 * scaleFactor, fontSize: `${parseInt(props.fontSize) * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
             <p style={props.titleStyle}>Professional Experience</p>
             <svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <line
@@ -35,7 +35,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 stroke="rgb(0,0,0)"
             />
             </svg>
-            <Div style={{display: 'flex', flexDirection: 'column', gap: `${5 * scaleFactor}pt`}} >
+            <Div style={{display: 'flex', flexDirection: 'column', gap: `${5 * scaleFactor}pt`, fontFamily: 'Calibri'}} >
             {props.data.map(({ jobTitle, company, description, duration, visible }: { jobTitle: string, company:string, description:string, duration:string, visible:boolean }, index: number) => {
                 if (jobTitle === "" && description === "" && duration === "") return null; 
                 if (visible === false) return null;
