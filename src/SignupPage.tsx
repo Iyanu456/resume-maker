@@ -24,8 +24,12 @@ const SigninLogin: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await signupOrLoginMutation.mutateAsync({ email, password });
+    await signupOrLoginMutation.mutateAsync({ email, password }).then((response) => {
+      console.log("Server response:", response);
+    });
   };
+
+  
 
   return (
     <div className="grid place-items-center h-screen">
