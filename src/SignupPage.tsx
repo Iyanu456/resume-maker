@@ -3,6 +3,8 @@ import { useMutation } from "react-query";
 import FloatingLabel from "./components/floatingLabel";
 import FloatingPassword from "./components/floatingPassword";
 
+const apiUrl = import.meta.env.BACKEND_API_URL;
+
 const SigninLogin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +13,7 @@ const SigninLogin: React.FC = () => {
   const signupOrLoginMutation = useMutation(
     async (data: { email: string; password: string }) => {
       const endpoint = isNewUser ? "/signup" : "/login";
-      const response = await fetch(`http://localhost:3000${endpoint}`, {
+      const response = await fetch(`http://${apiUrl}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +46,6 @@ const SigninLogin: React.FC = () => {
         </div>
 
         <FloatingLabel
-          className="form-control"
           value={email}
           label="Email address"
           type="email"
