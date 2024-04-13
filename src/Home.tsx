@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterFont } from "./RegisteredFonts";
 import { pdfjs } from "react-pdf";
 import MyDoc from "./templates/template_1/Template1";
@@ -11,7 +11,7 @@ import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
 //import Icon from "./Icon";
-import { RenderedProps } from "./types/usertypes";
+//import { RenderedProps } from "./types/usertypes";
 import { useScaleFactor } from "./ScaleContext";
 //import EditorConvertToHTML from "./TextEditor";
 //import { Editor } from 'react-draft-wysiwyg';
@@ -29,63 +29,74 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url
 ).toString();
 
+function convertToMilliseconds(hours: number = 0, minutes: number = 0, seconds: number = 0): number {
+    const millisecondsPerHour = 60 * 60 * 1000;
+    const millisecondsPerMinute = 60 * 1000;
+    const millisecondsPerSecond = 1000;
+
+    return (hours * millisecondsPerHour) + (minutes * millisecondsPerMinute) + (seconds * millisecondsPerSecond);
+}
+
+const EXPIRATION_DURATION_MS = convertToMilliseconds(0, 1) // 24 hours
+
 export default function Home(): JSX.Element {
-	//const [numPages, setNumPages] = useState(1);
-	//const [pageNum, setPageNum] = useState(1);
-
-	/*function nextPage() {
-		if (pageNum >= numPages) setPageNum(pageNum);
-		else setPageNum(pageNum + 1);
-	}
-
-	function prevPage() {
-		if (pageNum > 0 && pageNum === 1) setPageNum(pageNum);
-		else setPageNum(pageNum - 1);
-	}*/
 
 	// State for data to be rendered in the PDF
-	const [pdfRenderedProps, setPdfRenderedProps] = useState<RenderedProps>({
-		personalInfo: [
-			{ fullname: "", jobTitle: "", email: "", website: "", phone: "" },
-		],
-		education: [{ school: "", degree: "", duration: "", visible: true }],
-		skill: [{ skill: "", visible: true }],
-		experience: [
-			{
-				jobTitle: "",
-				company: "",
-				description: "",
-				duration: "",
-				visible: true,
-			},
-		],
-		project: [
-			{
-				project: "",
-				about: "",
-				description: "",
-				duration: "",
-				visible: false,
-			},
-		],
-		contactInfo: [{ name: "", label: "", src: "", visible: true }],
-	});
+	const [pdfRenderedProps, setPdfRenderedProps] = useState(() => {
+    const storedData = localStorage.getItem('pdfRenderedProps');
+    if (storedData) {
+      const { data, timestamp } = JSON.parse(storedData);
+      if (Date.now() - timestamp <= EXPIRATION_DURATION_MS) {
+        return data;
+      } else {
+        localStorage.removeItem('pdfRenderedProps'); // Remove expired data
+      }
+    }
+    return {
+      personalInfo: [
+        { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
+      ],
+      education: [{ school: "", degree: "", duration: "", visible: true }],
+      skill: [{ skill: "", visible: true }],
+      experience: [
+        {
+          jobTitle: "",
+          company: "",
+          description: "",
+          duration: "",
+          visible: true,
+        },
+      ],
+      project: [
+        {
+          project: "",
+          about: "",
+          description: "",
+          duration: "",
+          visible: false,
+        },
+      ],
+      contactInfo: [{ name: "", label: "", src: "", visible: true }],
+    };
+  });
+	  
 	const { scaleFactor } = useScaleFactor();
-	//const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
-	//const [projectForms, setProjectForms] = useState([]);
 
-	//function that handles input change in input fields
-	const handleChange = (
-		category: string,
+ useEffect(() => {
+    localStorage.setItem('pdfRenderedProps', JSON.stringify({ data: pdfRenderedProps, timestamp: Date.now() }));
+  }, [pdfRenderedProps]);
+
+  // Function to handle input change
+  const handleChange = (category: string,
 		index: number,
 		field: string,
-		value: any
-	): void => {
-		const updatedData: any = { ...pdfRenderedProps };
-		updatedData[category][index][field] = value;
-		setPdfRenderedProps(updatedData);
-	};
-
+		value: any) => {
+    setPdfRenderedProps((prevData: any) => {
+      const updatedData = { ...prevData };
+      updatedData[category][index][field] = value;
+      return updatedData;
+    });
+  };
 	/*const onEditorStateChange = (newEditorState: EditorState, editorProjectIndex: number) => {
 		setEditorState(newEditorState);
 		// Update the corresponding project description in pdfRenderedProps
@@ -108,8 +119,8 @@ export default function Home(): JSX.Element {
 
 	//toogles the visibility of an item in the list of Accordion2 component
 	const toggleVisibility = (field: ArrayKeys, index: number): void => {
-		setPdfRenderedProps((prevState) => {
-			const updatedArray = prevState[field].map((item, i) => {
+		setPdfRenderedProps((prevState: any) => {
+			const updatedArray = prevState[field].map((item: any, i: any) => {
 				if (i === index && "visible" in item) {
 					return {
 						...item,
@@ -171,7 +182,7 @@ export default function Home(): JSX.Element {
 	const accordionData = [
 		{
 			title: "Personal Details",
-			content: pdfRenderedProps.personalInfo.map((data, index) => (
+			content: pdfRenderedProps.personalInfo.map((data: any, index: number) => (
 				<PersonalDetails
 					//debounceTime={debounceTime}
 					//key={index}
@@ -212,7 +223,7 @@ export default function Home(): JSX.Element {
 				<>
 					<Accordion2
 						accordionData={pdfRenderedProps.education.map(
-							(data, index) => ({
+							(data: any, index: number) => ({
 								title: `${truncateText(data.school, 24)}`,
 								content: (
 									<EducationForm
@@ -249,7 +260,7 @@ export default function Home(): JSX.Element {
 				<>
 					<Accordion2
 						accordionData={pdfRenderedProps.skill.map(
-							(data, index) => ({
+							(data: any, index: number) => ({
 								title: `${truncateText(data.skill, 24)}`,
 								content: (
 									<SkillForm
@@ -279,7 +290,7 @@ export default function Home(): JSX.Element {
 				<>
 					<Accordion2
 						accordionData={pdfRenderedProps.experience.map(
-							(data, index) => ({
+							(data: any, index: number) => ({
 								title: `${truncateText(data.jobTitle, 24)}`,
 								content: (
 									<ExperienceForm
@@ -315,7 +326,7 @@ export default function Home(): JSX.Element {
 				<>
 					<Accordion2
 						accordionData={pdfRenderedProps.project.map(
-							(data, index) => ({
+							(data: any, index: number) => ({
 								title: `${truncateText(data.project, 24)}`,
 								content: (
 									<ProjectForm
