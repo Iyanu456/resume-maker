@@ -1,27 +1,28 @@
 /* Form group */
-.form-group {
+.form-group-floating {
+  font-family: 'Inter';
     position: relative;
   }
   
   /* Input field */
-  .form-control {
+  .form-control-floating {
     background-color: #F3F2F2;
     width: 100%;
     height: fit-content;
-    height: 3.1em;
-    padding: 1.3em 1em 0.4em 1.06em;
+    height: 3.44em;
+    padding: 1.5em 1em 0.4em 1.3em;
     border: 0px solid #ced4da;
-    font-weight: 600;
-    font-size: 1em;
+    /*font-weight: 400;*/
+    font-size: 0.9em;
     border-radius: 0.25rem;
   }
   
   /* Floating label */
-  .form-group label {
+  .form-group-floating label {
     font-size: 1em;
     color: grey;
     position: absolute;
-    top: 0.84em;
+    top: 0.8em;
     bottom: 0.3em;
     left: 1.3em;
     pointer-events: none;
@@ -29,8 +30,8 @@
   }
   
   /* Floating label animation */
-  .form-group .form-control:focus ~ label,
-  .form-group .form-control:not(:placeholder-shown) ~ label {
+  .form-group-floating .form-control-floating:focus ~ label,
+  .form-group-floating .form-control-floating:not(:placeholder-shown) ~ label {
     border-radius: 5px;
     height: fit-content;
     padding: 0 0.8em;
@@ -43,7 +44,7 @@
   
   
   
-  .form-group .form-control:not(:placeholder-shown) ~ label {
+  .form-group-floating .form-control-floating:not(:placeholder-shown) ~ label {
     color: black;
     }
   
