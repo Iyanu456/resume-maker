@@ -13,12 +13,12 @@ const FloatingPassword: React.FC<Props> = (props) => {
   const [passwordVisible, setVisibility] = useState(false);
 
   return (
-    <div className="form-group">
+    <div className="form-group-floating">
       <input
         value={props.value}
         type={passwordVisible ? 'text' : 'password'}
         name={props.name}
-        className="form-control"
+        className="form-control-floating"
         id="FloatingPassword"
         placeholder=" "
         onChange={props.onChange}
