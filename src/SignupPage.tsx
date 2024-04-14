@@ -36,7 +36,7 @@ const SigninLogin: React.FC = () => {
   return (
     <div className="grid place-items-center h-screen">
       <form
-        className="w-[85vw] flex flex-col gap-3 md:w-[320px] h-[fit-content]"
+        className="w-[85vw] flex flex-col gap-3 md:w-[320px] h-[fit-content] mb-[-2em]"
         onSubmit={handleSubmit}
       >
         <img src="/Sketchcv_logo.svg" alt="" className="mx-auto mb-4  max-w-[200px] max-h-[200px]" />
@@ -59,23 +59,23 @@ const SigninLogin: React.FC = () => {
           name="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        { !isNewUser && <button className="font-semibold text-sm text-right text-[#790cdf]">Forgot password? </button>}
+        { !isNewUser && <button className="font-semibold text-sm text-right text-[#007bff]">Forgot password? </button>}
 
         {email !== "" && password !== "" ? (
-          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#7400B8] text-white" type="submit">
+          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#007bff] text-white" type="submit">
             Continue
           </button>
         ) : (
-          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#7400B8] text-white">Continue</button>
+          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#007bff] text-white">Continue</button>
         )}
         
         {
           isNewUser === false ?
             <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
-              Don't have an account <span className="text-[#6816b6]">Signup</span> 
+              Don't have an account <span className="text-[#007bff]">Signup</span> 
             </button> : 
             <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
-              Have an account <span className="text-[#6816b6]">Sign in</span> 
+              Have an account <span className="text-[#007bff] font-semibold">Sign in</span> 
             </button>
         }
 
