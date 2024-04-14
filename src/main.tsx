@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <Routes>
           
-          <Route path="/" element={<ScaleProvider><Home /></ScaleProvider>}/>
-          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/resume" element={<ScaleProvider><Home /></ScaleProvider>}/>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<QueryClientProvider client={queryClient}><SigninLogin /></QueryClientProvider>} />
         </Routes>
       </BrowserRouter>
