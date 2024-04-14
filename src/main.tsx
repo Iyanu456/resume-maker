@@ -14,14 +14,15 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ScaleProvider>
+    
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}/>
+          
+          <Route path="/" element={<ScaleProvider><Home /></ScaleProvider>}/>
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/signup" element={<QueryClientProvider client={queryClient}><SigninLogin /></QueryClientProvider>} />
         </Routes>
       </BrowserRouter>
-    </ScaleProvider>
+    
   </React.StrictMode>,
 )
