@@ -60,3 +60,9 @@
     background: none;
     cursor: pointer;
   }
+
+  .form-control-floating:focus {
+    border: 1.4px solid #6930C3;
+    border-color: #6930C3;
+    box-shadow: 0 0 0 0.24rem #3a0a863b;
+  }

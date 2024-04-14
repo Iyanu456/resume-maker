@@ -12,7 +12,9 @@
 
 
 
-
+.poppins {
+  font-family: 'Poppins';
+}
 .form-control::selection {
   background-color: rgba(20, 20, 20, 0.1);
 
