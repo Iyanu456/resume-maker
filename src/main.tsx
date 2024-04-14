@@ -5,12 +5,11 @@ import Home from './Home.tsx'
 //import { useState, useEffect, createContext, useContext } from 'react'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from 'react-query';
 import LandingPage from './LandingPage.tsx';
 import { ScaleProvider } from './ScaleContext.tsx'
 import SigninLogin from './SignupPage.tsx'
 
-const queryClient = new QueryClient();
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/landing" element={<LandingPage />} />
-          <Route path="/signup" element={<QueryClientProvider client={queryClient}><SigninLogin /></QueryClientProvider>} />
+          <Route path="/signup" element={<SigninLogin />} />
         </Routes>
       </BrowserRouter>
     </ScaleProvider>

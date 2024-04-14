@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import { QueryClient, QueryClientProvider } from 'react-query';
 import FloatingLabel from "./components/floatingLabel";
 import FloatingPassword from "./components/floatingPassword";
 
 const apiUrl = import.meta.env.BACKEND_API_URL;
+const queryClient = new QueryClient();
 
 const SigninLogin: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +36,7 @@ const SigninLogin: React.FC = () => {
   
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="grid place-items-center h-screen">
       <form
         className="border-2 py-[1em] px-[1.4em] rounded-lg  w-[85vw] flex flex-col gap-3 md:w-[350px] h-[fit-content] text-center"
@@ -81,6 +84,7 @@ const SigninLogin: React.FC = () => {
 
       </form>
     </div>
+    </QueryClientProvider>
   );
 };
 
