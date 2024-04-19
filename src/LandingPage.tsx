@@ -5,12 +5,13 @@ export default function LandingPage() {
     return (
         <>
             <div className="nav flex py-[1.2em] px-[2em] relative z-20 top-0 bottom-auto border-b-2">
-                <p className="text-[1.2em] font-bold">Sketchcv</p>
+                <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
+                <button className="mr-0 ml-auto py-[0.6em] px-[1.2em] border-[2px] rounded-md font-bold">Login</button>
             </div>
             <div className="hero grid place-items-center h-[fit-contents] pt-[2em] md:pt-[5em]">
                 <div className="max-w-[75%] text-center">
-                    <h2 className="poppins font-semibold text-[2em] md:text-[3em]">
-                        Create a free <span className="text-[#007bff]">Resume</span> in minutes
+                    <h2 className="inter text-[2.6em] leading-[1.2em] md:text-[3.3em]">
+                        <b>Create a free Resume in minutes</b>
                     </h2>
                     <p className="text-[1.05em] m-auto pt-3 text-grey poppins md:max-w-[70%] ">
                         Create a professional and standout resume effortlessly with our
@@ -18,26 +19,29 @@ export default function LandingPage() {
                         or just starting your career, we've got you covered.
                     </p>
                     <div className="flex gap-3 justify-center center-align mt-[2em] ">
-                        <Link to="/resume">
-                        <button className="btn bg-[#007bff] text-white py-[0.6em] px-[2.2em] rounded-[0.75em]">
+                        <Link to="/resume" className="my-auto">
+                        <button className="py-[0.5em] text-[1.1em] px-[1.1em] border-[2.3px] rounded-md font-bold hidden md:block">
                             Get Started
+                            
                         </button>
                         </Link>
                         
-                        <Link to="/signup">
-                        <button className="btn-outline py-[0.6em] px-[2.2em] rounded-[0.75em] hidden md:block">
+                        <Link to="/signup" className="my-auto">
+                        <button className="btn  bg-[#007bff] my-auto text-white py-[0.7em] px-[2.2em] rounded-md">
                             Sign in
                         </button></Link>
                         
                     </div>
                 </div>
             </div>
-            <div className="grid place-items-center mt-[5em] relative px-5">
-                <div className="shadow-2xl border-[2px] w-[fit-contents] p-1 rounded-[0.8em] md:max-w-[75vw]">
-                    <div className=" bg-white w-[fit-contents] p-3 rounded-[0.75em] ">
-                        <img src="resume-maker-screenshoot2.PNG" />
-                    </div>
+            <div className="grid grid-cols-[50px,auto,50px] md:grid-cols-[200px,auto,200px] place-items-center mt-[5em] relative px-5">
+                <div className="shadow-md bg-[#FB585A] w-[100%] h-[300px] "></div>
+                <div className="border-[1px] shadow-2xl p-[1em] rounded-[1em]">
+                    <img src="resume-maker-screenshoot2.PNG" className="max-w-[100%]"/>
                 </div>
+                <div className="shadow-2xl bg-[#FABE24] w-[100%] h-[300px]"></div>
+                    
+                
             </div>
             <div className="bg-white z-20 h-[80px] relative mt-[-1em] mb-[1em]"></div>
             <div className=" bg-black text-white px-[3em] py-[1.7em]">

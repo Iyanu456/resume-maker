@@ -14,7 +14,10 @@
 
 .poppins {
   font-family: 'Poppins';
-  color: #1a1a1a;
+}
+
+.inter {
+  font-family: 'Inter';
 }
 .form-control::selection {
   background-color: rgba(20, 20, 20, 0.1);

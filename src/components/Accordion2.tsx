@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Icon from "../Icon";
 import "./styles/accordion2.css";
 
@@ -11,6 +11,8 @@ interface Accordion2Props {
 	onToggleVisibility: (field: any, index: number) => void;
 	onAccordionClose?: () => void;
 	placeholder?: string;
+	activeIndex: number | null;
+	setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const Accordion2: React.FC<Accordion2Props> = ({
@@ -20,8 +22,10 @@ const Accordion2: React.FC<Accordion2Props> = ({
 	field,
 	accordionData,
 	onToggleVisibility,
+	activeIndex,
+	setActiveIndex
 }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(null);
+	//const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const addNewRef = useRef<HTMLButtonElement>(null);
 
 	const handleAccordionClick = (index: number) => {
@@ -54,6 +58,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
 	};
 
 	return (
+		
 		<div className="bg-white">
 			{accordionData.map((section, index) => (
 				<div
@@ -167,6 +172,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
 				</button>
 			</div>
 		</div>
+		
 	);
 };
 

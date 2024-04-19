@@ -37,11 +37,14 @@ function convertToMilliseconds(hours: number = 0, minutes: number = 0, seconds: 
     return (hours * millisecondsPerHour) + (minutes * millisecondsPerMinute) + (seconds * millisecondsPerSecond);
 }
 
-const EXPIRATION_DURATION_MS = convertToMilliseconds(0, 1) // 24 hours
+const EXPIRATION_DURATION_MS = convertToMilliseconds(1, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
 
 	// State for data to be rendered in the PDF
+	const [accordionActiveIndex, setAccordionActiveIndex] = useState<number | null>(null);
+	const [accordion2ActiveIndex, setAccordion2ActiveIndex] = useState<number | null>(null);
+	const [isAccordion2open, setIsAccordion2Open] = useState<boolean | null>(null)
 	const [pdfRenderedProps, setPdfRenderedProps] = useState(() => {
     const storedData = localStorage.getItem('pdfRenderedProps');
     if (storedData) {
@@ -117,6 +120,10 @@ export default function Home(): JSX.Element {
 
 	type ArrayKeys = keyof typeof pdfRenderedProps;
 
+	const handleSetActiveIndex = (index: number | null | any) => {
+		setAccordionActiveIndex(index);
+	  };
+
 	//toogles the visibility of an item in the list of Accordion2 component
 	const toggleVisibility = (field: ArrayKeys, index: number): void => {
 		setPdfRenderedProps((prevState: any) => {
@@ -148,6 +155,7 @@ export default function Home(): JSX.Element {
 		});
 	};
 
+	const handleAccordionClose = () => setAccordionActiveIndex(null)
 	//deletes an item from the corresponding object
 	const handleDeleteItem = (field: string, index: number) => {
 		if (index === 0) {
@@ -189,6 +197,7 @@ export default function Home(): JSX.Element {
 					index={index}
 					data={data}
 					handleChange={handleChange}
+					handleAccordionClose={handleAccordionClose}
 					//onSave={handleDataSave}
 				/>
 			)),
@@ -238,6 +247,8 @@ export default function Home(): JSX.Element {
 								visible: data.visible,
 							})
 						)}
+						activeIndex={accordion2ActiveIndex}
+						setActiveIndex={setAccordion2ActiveIndex}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
@@ -275,6 +286,8 @@ export default function Home(): JSX.Element {
 								visible: data.visible,
 							})
 						)}
+						activeIndex={accordion2ActiveIndex}
+						setActiveIndex={setAccordion2ActiveIndex}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
@@ -305,6 +318,8 @@ export default function Home(): JSX.Element {
 								visible: data.visible,
 							})
 						)}
+						activeIndex={accordion2ActiveIndex}
+						setActiveIndex={setAccordion2ActiveIndex}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
@@ -344,6 +359,8 @@ export default function Home(): JSX.Element {
 								visible: data.visible,
 							})
 						)}
+						activeIndex={accordion2ActiveIndex}
+						setActiveIndex={setAccordion2ActiveIndex}
 						onAdd={handleAddItem}
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
@@ -389,6 +406,9 @@ export default function Home(): JSX.Element {
 							accordionData={
 								accordionData
 							} /*activeIndex={activeIndex} handleAccordionClick={handleAccordionClick}*/
+							setActiveIndex={handleSetActiveIndex}
+							activeIndex={accordionActiveIndex}
+							accordion2ActiveIndex={accordion2ActiveIndex}
 						/>
 						{/*rawTextRepresentation*/}
 					</div>
@@ -403,7 +423,8 @@ export default function Home(): JSX.Element {
 							component={
 								<MyDoc info={pdfRenderedProps} scale={1} />
 							}
-							className="btn-primary m-auto"
+							iconVisible={false}
+							className="font-semibold py-[0.5em] px-[1.2em] bg-[#1f1f1f] text-white rounded-md m-auto"
 						/>
 						{/*<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
 							<Icon
