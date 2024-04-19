@@ -64,7 +64,7 @@ const SigninLogin: React.FC = () => {
           name="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        { !isNewUser && <button className="font-semibold text-sm text-right text-[#007bff]">Forgot password? </button>}
+        { !isNewUser && <button className="font-bold text-sm text-right text-[#1f1f1f]">Forgot password? </button>}
 
         {email !== "" && password !== "" ? (
           <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white" type="submit">
