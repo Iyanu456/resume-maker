@@ -37,14 +37,14 @@ function convertToMilliseconds(hours: number = 0, minutes: number = 0, seconds: 
     return (hours * millisecondsPerHour) + (minutes * millisecondsPerMinute) + (seconds * millisecondsPerSecond);
 }
 
-const EXPIRATION_DURATION_MS = convertToMilliseconds(1, 0, 0) // 24 hours
+const EXPIRATION_DURATION_MS = convertToMilliseconds(6, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
 
 	// State for data to be rendered in the PDF
 	const [accordionActiveIndex, setAccordionActiveIndex] = useState<number | null>(null);
 	const [accordion2ActiveIndex, setAccordion2ActiveIndex] = useState<number | null>(null);
-	const [isAccordion2open, setIsAccordion2Open] = useState<boolean | null>(null)
+	//const [isAccordion2open, setIsAccordion2Open] = useState<boolean | null>(null)
 	const [pdfRenderedProps, setPdfRenderedProps] = useState(() => {
     const storedData = localStorage.getItem('pdfRenderedProps');
     if (storedData) {
