@@ -6,7 +6,10 @@ export default function LandingPage() {
         <>
             <div className="nav flex py-[1.2em] px-[2em] relative z-20 top-0 bottom-auto border-b-2">
                 <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
-                <button className="mr-0 ml-auto py-[0.6em] px-[1.2em] border-[2px] rounded-md font-bold">Login</button>
+                <Link to="/signup" className="mr-0 ml-auto">
+                    <button className=" py-[0.6em] px-[1.2em] border-[2px] rounded-md font-bold">Login</button>
+                </Link>
+      
             </div>
             <div className="hero grid place-items-center h-[fit-contents] pt-[2em] md:pt-[5em]">
                 <div className="max-w-[75%] text-center">
@@ -34,12 +37,12 @@ export default function LandingPage() {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-[50px,auto,50px] md:grid-cols-[200px,auto,200px] place-items-center mt-[5em] relative px-5">
-                <div className="shadow-md bg-[#FB585A] w-[100%] h-[300px] "></div>
+            <div className="grid grid-cols-[1fr,11fr,1fr] md:grid-cols-[1fr,7fr,1fr] place-items-center mt-[5em] relative px-5">
+                <div className="shadow-md bg-[#FB585A] w-[100%] md:h-[300px] h-[150px]"></div>
                 <div className="border-[1px] shadow-2xl p-[1em] rounded-[1em]">
                     <img src="resume-maker-screenshoot2.PNG" className="max-w-[100%]"/>
                 </div>
-                <div className="shadow-2xl bg-[#FABE24] w-[100%] h-[300px]"></div>
+                <div className="shadow-2xl bg-[#FABE24] w-[100%] md:h-[300px] h-[150px]"></div>
                     
                 
             </div>

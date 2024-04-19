@@ -34,14 +34,19 @@ const SigninLogin: React.FC = () => {
   
 
   return (
+    <div>
+       <div className="nav flex py-[1.2em] px-[2em] absolute z-20 right-0 left-0 top-0 bottom-auto border-b-2">
+                <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
+      
+            </div>
     <div className="grid place-items-center h-screen">
       <form
         className="w-[85vw] flex flex-col gap-3 md:w-[320px] h-[fit-content] mb-[-2em]"
         onSubmit={handleSubmit}
       >
-        <img src="/Sketchcv_logo.svg" alt="" className="mx-auto mb-4  max-w-[200px] max-h-[200px]" />
+        {/*<img src="/Sketchcv_logo.svg" alt="" className="mx-auto mb-4  max-w-[200px] max-h-[200px]" />*/}
         <div className="mb-2">
-          <h3 className="text-[1.5em] font-semibold text-center poppins">{isNewUser === true ? "Create your account" : "Welcome back"}</h3>
+          <h3 className="text-[1.75em] font-semibold text-center poppins">{isNewUser === true ? "Create your account" : "Welcome back"}</h3>
           {/*<p className="text-sm text-[grey] text-center">{isNewUser === true ? "Sign up to get started" : "Welcome back enter your details"}</p>*/}
         </div>
 
@@ -62,24 +67,25 @@ const SigninLogin: React.FC = () => {
         { !isNewUser && <button className="font-semibold text-sm text-right text-[#007bff]">Forgot password? </button>}
 
         {email !== "" && password !== "" ? (
-          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#007bff] text-white" type="submit">
+          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white" type="submit">
             Continue
           </button>
         ) : (
-          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#007bff] text-white">Continue</button>
+          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white">Continue</button>
         )}
         
         {
           isNewUser === false ?
             <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
-              Don't have an account <span className="text-[#007bff]">Signup</span> 
+              Don't have an account? <span className="text-[#1f1f1f] font-bold">Signup</span> 
             </button> : 
             <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
-              Have an account <span className="text-[#007bff] font-semibold">Sign in</span> 
+              Have an account? <span className="text-[#1f1f1f] font-bold">Sign in</span> 
             </button>
         }
 
       </form>
+    </div>
     </div>
   );
 };
