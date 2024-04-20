@@ -60,7 +60,7 @@ export default function Home(): JSX.Element {
         { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
       ],
       education: [{ school: "", degree: "", duration: "", visible: true }],
-      skill: [{ skill: "", visible: true }],
+      skill: [{ skill: "", skillInformation: "", visible: true }],
       experience: [
         {
           jobTitle: "",
@@ -292,7 +292,7 @@ export default function Home(): JSX.Element {
 						onDelete={handleDeleteItem}
 						onToggleVisibility={toggleVisibility}
 						field="skill"
-						defaultObject={{ skill: "", visible: true }}
+						defaultObject={{ skill: "", skillInformation: "", visible: true }}
 					/>
 				</>
 			),

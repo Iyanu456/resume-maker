@@ -39,6 +39,9 @@ export default function scaledStyle(scaleFactor: number) {
 	line: {
 		margin: `${3 * scaleFactor}pt, auto`,
 	},
+	bold: {
+		fontWeight: 'bold'
+	},
 	dateStyle: { margin: "auto 0 auto auto", fontFamily: "Calibri" },
 	icon: {maxHeight: `${13 * scaleFactor}px`, maxWidth: `${13 * scaleFactor}px`}
 })}

@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import InputLabel from "../InputLabel";
+import TextEditor from "../../templates/template_1/TextEditor";
 
 interface skillsProps {
 	data: {
 		skill: string;
+		skillInformation: string;
 	};
 	handleChange: (
 		userDetails: string,
@@ -13,7 +15,10 @@ interface skillsProps {
 	) => any;
 	index?: any;
 }
+
+
 export default function SkillForm(props: skillsProps) {
+	const [editorValue, setEditorValue] = useState(props.data.skillInformation);
 	useEffect(() => {
         const allFieldsEmpty = Object.values(props.data).every(field => field === '');
         if (allFieldsEmpty) {
@@ -40,6 +45,28 @@ export default function SkillForm(props: skillsProps) {
 							)
 						}
 					/>
+
+					<TextEditor
+						label="Information / Sub-skill"
+		
+						value={editorValue} // Bind the Quill editor value to editorValue state
+						editorContainerClassName="mt-2"
+						editorClassName="md:max-w-[300px] no-toolbar"
+						placeholder="Enter information / sub-skill"
+						toolbar={[
+							
+						  ]}
+						onChange={(value) => {
+							setEditorValue(value); // Update the editorValue state
+							props.handleChange(
+								"skill",
+								props.index,
+								"skillInformation",
+								value
+							);
+						}}
+					/>
+					
 				</div>
 		
 		</form>

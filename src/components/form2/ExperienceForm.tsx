@@ -87,6 +87,11 @@ export default function ExperienceForm(props: experienceProps) {
 					editorContainerClassName="pt-3"
 					editorClassName="md:max-w-[300px]"
 					placeholder="Enter description here"
+                    toolbar={[
+                        ["bold", "italic", "underline"],
+                        [{ list: "bullet" }],
+                        ["link"],
+                      ]}
 					onChange={(value) => {
 						setEditorValue(value); // Update the editorValue state
 						props.handleChange(

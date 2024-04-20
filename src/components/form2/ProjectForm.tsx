@@ -101,9 +101,14 @@ export default function ProjectForm(props: projectProps) {
 					<TextEditor
 						label="Description"
 						value={editorValue} // Bind the Quill editor value to editorValue state
-						editorContainerClassName=""
+						editorContainerClassName="mt-2"
 						editorClassName="md:max-w-[300px]"
 						placeholder="Enter description here"
+						 toolbar={[
+    ["bold", "italic", "underline"],
+    [{ list: "bullet" }],
+    ["link"],
+  ]}
 						onChange={(value) => {
 							setEditorValue(value); // Update the editorValue state
 							props.handleChange(

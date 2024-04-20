@@ -9,6 +9,7 @@ interface editorProps {
   editorClassName?: string;
   placeholder?: string;
   onChange?: (e: any) => void;
+  toolbar: Array<Array<string | object>>
 }
 
 // Define a custom clipboard module to handle plain text pasting
@@ -29,17 +30,19 @@ class PlainTextPaster extends PlainTextClipboard {
 
 Quill.register("modules/clipboard", PlainTextPaster);
 
+
 export default function TextEditor(props: editorProps) {
   const modules = {
-    toolbar: [["bold", "italic", "underline"], [{ list: "bullet" }], ["link"]],
+    toolbar: props.toolbar,
     clipboard: {
       matchVisual: false, // Disable visual matching for plain text
     },
+    
   };
 
   return (
     <div className={props.editorContainerClassName}>
-      <p className="form-label pb-2 text-xs">{props.label}</p>
+      <p className="form-label pb-2 text-xs font-bold text-[0.78em]">{props.label}</p>
       <ReactQuill
         theme="snow"
         placeholder={props.placeholder}

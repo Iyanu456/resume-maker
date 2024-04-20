@@ -12,7 +12,7 @@ export default function InputLabel(props: inputLabelProps) {
     return (
         <div className={`input-group w-[100%] ${props.style}`}>
             {props.label && (
-            <><label className="form-label pb-2 text-xs" htmlFor="exampleInput">{props.label}</label><br /></>)}
+            <><label className="form-label font-bold pb-2 text-[0.78em]" htmlFor="exampleInput">{props.label}</label><br /></>)}
             
             <input 
               className="form-control mt-[0.2em]" 

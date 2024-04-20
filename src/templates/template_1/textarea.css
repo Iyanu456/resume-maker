@@ -25,3 +25,10 @@
   font-family: 'Inter';
   font-size: 1.15em;
   }
+
+.no-toolbar > .ql-toolbar.ql-snow {
+  display: none;
+}
+.no-toolbar > .ql-toolbar.ql-snow + .ql-container.ql-snow {
+  border-top: 1px solid #ccc;
+}

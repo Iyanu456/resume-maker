@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { View, Text, Link, Svg, Line, Image } from "@react-pdf/renderer"; // Import React components from your library
 
+
 const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   div: View,
   p: Text,
@@ -28,7 +29,7 @@ const htmlToReactPDFMapping: { [key: string]: React.ComponentType<any> } = {
   b: ({ children }: { children: ReactNode }) => {
     //console.log("<ul>", children);
     return (
-      <Text style={{fontWeight: 'semibold'}}>
+      <Text style={{fontWeight: 'bold'}}>
         {children}
       </Text>
     );

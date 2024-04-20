@@ -40,7 +40,7 @@ export interface ContactInfoProps {
 export interface RenderedProps {
 	personalInfo: PersonalInfoProps[];
 	education: EducationInfo[];
-	skill: { skill: string; visible: boolean }[];
+	skill: { skill: string; skillInformation: string; visible: boolean }[];
 	experience: ExperienceInfo[];
 	project: ProjectInfo[];
 	contactInfo: ContactInfoProps[];
