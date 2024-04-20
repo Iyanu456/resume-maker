@@ -16,7 +16,7 @@ const Download = ({component, className, iconVisible}: downloadProps) => {
 
   const handleDownload = async () => {
     const blob = await pdf(<PDFDocument component={component} />).toBlob()
-    saveAs(blob, 'untitled.pdf')
+    saveAs(blob, 'Sketchcv_Resume.pdf')
   }
 
   return <button className={`${className} flex gap-2`} onClick={handleDownload}>

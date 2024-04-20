@@ -15,7 +15,7 @@ const Education: React.FC<EducationProps> = (props) => {
   const {scaleFactor} = useScaleFactor()
 
   return (
-    <Div style={{ marginBottom: 15 * scaleFactor, fontSize: `${parseInt(props.fontSize) * scaleFactor}`}}>
+    <Div style={{ fontSize: `${parseInt(props.fontSize) * scaleFactor}`}}>
       <p style={props.titleStyle}>Education</p>
       <svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <line

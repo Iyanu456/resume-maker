@@ -23,7 +23,7 @@ interface ExperienceProps {
 const Experience: React.FC<ExperienceProps> = (props) => {
     const {scaleFactor} = useScaleFactor()
     return (
-        <Div style={{marginBottom: 10 * scaleFactor, fontSize: `${parseInt(props.fontSize) * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
+        <Div style={{ fontSize: `${parseInt(props.fontSize) * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
             <p style={props.titleStyle}>Professional Experience</p>
             <svg height="10" width={props.strokeLength} style={props.lineStyle}>
                 <line
@@ -35,20 +35,20 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 stroke="rgb(0,0,0)"
             />
             </svg>
-            <Div style={{display: 'flex', flexDirection: 'column', gap: `${5 * scaleFactor}pt`, fontFamily: 'Calibri'}} >
+            <Div style={{display: 'flex', flexDirection: 'column', fontFamily: 'Calibri'}} >
             {props.data.map(({ jobTitle, company, description, duration, visible }: { jobTitle: string, company:string, description:string, duration:string, visible:boolean }, index: number) => {
                 if (jobTitle === "" && description === "" && duration === "") return null; 
                 if (visible === false) return null;
                 return (
                     <Div style={{marginBottom: 10 * scaleFactor}} key={index} >
-                        <Div style={{display: 'flex', flexDirection: 'row', marginBottom: 2 * scaleFactor}}>
+                        <Div style={{display: 'flex', flexDirection: 'row'}}>
                                 <Div style={{display: 'flex', flexDirection: 'row'}}>
                                     <p style={props.positionStyle}>{ jobTitle !== "" ? `${jobTitle} - ` : null }</p>
                                     <p>&nbsp;{company}</p>
                                 </Div>
                             <p style={props.dateStyle}>{`${duration}`}</p>
                         </Div>
-                        <Div style={{maxWidth: `${390 * scaleFactor}pt`, display: 'flex', flexDirection: 'column', gap: `${8 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
+                        <Div style={{maxWidth: `${410 * scaleFactor}pt`, display: 'flex', flexDirection: 'column', gap: `${2 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
                             {parse(convertToHTML(description))}
                         </Div>
                                

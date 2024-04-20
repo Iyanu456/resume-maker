@@ -25,7 +25,7 @@ function removeHtmlTags(text: string): string {
 const Skills: React.FC<skillsProps> = (props) => {
   const { scaleFactor } = useScaleFactor()
   return (
-    <Div style={{marginBottom: 15 * scaleFactor, fontSize: `${props.fontSize * scaleFactor}`}}>
+    <Div style={{ fontSize: `${props.fontSize * scaleFactor}`}}>
       <p style={props.titleStyle}>Skills</p>
       <svg height="10" width={props.strokeLength} style={props.lineStyle}>
         <line
@@ -37,7 +37,7 @@ const Skills: React.FC<skillsProps> = (props) => {
           stroke="rgb(0,0,0)"
         />
       </svg>
-      <Div style={{display: 'flex', flexDirection: 'column', gap: `${0 * scaleFactor}pt`, width: `${515 * scaleFactor}pt`}}>
+      <Div style={{display: 'flex', flexDirection: 'column', gap: `${2 * scaleFactor}pt`, width: `${515 * scaleFactor}pt`}}>
       {props.data.map(({ skill, skillInformation, visible }, index: number) => {
                 if (skill=== "" && skillInformation === "") return null; 
                 if (visible === false) return null;
