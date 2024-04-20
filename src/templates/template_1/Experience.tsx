@@ -40,7 +40,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 if (jobTitle === "" && description === "" && duration === "") return null; 
                 if (visible === false) return null;
                 return (
-                    <Div style={{marginBottom: 10 * scaleFactor}} key={index} >
+                    <Div style={{}} key={index} >
                         <Div style={{display: 'flex', flexDirection: 'row'}}>
                                 <Div style={{display: 'flex', flexDirection: 'row'}}>
                                     <p style={props.positionStyle}>{ jobTitle !== "" ? `${jobTitle} - ` : null }</p>

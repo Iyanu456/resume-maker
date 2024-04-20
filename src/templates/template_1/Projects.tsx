@@ -26,7 +26,7 @@ export default function Projects(props: projectProps) {
   const {scaleFactor} = useScaleFactor()
 
   return (
-    <Div style={{marginBottom: 15 * scaleFactor, marginTop: -10 * scaleFactor, fontSize: `${parseInt(props.fontSize) * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
+    <Div style={{ fontSize: `${parseInt(props.fontSize) * scaleFactor}`, width: `${515 * scaleFactor}pt`}}>
       <p style={props.titleStyle}>Projects</p>
       <svg height="10" width={props.strokeLength} style={props.lineStyle}>
         <line
@@ -44,7 +44,7 @@ export default function Projects(props: projectProps) {
         if (project === "" && about === "" && description === "" && duration === "" && visible === true) return null;
         if (visible === false) return null;
         return (
-          <Div style={{marginBottom: 10 * scaleFactor}} key={index} >
+          <Div style={{}} key={index} >
             <Div style={{display: 'flex', flexDirection: 'row',}}>
               <Div style={{display: 'flex', flexDirection: 'row', gap: '2pt'}}>
                 <p style={props.projectStyle}>{ project !=="" ? `${project} - ` : null }</p>

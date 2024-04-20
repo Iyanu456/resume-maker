@@ -150,7 +150,7 @@ export default function MyDoc(props: RenderedProps) {
 				<Div
 					style={{
 						display: "flex",
-						gap: `${8 * scale}pt`,
+						gap: `${2 * scale}pt`,
 						flexDirection: "row",
 						margin: "0 auto",
 					}}>
@@ -171,8 +171,8 @@ export default function MyDoc(props: RenderedProps) {
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						gap: `${15 * scale}pt`,
-						marginTop: 15 * scale,
+						gap: `${12 * scale}pt`,
+						marginTop: 8 * scale,
 					}}>
 					{education &&
 						(education.some(
