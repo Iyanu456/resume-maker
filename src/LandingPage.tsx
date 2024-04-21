@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function LandingPage() {
     return (
         <>
-            <div className="nav flex py-[1.2em] px-[2em] relative z-20 top-0 bottom-auto border-b-2">
+            <div className="nav flex py-[1.2em] px-[1.4em] md:px-[2em] relative z-20 top-0 bottom-auto border-b-2">
                 <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
                 <Link to="/signup" className="mr-0 ml-auto">
                     <button className=" py-[0.6em] px-[1.2em] border-[2px] rounded-md font-bold">Login</button>
