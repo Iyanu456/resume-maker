@@ -7,6 +7,7 @@ import InputLabel from "../InputLabel";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 //import EditorConvertToHTML from '../../TextEditor';
 import TextEditor from "../../templates/template_1/TextEditor";
+import LinkButton from "../LinkButton";
 
 interface projectProps {
 	data: {
@@ -14,6 +15,7 @@ interface projectProps {
 		about: string;
 		description: string;
 		duration: string;
+		link: string;
 		visible: boolean;
 	};
 	handleChange: (
@@ -49,7 +51,7 @@ export default function ProjectForm(props: projectProps) {
 	return (
 		<form onSubmit={(e) => e.preventDefault()}>
 			<div className="flex flex-col gap-2 md:gap-1">
-				<div>
+				<div className="grid grid-cols-[88%,10%] gap-1">
 					<InputLabel
 						type="text"
 						value={props.data.project}
@@ -64,6 +66,22 @@ export default function ProjectForm(props: projectProps) {
 						label="Project Title"
 						placeholder="Enter project title"
 					/>
+					
+						<LinkButton 
+						value={props.data.link}
+						handleChange={(e) =>
+							props.handleChange(
+								"project",
+								props.index,
+								"link",
+								e.target.value
+							)
+						}
+						buttonStyle="flex mb-0 mt-auto mx-auto w-[38px] h-[38px]"
+						inputStyle="left-[7.5em] right-8 mt-[-0.8em] z-50"
+						/>
+					
+					
 				</div>
 				<div>
 					<InputLabel

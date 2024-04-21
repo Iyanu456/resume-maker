@@ -59,7 +59,7 @@ export default function Home(): JSX.Element {
       personalInfo: [
         { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
       ],
-      education: [{ school: "", degree: "", duration: "", visible: true }],
+      education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
       skill: [{ skill: "", skillInformation: "", visible: true }],
       experience: [
         {
@@ -67,6 +67,7 @@ export default function Home(): JSX.Element {
           company: "",
           description: "",
           duration: "",
+		  link: "",
           visible: true,
         },
       ],
@@ -76,6 +77,7 @@ export default function Home(): JSX.Element {
           about: "",
           description: "",
           duration: "",
+		  link: "",
           visible: false,
         },
       ],
@@ -258,6 +260,7 @@ export default function Home(): JSX.Element {
 							school: "",
 							degree: "",
 							duration: "",
+							link: "",
 							visible: true,
 						}}
 					/>
@@ -329,6 +332,7 @@ export default function Home(): JSX.Element {
 							company: "",
 							description: "",
 							duration: "",
+							link: "",
 							visible: true,
 						}}
 					/>
@@ -370,6 +374,7 @@ export default function Home(): JSX.Element {
 							about: "",
 							description: "",
 							duration: "",
+							link: "",
 							visible: true,
 						}}
 					/>

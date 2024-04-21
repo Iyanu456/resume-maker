@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import InputLabel from "../InputLabel";
 import TextEditor from "../../templates/template_1/TextEditor";
+import LinkButton from "../LinkButton";
+
 interface experienceProps {
     data: {
         jobTitle: string;
         company: string;
         description: string;
+        link: string
         duration: string;
     };
     handleChange: (
@@ -31,7 +34,7 @@ export default function ExperienceForm(props: experienceProps) {
             {/* Personal Info Form */}
            
                 <div className="flex flex-col gap-1">
-                    <div>
+                    <div className="grid grid-cols-[88%,10%] gap-1">
                         <InputLabel
                             type="text"
                             value={props.data.jobTitle}
@@ -46,6 +49,19 @@ export default function ExperienceForm(props: experienceProps) {
                             label="Job Title"
                             placeholder="Enter Job Title"
                         />
+                        <LinkButton 
+                        value={props.data.link}
+						handleChange={(e) =>
+							props.handleChange(
+								"experience",
+								props.index,
+								"link",
+								e.target.value
+							)
+						}
+						buttonStyle="flex mb-0 mt-auto mx-auto w-[38px] h-[38px]"
+						inputStyle="left-[7.5em] right-8 mt-[-0.8em] z-50"
+						/>
                     </div>
                     <div>
                         <InputLabel

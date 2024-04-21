@@ -12,6 +12,7 @@ export interface EducationInfo {
 	school: string;
 	degree: string;
 	duration: string;
+	link: string;
 	visible: boolean;
 }
 
@@ -20,6 +21,7 @@ export interface ExperienceInfo {
 	company: string;
 	description: string;
 	duration: string;
+	link: string;
 	visible: boolean;
 }
 
@@ -28,6 +30,7 @@ export interface ProjectInfo {
 	about: string;
 	description: string;
 	duration: string;
+	link: string;
 	visible: boolean;
 }
 
