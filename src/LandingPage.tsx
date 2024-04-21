@@ -11,7 +11,7 @@ export default function LandingPage() {
                 </Link>
       
             </div>
-            <div className="hero grid place-items-center h-[fit-contents] pt-[2em] md:pt-[5em]">
+            <div className="hero grid place-items-center h-[fit-contents] pt-[5em]">
                 <div className="max-w-[75%] text-center">
                     <h2 className="inter text-[2.6em] leading-[1.2em] md:text-[3.3em]">
                         <b>Create a free Resume in minutes</b>
