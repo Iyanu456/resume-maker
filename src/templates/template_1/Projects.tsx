@@ -48,7 +48,7 @@ export default function Projects(props: projectProps) {
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: `${5 * scaleFactor}pt`,
+          gap: `${8 * scaleFactor}pt`,
           fontFamily: "Calibri",
         }}
       >
