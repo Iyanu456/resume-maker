@@ -36,7 +36,7 @@ const Education: React.FC<EducationProps> = (props) => {
             <p style={props.schoolStyle}>{school}</p>
             <p>{`${degree !== "" ? (`, ${degree}`) : ""} `}</p>
             <a href={link} style={{marginLeft: '1pt'}}>
-                   {link && <svg
+                   {link !== "" && <svg
                                     className="mt-[3.5pt] hidden"
                                     width={`${10 * scaleFactor}pt`}
                                     height="10pt"
