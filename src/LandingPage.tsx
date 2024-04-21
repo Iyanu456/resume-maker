@@ -21,9 +21,9 @@ export default function LandingPage() {
                         user-friendly resume builder. Whether you're a seasoned professional
                         or just starting your career, we've got you covered.
                     </p>
-                    <div className="flex gap-3 justify-center center-align mt-[2em] ">
+                    <div className="flex gap-3 justify-center center-align mt-[2em] flex-wrap wrap">
                         <Link to="/resume" className="my-auto">
-                        <button className="py-[0.5em] text-[1.1em] px-[1.1em] border-[2.3px] rounded-md font-bold hidden md:block">
+                        <button className="py-[0.5em] text-[1.1em] px-[1.1em] border-[2.3px] rounded-md font-bold">
                             Get Started
                             
                         </button>
