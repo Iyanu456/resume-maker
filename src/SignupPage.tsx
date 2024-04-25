@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom"; // Import useHistory hook
 import FloatingLabel from "./components/floatingLabel";
 import FloatingPassword from "./components/floatingPassword";
+import HorizontalLoader from "./components/HorizontalLoader";
 
-const apiUrl = import.meta.env.BACKEND_API_URL;
+//const apiUrl = import.meta.env.REACT_APP_BACKEND_API_URL;
 
 const SigninLogin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isNewUser, setIsNewUser] = useState(true);
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate(); // Initialize useHistory hook
 
   const signupOrLoginMutation = useMutation(
     async (data: { email: string; password: string }) => {
       const endpoint = isNewUser ? "/signup" : "/login";
-      const response = await fetch(`http://${apiUrl}${endpoint}`, {
+      const response = await fetch((`https://express-backend-9bou.onrender.com${endpoint}`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,14 +30,34 @@ const SigninLogin: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (email === "" || password === "") {
+      setLoader(false)
+      return null;
+    }
+    setLoader(true);
     await signupOrLoginMutation.mutateAsync({ email, password }).then((response) => {
       console.log("Server response:", response);
+      if (response.token && response.status === "success") {
+        setLoader(false);
+        navigate("/resume"); // Redirect to /resume route
+      }
+      if (response.message === "email already exists") {
+        setLoader(false)
+        setIsNewUser(false);
+      }
+
+      if (response.status === "failed") {
+        setLoader(false);
+      }
+
     });
   };
 
   
 
   return (
+    <>
+    {loader && <HorizontalLoader />}
     <div>
        <div className="nav flex py-[1.2em] px-[2em] absolute z-20 right-0 left-0 top-0 bottom-auto border-b-2">
                 <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
@@ -64,22 +88,22 @@ const SigninLogin: React.FC = () => {
           name="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        { !isNewUser && <button className="font-bold text-sm text-right text-[#1f1f1f]">Forgot password? </button>}
+        { !isNewUser && <button type="button" className="font-bold text-sm text-right text-[#1f1f1f]">Forgot password? </button>}
 
         {email !== "" && password !== "" ? (
           <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white" type="submit">
             Continue
           </button>
         ) : (
-          <button className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white">Continue</button>
+          <button type="submit"className="mt-2 px-2 py-3 w-[100%] rounded-[8px] bg-[#1f1f1f] text-white">Continue</button>
         )}
         
         {
           isNewUser === false ?
-            <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
+            <button type="button" className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
               Don't have an account? <span className="text-[#1f1f1f] font-bold">Signup</span> 
             </button> : 
-            <button className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
+            <button type="button" className=" text-sm" onClick={() => setIsNewUser(!isNewUser)}>
               Have an account? <span className="text-[#1f1f1f] font-bold">Sign in</span> 
             </button>
         }
@@ -87,6 +111,7 @@ const SigninLogin: React.FC = () => {
       </form>
     </div>
     </div>
+    </>
   );
 };
 

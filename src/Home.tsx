@@ -388,9 +388,10 @@ export default function Home(): JSX.Element {
 	return (
 		<div className="relative h-[100svh] overflow-y-hidden">
 			{/* Navigation */}
-			<div className="nav flex py-[1.2em] px-[2em] relative z-20 top-0 bottom-auto">
-				<b>Sketch.cv</b>
-			</div>
+			<div className="nav flex py-[1.2em] px-[1.4em] md:px-[2em] relative z-20 top-0 bottom-auto border-b-2">
+                <p className="text-[1.2em] my-auto font-bold">Sketch.cv</p>
+      
+            </div>
 
 			{/* Main content */}
 			<div className="home md:flex justify-center center-align h-[100%] md:px-[0.1em] pt-[1em] md:pt-[2em] md:fixed left-0 right-0">
@@ -429,7 +430,7 @@ export default function Home(): JSX.Element {
 								<MyDoc info={pdfRenderedProps} scale={1} />
 							}
 							iconVisible={false}
-							className="font-semibold py-[0.5em] px-[1.2em] bg-[#1f1f1f] text-white rounded-md m-auto"
+							className=" py-[0.5em] px-[1.2em] border-[2.3px] font-bold rounded-md m-auto"
 						/>
 						{/*<div className="flex  m-auto rounded-3 ml-4 border-2 rounded-[0.75em]">
 							<Icon

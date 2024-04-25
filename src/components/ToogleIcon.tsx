@@ -12,7 +12,7 @@ const ToogleIcon: React.FC<Props> = (props) => {
 
   return (
     <div className="icon-toggle-btn" onClick={props.onClick}>
-    <button  onClick={() => { setIcon(!icon) }}>
+    <button type="button" onClick={() => { setIcon(!icon) }}>
     <img
         src={icon ? props.beforeClick : props.afterClick}
         style={{

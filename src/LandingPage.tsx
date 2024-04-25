@@ -46,8 +46,8 @@ export default function LandingPage() {
                     
                 
             </div>
-            <div className="bg-white z-20 h-[80px] relative mt-[-1em] mb-[1em]"></div>
-            <div className=" bg-black text-white px-[3em] py-[1.7em]">
+            <div className="bg-[#1f1f1f] w-[100%] h-[200px] mt-[5em]"></div>
+            {/*<div className=" bg-black text-white px-[3em] py-[1.7em]">
                 <div>
                     <h2 className="text-[2.2em] dm-serif-text">Templates</h2>
                     <h2 className="">Choose your preferred template</h2>
@@ -58,7 +58,7 @@ export default function LandingPage() {
                     <div className="h-[330px] w-[243px] border-2 border-white border-2"></div>
                     <div className="h-[330px] w-[243px] border-2 border-white border-2"></div>
                 </div>
-            </div>
+    </div>*/}
         </>
     );
 }
