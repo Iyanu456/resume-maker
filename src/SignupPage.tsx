@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+//import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom"; // Import useHistory hook
 import FloatingLabel from "./components/floatingLabel";
 import FloatingPassword from "./components/floatingPassword";
@@ -14,7 +14,7 @@ const SigninLogin: React.FC = () => {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate(); // Initialize useHistory hook
 
-  const signupOrLoginMutation = useMutation(
+  /*const signupOrLoginMutation = useMutation(
     async (data: { email: string; password: string }) => {
       const endpoint = isNewUser ? "/signup" : "/login";
       const response = await fetch((`https://express-backend-9bou.onrender.com${endpoint}`), {
@@ -26,7 +26,7 @@ const SigninLogin: React.FC = () => {
       });
       return response.json();
     }
-  );
+  );*/
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
