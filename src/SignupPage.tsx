@@ -34,7 +34,7 @@ const SigninLogin: React.FC = () => {
       setLoader(false)
       return null;
     }
-    setLoader(true);
+    /*setLoader(true);
     await signupOrLoginMutation.mutateAsync({ email, password }).then((response) => {
       console.log("Server response:", response);
       if (response.token && response.status === "success") {
@@ -50,7 +50,8 @@ const SigninLogin: React.FC = () => {
         setLoader(false);
       }
 
-    });
+    });*/
+    navigate("/resume")
   };
 
   
