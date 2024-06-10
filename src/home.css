@@ -52,12 +52,15 @@ li {
 }
 
 .btn-primary {
+    display: grid;
+    place-items: center;
     font-family: Poppins;
     font-weight: 500;
     font-size: 0.85em;
     border-radius: 4em;
     padding: 0.5em 1.1em;
-    background-color: #1f1f1f;
+    /*background-color: #1f1f1f;*/
+    background-color: black;
     color: white;
 }
 

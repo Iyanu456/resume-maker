@@ -10,6 +10,7 @@ import Accordion from "./components/Accordion";
 import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
+import { RenderedProps } from "./types/usertypes";
 //import Icon from "./Icon";
 //import { RenderedProps } from "./types/usertypes";
 import { useScaleFactor } from "./ScaleContext";
@@ -37,9 +38,30 @@ function convertToMilliseconds(hours: number = 0, minutes: number = 0, seconds: 
     return (hours * millisecondsPerHour) + (minutes * millisecondsPerMinute) + (seconds * millisecondsPerSecond);
 }
 
+const defaultPdfRenderedProps: RenderedProps = {
+    personalInfo: [
+        { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
+    ],
+    education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
+    skill: [{ skill: "", skillInformation: "", visible: true }],
+    experience: [
+        {
+            jobTitle: "", company: "", description: "", duration: "", link: "", visible: true,
+        },
+    ],
+    project: [
+        {
+            project: "", about: "", description: "", duration: "", link: "", visible: false,
+        },
+    ],
+    contactInfo: [{ name: "", label: "", src: "", visible: true }],
+};
+
 const EXPIRATION_DURATION_MS = convertToMilliseconds(6, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
+
+	const { scaleFactor } = useScaleFactor();
 
 	// State for data to be rendered in the PDF
 	const [accordionActiveIndex, setAccordionActiveIndex] = useState<number | null>(null);
@@ -55,37 +77,32 @@ export default function Home(): JSX.Element {
         localStorage.removeItem('pdfRenderedProps'); // Remove expired data
       }
     }
-    return {
-      personalInfo: [
-        { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
-      ],
-      education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
-      skill: [{ skill: "", skillInformation: "", visible: true }],
-      experience: [
-        {
-          jobTitle: "",
-          company: "",
-          description: "",
-          duration: "",
-		  link: "",
-          visible: true,
-        },
-      ],
-      project: [
-        {
-          project: "",
-          about: "",
-          description: "",
-          duration: "",
-		  link: "",
-          visible: false,
-        },
-      ],
-      contactInfo: [{ name: "", label: "", src: "", visible: true }],
-    };
+    return defaultPdfRenderedProps;
   });
+
+  const clearStoredData = () => {
+	localStorage.removeItem('pdfRenderedProps');
+	setPdfRenderedProps({
+		personalInfo: [
+			{ fullname: "", jobTitle: "", email: "", website: "", phone: "" },
+		],
+		education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
+		skill: [{ skill: "", skillInformation: "", visible: true }],
+		experience: [
+			{
+				jobTitle: "", company: "", description: "", duration: "", link: "", visible: true,
+			},
+		],
+		project: [
+			{
+				project: "", about: "", description: "", duration: "", link: "", visible: false,
+			},
+		],
+		contactInfo: [{ name: "", label: "", src: "", visible: true }],
+	});
+};
 	  
-	const { scaleFactor } = useScaleFactor();
+	
 
  useEffect(() => {
     localStorage.setItem('pdfRenderedProps', JSON.stringify({ data: pdfRenderedProps, timestamp: Date.now() }));
@@ -378,18 +395,24 @@ export default function Home(): JSX.Element {
 
 			{/* Main content */}
 			<div className="home md:flex justify-center center-align h-[100%] md:px-[0.1em] pt-[1em] md:pt-[2em] md:fixed left-0 right-0">
-				<div className="flex flex-col gap-2 h-full overflow-y-auto bg-grey md:pr-[1em]">
+				<div className="flex flex-col gap-2 h-full overflow-y-auto bg-grey md:pr-[0.5em]">
 					<div className="form-section max-[768px]:w-[100%] md:min-w-[340px] min-[941px]:w-[380px] max-[940px]:w-[300px] relative md:rounded-[0.75em] overflow-x-hidden">
 						<div className="min-[870px]:hidden flex px-[1.2em] py-[1.2em] md:py-[1.6em] w-[100%] bg-white border-[1px] md:rounded-[0.6em] sticky top-0 z-30 md:shadow-lg">
 							<h2 className="my-auto">
 								<b>Resume</b>
 							</h2>
+							<div className="flex gap-1 mr-0 ml-auto">
+							<button className="md:hidden grid place-items-center h-[40px] w-[40px] mr-3 bg-black text-white font semibold rounded-full" onClick={clearStoredData}>
+					<img src="New window.svg" alt="New" />
+				</button>
 							<Download
 								component={
 									<MyDoc info={pdfRenderedProps} scale={1} />
 								}
-								className="btn-primary mr-0 ml-auto"
+								className="btn-primary "
 							/>
+							</div>
+							
 						</div>
 						<Accordion
 							accordionData={
@@ -404,10 +427,14 @@ export default function Home(): JSX.Element {
 				</div>
 
 				{/* PDF Section */}
+				<button className="grid place-items-center h-[40px] w-[40px] mr-3 bg-black text-white font semibold rounded-full" onClick={clearStoredData}>
+					<img src="New window.svg" alt="New" />
+				</button>
 				
 				<div className="max-[870px]:hidden w-[fit-content] flex flex-col justify-center center-align w-[max-content] pb-[2.4em] rounded-[0.75em] desktop h-[100%]">
 					
-					<div className="grid h-[fit-content] w-[100%] bg-white py-[1.5em] rounded-t-[0.6em]">
+					<div className="flex h-[fit-content] w-[100%] bg-white py-[1.5em] rounded-t-[0.6em]">
+						
 						<Download
 							component={
 								<MyDoc info={pdfRenderedProps} scale={1} />
