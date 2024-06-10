@@ -1,6 +1,8 @@
 # SketchCV - Resume Maker App
 
-Welcome to the SketchCV! This application allows users to create professional resumes effortlessly. Built with React and Vite, it offers a seamless and fast experience.
+Welcome to the SketchCV, my portfolio project for the ALX_SE Software Engineering Program!
+
+SketchCV allows users to create professional resumes effortlessly. Built with React and Vite, it offers a seamless and fast experience.
 
 ## Features
 
@@ -75,7 +77,7 @@ Contributions are welcome! Please follow these steps:
 
 For any questions or suggestions, feel free to reach out:
 
-- Email: your-oyerindei13@gmail.com
+- Email: oyerindei13@gmail.com
 - GitHub: [Iyanu456](https://github.com/iyanu456)
 
 --
