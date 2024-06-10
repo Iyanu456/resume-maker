@@ -70,15 +70,14 @@ Contributions are welcome! Please follow these steps:
 ## Acknowledgements
 
 - Thanks to the developers of [React](https://reactjs.org/) and [Vite](https://vitejs.dev/).
-- Icons made by [Icon creators](https://www.flaticon.com/) from [www.flaticon.com](https://www.flaticon.com/).
 
 ## Contact
 
 For any questions or suggestions, feel free to reach out:
 
-- Email: your-email@example.com
-- GitHub: [your-username](https://github.com/iyanu456)
+- Email: your-oyerindei13@gmail.com
+- GitHub: [Iyanu456](https://github.com/iyanu456)
 
----
+--
 
 Thank you for using the Resume Maker App! We hope it helps you create the perfect resume.
