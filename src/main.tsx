@@ -9,7 +9,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import LandingPage from './LandingPage.tsx';
 import { ScaleProvider } from './ScaleContext.tsx'
 import SigninLogin from './SignupPage.tsx'
-import LandingNew from './LandingPageNew.tsx'
 
 const queryClient = new QueryClient();
 
@@ -21,7 +20,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           
           <Route path="/resume" element={<ScaleProvider><Home /></ScaleProvider>}/>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/landing" element={<LandingNew />} />
           <Route path="/signup" element={<QueryClientProvider client={queryClient}><SigninLogin /></QueryClientProvider>} />
         </Routes>
       </BrowserRouter>
