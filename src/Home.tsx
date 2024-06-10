@@ -102,24 +102,7 @@ export default function Home(): JSX.Element {
       return updatedData;
     });
   };
-	/*const onEditorStateChange = (newEditorState: EditorState, editorProjectIndex: number) => {
-		setEditorState(newEditorState);
-		// Update the corresponding project description in pdfRenderedProps
-		const updatedPdfRenderedProps = {
-		  ...pdfRenderedProps,
-		  project: pdfRenderedProps.project.map((project, i) => {
-			if (i === editorProjectIndex) {
-			  return {
-				...project,
-				description: draftToHtml(convertToRaw(newEditorState.getCurrentContent())),
-			  };
-			}
-			return project;
-		  }),
-		};
-		setPdfRenderedProps(updatedPdfRenderedProps);
-	  };*/
-
+	
 	type ArrayKeys = keyof typeof pdfRenderedProps;
 
 	const handleSetActiveIndex = (index: number | null | any) => {

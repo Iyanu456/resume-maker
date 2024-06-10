@@ -40,7 +40,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-[1fr,11fr,1fr] md:grid-cols-[1fr,7fr,1fr] place-items-center mt-[5em] relative px-5">
                 <div className="shadow-md bg-[#FB585A] w-[100%] md:h-[300px] h-[150px]"></div>
                 <div className="border-[1px] shadow-2xl p-[1em] rounded-[1em]">
-                    <img src="resume-maker-screenshoot2.PNG" className="max-w-[100%]"/>
+                    <img alt="screenshot" src="resume-maker-screenshoot2.PNG" className="max-w-[100%]"/>
                 </div>
                 <div className="shadow-2xl bg-[#FABE24] w-[100%] md:h-[300px] h-[150px]"></div>
                     
