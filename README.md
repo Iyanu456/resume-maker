@@ -1,6 +1,6 @@
-# Resume Maker App
+# SketchCV - Resume Maker App
 
-Welcome to the Resume Maker App! This application allows users to create professional resumes effortlessly. Built with React and Vite, it offers a seamless and fast experience.
+Welcome to the SketchCV! This application allows users to create professional resumes effortlessly. Built with React and Vite, it offers a seamless and fast experience.
 
 ## Features
 
