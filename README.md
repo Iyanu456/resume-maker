@@ -1,31 +1,84 @@
-# React + TypeScript + Vite
+# Resume Maker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Resume Maker App! This application allows users to create professional resumes effortlessly. Built with React and Vite, it offers a seamless and fast experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User-friendly Interface**: Easy to navigate and use.
+- **Customizable Templates**: Choose from multiple resume templates.
+- **Real-time Preview**: See changes in real-time as you edit your resume.
+- **Export Options**: Export your resume as PDF or save it online.
+- **Auto-save**: Automatically saves your progress to prevent data loss.
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Check out the live demo of the application [here](https://resume-maker-iyanu456s-projects.vercel.app/).
 
-- Configure the top-level `parserOptions` property like this:
+## Screenshots
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+![Home Page](screenshots/home.png)
+![Edit Page](screenshots/edit.png)
+![Preview Page](screenshots/preview.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# resume-maker
+## Installation
+
+To get started with the Resume Maker App locally, follow these steps:
+
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/your-username/resume-maker-app.git
+    cd resume-maker-app
+    ```
+
+2. **Install dependencies:**
+    ```sh
+    npm install
+    ```
+
+3. **Run the development server:**
+    ```sh
+    npm run dev
+    ```
+
+4. **Open your browser and visit:**
+    ```
+    http://localhost:3000
+    ```
+
+## Usage
+
+1. **Fill in Your Information**: Input your personal, educational, and professional details.
+2. **Preview**: Check the real-time preview of your resume.
+3. **Export**: Download your resume as a PDF or save it online.
+
+## Built With
+
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork the repository**
+2. **Create a new branch** (`git checkout -b feature-branch`)
+3. **Commit your changes** (`git commit -am 'Add new feature'`)
+4. **Push to the branch** (`git push origin feature-branch`)
+5. **Create a new Pull Request**
+
+
+## Acknowledgements
+
+- Thanks to the developers of [React](https://reactjs.org/) and [Vite](https://vitejs.dev/).
+- Icons made by [Icon creators](https://www.flaticon.com/) from [www.flaticon.com](https://www.flaticon.com/).
+
+## Contact
+
+For any questions or suggestions, feel free to reach out:
+
+- Email: your-email@example.com
+- GitHub: [your-username](https://github.com/iyanu456)
+
+---
+
+Thank you for using the Resume Maker App! We hope it helps you create the perfect resume.
