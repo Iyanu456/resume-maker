@@ -26,8 +26,8 @@ To get started with the Resume Maker App locally, follow these steps:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/your-username/resume-maker-app.git
-    cd resume-maker-app
+    git clone https://github.com/iyanu456/resume-maker.git
+    cd resume-maker
     ```
 
 2. **Install dependencies:**
