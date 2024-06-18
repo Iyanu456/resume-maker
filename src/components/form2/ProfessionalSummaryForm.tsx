@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import InputLabel from "../InputLabel";
 import TextEditor from "../../templates/template_1/TextEditor";
 
-interface skillsProps {
+interface summaryProps {
 	data: {
-		skill: string;
-		skillInformation: string;
+		summary: string;
+        visible: boolean;
 	};
 	handleChange: (
 		userDetails: string,
@@ -17,14 +16,14 @@ interface skillsProps {
 }
 
 
-export default function SkillForm(props: skillsProps) {
-	const [editorValue, setEditorValue] = useState(props.data.skillInformation);
+export default function ProfessionalSummaryForm(props: summaryProps) {
+	const [editorValue, setEditorValue] = useState(props.data.summary);
 	useEffect(() => {
         const allFieldsEmpty = Object.values(props.data).every(field => field === '');
         if (allFieldsEmpty) {
-            props.handleChange('skill', props.index, 'visible', false);
+            props.handleChange('professionalSummary', props.index, 'visible', false);
         } else {
-            props.handleChange('skill', props.index, 'visible', true);
+            props.handleChange('professionalSummary', props.index, 'visible', true);
         }
     }, [props.data]);
 	return (
@@ -32,38 +31,26 @@ export default function SkillForm(props: skillsProps) {
 			{/* Personal Info Form */}
 			
 				<div className="flex flex-col gap-1">
-					<InputLabel
-						label="Skill"
-						type="text"
-						value={props.data.skill}
-						handleChange={(e) =>
-							props.handleChange(
-								"skill",
-								props.index,
-								"skill",
-								e.target.value
-							)
-						}
-					/>
+					
 
 					<TextEditor
-						label="Information / Sub-skill"
+						label="Summary"
 		
 						value={editorValue} // Bind the Quill editor value to editorValue state
 						editorContainerClassName="mt-2"
-						editorClassName="md:max-w-[300px]"
-						placeholder="Enter information / sub-skill"
+						editorClassName="md:max-w-[300px] "
+						placeholder="Enter summary here"
 						toolbar={[
-							["bold", "italic", "underline"],
-							[{ list: "bullet" }],
-							["link"],
-						  ]}
+                        ["bold", "italic", "underline"],
+                        [{ list: "bullet" }],
+                        ["link"],
+                      ]}
 						onChange={(value) => {
 							setEditorValue(value); // Update the editorValue state
 							props.handleChange(
-								"skill",
+								"professionalSummary",
 								props.index,
-								"skillInformation",
+								"summary",
 								value
 							);
 						}}

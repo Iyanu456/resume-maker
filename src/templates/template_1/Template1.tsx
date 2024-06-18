@@ -4,8 +4,10 @@ import Education from "./Education.tsx";
 import Skills from "./Skills.tsx";
 import Experience from "./Experience.tsx";
 import Projects from "./Projects.tsx";
+import ProfessionalSummary from "./ProfessionalSummary.tsx";
 import scaledStyle from "./data.ts";
 import * as Types from "../../types/usertypes.ts";
+
 
 // Assuming you have types.ts or usertypes.ts where RenderedProps is defined
 export interface RenderedProps {
@@ -17,6 +19,7 @@ export default function MyDoc(props: RenderedProps) {
 	const {
 		info: {
 			personalInfo,
+			professionalSummary,
 			contactInfo,
 			education,
 			skill,
@@ -147,6 +150,10 @@ export default function MyDoc(props: RenderedProps) {
 							</>
 						)
 					)}
+
+
+
+						
 				<Div
 					style={{
 						display: "flex",
@@ -154,6 +161,7 @@ export default function MyDoc(props: RenderedProps) {
 						flexDirection: "row",
 						margin: "0 auto",
 					}}>
+						
 					{contactInfo &&
 						contactInfo.map(({ label, src }, index) => (
 							<a
@@ -174,6 +182,24 @@ export default function MyDoc(props: RenderedProps) {
 						gap: `${12 * scale}pt`,
 						marginTop: 8 * scale,
 					}}>
+						{professionalSummary &&
+						(professionalSummary.some(
+							(item: any) =>
+								item.visible &&
+								Object.values(item)
+									.slice(0, -1)
+									.some((value) => value !== "")
+						) ? (
+							<ProfessionalSummary
+								titleStyle={style.title}
+								schoolStyle={style.subtitle}
+								lineStyle={style.line}
+								strokeWidth={docData.strokeWidth}
+								strokeLength={docData.strokeLength}
+								fontSize={docData.fontSize}
+								data={professionalSummary}
+							/>
+						) : null)}
 					{education &&
 						(education.some(
 							(item) =>

@@ -10,7 +10,9 @@
 @tailwind utilities;
 
 
-
+.quill {
+  height: 100%;
+}
 
 .poppins {
   font-family: 'Poppins';

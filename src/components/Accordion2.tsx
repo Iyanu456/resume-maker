@@ -13,6 +13,7 @@ interface Accordion2Props {
 	placeholder?: string;
 	activeIndex: number | null;
 	setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
+	showAddButton?: boolean;
 }
 
 const Accordion2: React.FC<Accordion2Props> = ({
@@ -23,7 +24,8 @@ const Accordion2: React.FC<Accordion2Props> = ({
 	accordionData,
 	onToggleVisibility,
 	activeIndex,
-	setActiveIndex
+	setActiveIndex,
+	showAddButton
 }) => {
 	//const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const addNewRef = useRef<HTMLButtonElement>(null);
@@ -155,7 +157,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
 					)}
 				</div>
 			))}
-			<div
+			{ showAddButton !== false && <div
 				className={`grid place-items-center mb-[-0.6em] ${
 					activeIndex !== null ? "hidden" : ""
 				}`}>
@@ -170,7 +172,7 @@ const Accordion2: React.FC<Accordion2Props> = ({
 						alt="Add"
 					/>
 				</button>
-			</div>
+			</div>}
 		</div>
 		
 	);

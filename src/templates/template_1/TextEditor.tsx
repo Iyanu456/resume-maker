@@ -23,13 +23,18 @@ class PlainTextPaster extends PlainTextClipboard {
     // Get plain text from clipboard
     const text = (e.originalEvent || e).clipboardData.getData("text/plain");
 
-    // Insert plain text into the editor
-    this.quill.pasteHTML(text);
+    // Get current selection
+    const selection = this.quill.getSelection();
+
+    // Insert plain text at the current cursor position
+    this.quill.insertText(selection.index, text, "user");
+    
+    // Move the cursor to the end of the inserted text
+    this.quill.setSelection(selection.index + text.length);
   }
 }
 
 Quill.register("modules/clipboard", PlainTextPaster);
-
 
 export default function TextEditor(props: editorProps) {
   const modules = {
@@ -37,7 +42,6 @@ export default function TextEditor(props: editorProps) {
     clipboard: {
       matchVisual: false, // Disable visual matching for plain text
     },
-    
   };
 
   return (

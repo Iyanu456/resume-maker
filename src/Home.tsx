@@ -18,6 +18,7 @@ import { useScaleFactor } from "./ScaleContext";
 //import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./home.css";
+import ProfessionalSummaryForm from "./components/form2/ProfessionalSummaryForm";
 //import ReactDOMServer from "react-dom/server";
 //import { convertToReactPDFComponents } from "./convertToReactPdf";
 //import { EditorState, convertToRaw } from 'draft-js';
@@ -42,6 +43,7 @@ const defaultPdfRenderedProps: RenderedProps = {
     personalInfo: [
         { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
     ],
+	professionalSummary: [{summary: "", visible: true}],
     education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
     skill: [{ skill: "", skillInformation: "", visible: true }],
     experience: [
@@ -57,7 +59,7 @@ const defaultPdfRenderedProps: RenderedProps = {
     contactInfo: [{ name: "", label: "", src: "", visible: true }],
 };
 
-const EXPIRATION_DURATION_MS = convertToMilliseconds(6, 0, 0) // 24 hours
+const EXPIRATION_DURATION_MS = convertToMilliseconds(22, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
 
@@ -86,6 +88,7 @@ export default function Home(): JSX.Element {
 		personalInfo: [
 			{ fullname: "", jobTitle: "", email: "", website: "", phone: "" },
 		],
+		professionalSummary: [{summary: "", visible: true}],
 		education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
 		skill: [{ skill: "", skillInformation: "", visible: true }],
 		experience: [
@@ -100,6 +103,7 @@ export default function Home(): JSX.Element {
 		],
 		contactInfo: [{ name: "", label: "", src: "", visible: true }],
 	});
+	window.location.reload();
 };
 	  
 	
@@ -204,6 +208,39 @@ export default function Home(): JSX.Element {
 				/>
 			)),
 		},
+
+		{
+			title: "Professional Summary",
+			content:  <>
+			<Accordion2
+				accordionData={pdfRenderedProps.professionalSummary.map(
+					(data: any, index: number) => ({
+						title: `${truncateText("Click here to add content", 30)}`,
+						content: (
+							<ProfessionalSummaryForm
+								//formStyle=""
+								index={index}
+								data={data}
+								handleChange={handleChange}
+								//onSave={handleDataSave}
+								//debounceTime={debounceTime}
+							/>
+						),
+						visible: data.visible,
+					})
+				)}
+				showAddButton={false}
+				activeIndex={accordion2ActiveIndex}
+				setActiveIndex={setAccordion2ActiveIndex}
+				onAdd={handleAddItem}
+				onDelete={handleDeleteItem}
+				onToggleVisibility={toggleVisibility}
+				field="professionalSummary"
+				defaultObject={{ summary: "", visible: true }}
+			/>
+		</>
+		},
+
 		/*{
       title: "Contact Info",
       content: (
