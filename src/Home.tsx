@@ -59,7 +59,7 @@ const defaultPdfRenderedProps: RenderedProps = {
     contactInfo: [{ name: "", label: "", src: "", visible: true }],
 };
 
-const EXPIRATION_DURATION_MS = convertToMilliseconds(0, 0, 0) // 24 hours
+const EXPIRATION_DURATION_MS = convertToMilliseconds(55, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
 
