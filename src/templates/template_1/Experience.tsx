@@ -36,7 +36,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                 stroke="rgb(0,0,0)"
             />
             </svg>
-            <Div style={{display: 'flex', flexDirection: 'column', fontFamily: 'Calibri'}} >
+            <Div style={{display: 'flex', flexDirection: 'column', fontFamily: 'Calibri', gap: `${8 * scaleFactor}pt`}} >
             {props.data.map(({ jobTitle, company, description, duration, link, visible }: { jobTitle: string, company:string, description:string, duration:string, link: string, visible:boolean }, index: number) => {
                 if (jobTitle === "" && description === "" && duration === "" && link === "") return null; 
                 if (visible === false) return null;
@@ -46,7 +46,7 @@ const Experience: React.FC<ExperienceProps> = (props) => {
                                 <Div style={{
                       display: "flex",
                       flexDirection: "row",
-                      gap: "2pt",
+                      gap: `${2 * scaleFactor}pt`,
                     }}>
                                     <p style={props.positionStyle}>
                                         <a href={link}>{ jobTitle !== "" ? `${jobTitle}` : null }</a>

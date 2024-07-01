@@ -41,7 +41,7 @@ export default function ProfessionalSummaryForm(props: summaryProps) {
 						editorClassName="md:max-w-[300px] "
 						placeholder="Enter summary here"
 						toolbar={[
-                        ["bold", "italic", "underline"],
+                        ["bold"],
                         [{ list: "bullet" }],
                         ["link"],
                       ]}

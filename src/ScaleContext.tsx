@@ -22,7 +22,7 @@ const ScaleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   useEffect(() => {
     function updateScaleFactor() {
       const width = window.innerWidth;
-      const scaleFactorRatio = window.innerWidth > 1080 ? 210 / 1400 : 210 / 1700 // Calculate the ratio for 1303px width
+      const scaleFactorRatio = window.innerWidth > 1080 ? 210 / 1500 : 210 / 1800 // Calculate the ratio for 1303px width
       const scaleFactor = scaleFactorRatio * width / 210; // Calculate the scale factor
       setScaleFactor(Math.min(scaleFactor, 210 / 210)); // Limit to maximum width of 210mm
     }

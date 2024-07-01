@@ -25,6 +25,7 @@ export default function MyDoc(props: RenderedProps) {
 			skill,
 			experience,
 			project,
+			customSection,
 		},
 		scale,
 	} = props;

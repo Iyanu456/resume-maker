@@ -40,13 +40,77 @@ export interface ContactInfoProps {
 	src: string;
 	visible: boolean;
 }
+
+export interface CustomSectionInfo {
+	title: string;
+    content: string;
+    visible: boolean;
+}
+
+export interface ProfessionalSummaryInfo { summary: string; visible: boolean }
+export interface SkillInfo {skill: string; skillInformation: string; visible: boolean }
+
 export interface RenderedProps {
 	personalInfo: PersonalInfoProps[];
 	education?: EducationInfo[];
-	skill?: { skill: string; skillInformation: string; visible: boolean }[];
-	professionalSummary?: { summary: string; visible: boolean }[];
+	skill?: SkillInfo[];
+	professionalSummary?: ProfessionalSummaryInfo[];
 	experience?: ExperienceInfo[];
 	project?: ProjectInfo[];
 	contactInfo?: ContactInfoProps[];
+	customSection?:CustomSectionInfo[];
 }
 
+
+export const defaultPdfRenderedProps: RenderedProps = {
+    personalInfo: [{ 
+			fullname: "", 
+			jobTitle: "", 
+			email: "", 
+			website: "", 
+			phone: "" }],
+			
+	professionalSummary: [{
+		summary: "", 
+		visible: true
+	}],
+
+    education: [{ 
+		school: "", 
+		degree: "", 
+		duration: "", 
+		link: "", 
+		visible: true 
+	}],
+
+    skill: [{ 
+		skill: "", 
+		skillInformation: "", 
+		visible: true 
+	}],
+
+    experience: [{
+            jobTitle: "", 
+			company: "", 
+			description: "", 
+			duration: "", 
+			link: "", 
+			visible: true,
+        }],
+
+    project: [{
+            project: "", 
+			about: "", 
+			description: "", 
+			duration: "", 
+			link: "", 
+			visible: false,
+        }],
+
+    contactInfo: [{ 
+		name: "", 
+		label: "", 
+		src: "", 
+		visible: true 
+	}],
+};

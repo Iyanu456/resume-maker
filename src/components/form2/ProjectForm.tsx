@@ -123,7 +123,7 @@ export default function ProjectForm(props: projectProps) {
 						editorClassName="md:max-w-[300px]"
 						placeholder="Enter description here"
 						 toolbar={[
-    ["bold", "italic", "underline"],
+    ["bold"],
     [{ list: "bullet" }],
     ["link"],
   ]}

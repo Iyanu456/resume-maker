@@ -10,7 +10,8 @@ import Accordion from "./components/Accordion";
 import Accordion2 from "./components/Accordion2";
 import SkillForm from "./components/form2/SkillsForm";
 import Download from "./DownloadBtn";
-import { RenderedProps } from "./types/usertypes";
+//import { RenderedProps } from "./types/usertypes";
+import { defaultPdfRenderedProps } from "./types/usertypes";
 //import Icon from "./Icon";
 //import { RenderedProps } from "./types/usertypes";
 import { useScaleFactor } from "./ScaleContext";
@@ -19,6 +20,7 @@ import { useScaleFactor } from "./ScaleContext";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./home.css";
 import ProfessionalSummaryForm from "./components/form2/ProfessionalSummaryForm";
+import { convertToMilliseconds } from "./utils";
 //import ReactDOMServer from "react-dom/server";
 //import { convertToReactPDFComponents } from "./convertToReactPdf";
 //import { EditorState, convertToRaw } from 'draft-js';
@@ -31,34 +33,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url
 ).toString();
 
-function convertToMilliseconds(hours: number = 0, minutes: number = 0, seconds: number = 0): number {
-    const millisecondsPerHour = 60 * 60 * 1000;
-    const millisecondsPerMinute = 60 * 1000;
-    const millisecondsPerSecond = 1000;
-
-    return (hours * millisecondsPerHour) + (minutes * millisecondsPerMinute) + (seconds * millisecondsPerSecond);
-}
-
-const defaultPdfRenderedProps: RenderedProps = {
-    personalInfo: [
-        { fullname: "", jobTitle: "", email: "", website: "", phone: "" },
-    ],
-	professionalSummary: [{summary: "", visible: true}],
-    education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
-    skill: [{ skill: "", skillInformation: "", visible: true }],
-    experience: [
-        {
-            jobTitle: "", company: "", description: "", duration: "", link: "", visible: true,
-        },
-    ],
-    project: [
-        {
-            project: "", about: "", description: "", duration: "", link: "", visible: false,
-        },
-    ],
-    contactInfo: [{ name: "", label: "", src: "", visible: true }],
-};
-
 const EXPIRATION_DURATION_MS = convertToMilliseconds(55, 0, 0) // 24 hours
 
 export default function Home(): JSX.Element {
@@ -68,7 +42,6 @@ export default function Home(): JSX.Element {
 	// State for data to be rendered in the PDF
 	const [accordionActiveIndex, setAccordionActiveIndex] = useState<number | null>(null);
 	const [accordion2ActiveIndex, setAccordion2ActiveIndex] = useState<number | null>(null);
-	//const [isAccordion2open, setIsAccordion2Open] = useState<boolean | null>(null)
 	const [pdfRenderedProps, setPdfRenderedProps] = useState(() => {
     const storedData = localStorage.getItem('pdfRenderedProps');
     if (storedData) {
@@ -84,25 +57,7 @@ export default function Home(): JSX.Element {
 
   const clearStoredData = () => {
 	localStorage.removeItem('pdfRenderedProps');
-	setPdfRenderedProps({
-		personalInfo: [
-			{ fullname: "", jobTitle: "", email: "", website: "", phone: "" },
-		],
-		professionalSummary: [{summary: "", visible: true}],
-		education: [{ school: "", degree: "", duration: "", link: "", visible: true }],
-		skill: [{ skill: "", skillInformation: "", visible: true }],
-		experience: [
-			{
-				jobTitle: "", company: "", description: "", duration: "", link: "", visible: true,
-			},
-		],
-		project: [
-			{
-				project: "", about: "", description: "", duration: "", link: "", visible: false,
-			},
-		],
-		contactInfo: [{ name: "", label: "", src: "", visible: true }],
-	});
+	setPdfRenderedProps(defaultPdfRenderedProps);
 	window.location.reload();
 };
 	  
@@ -172,10 +127,7 @@ export default function Home(): JSX.Element {
 		setPdfRenderedProps((prevProps: any) => {
 			const newArray = [...prevProps[field]];
 			newArray.splice(index, 1);
-			//handleAccordionClick(index);
-			//setActiveIndex(null);
-			//console.log(newArray)
-
+			
 			return {
 				...prevProps,
 				[field]: newArray,
@@ -198,13 +150,10 @@ export default function Home(): JSX.Element {
 			title: "Personal Details",
 			content: pdfRenderedProps.personalInfo.map((data: any, index: number) => (
 				<PersonalDetails
-					//debounceTime={debounceTime}
-					//key={index}
 					index={index}
 					data={data}
 					handleChange={handleChange}
 					handleAccordionClose={handleAccordionClose}
-					//onSave={handleDataSave}
 				/>
 			)),
 		},
@@ -241,30 +190,6 @@ export default function Home(): JSX.Element {
 		</>
 		},
 
-		/*{
-      title: "Contact Info",
-      content: (
-        <>
-          <Accordion2
-            accordionData={pdfRenderedProps.contactInfo.map((data, index) => ({
-              title: `Contact Info ${index + 1}`,
-              content: (
-                <ContactForm
-                  //formStyle=""
-                  //index={index}
-                  data={data}
-                  //onSave={handleDataSave}
-                  //debounceTime={debounceTime}
-                />
-              ),
-            }))}
-            onAdd={handleAddItem}
-            field="contactInfo"
-            defaultObject={{ name: "", label: "", src: "" }}
-          />
-        </>
-      ),
-    },*/
 		{
 			title: "Education",
 			content: (
@@ -464,9 +389,15 @@ export default function Home(): JSX.Element {
 				</div>
 
 				{/* PDF Section */}
-				<button className="grid place-items-center h-[40px] w-[40px] mr-3 bg-black text-white font semibold rounded-full" onClick={clearStoredData}>
+				<div className="flex flex-col gap-3">
+				{/*<button className="grid place-items-center h-[40px] w-[40px] mr-3 bg-black text-white font semibold rounded-full" onClick={clearStoredData}>
 					<img src="New window.svg" alt="New" />
+				</button>*/}
+				<button className="grid place-items-center h-[40px] w-[40px] mr-3 bg-black text-white font semibold rounded-full" onClick={clearStoredData}>
+					<img src="add_white.svg" className="h-[30px] w-[30px]" alt="New" />
 				</button>
+				</div>
+				
 				
 				<div className="max-[870px]:hidden w-[fit-content] flex flex-col justify-center center-align w-[max-content] pb-[2.4em] rounded-[0.75em] desktop h-[100%]">
 					

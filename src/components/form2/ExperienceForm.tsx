@@ -104,7 +104,7 @@ export default function ExperienceForm(props: experienceProps) {
 					editorClassName="md:max-w-[300px]"
 					placeholder="Enter description here"
                     toolbar={[
-                        ["bold", "italic", "underline"],
+                        ["bold"],
                         [{ list: "bullet" }],
                         ["link"],
                       ]}

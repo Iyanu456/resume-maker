@@ -1,8 +1,8 @@
 // import { useState, useEffect } from 'react';
 import { Div } from '../../Div'
-//import parse from "html-react-parser";
+import parse from "html-react-parser";
 import { useScaleFactor } from '../../ScaleContext'
-//import { convertToHTML } from './convertToHTML';
+import { convertToHTML } from './convertToHTML';
 
 interface summaryProps {
   titleStyle: any,
@@ -43,7 +43,7 @@ const ProfessionalSummary: React.FC<summaryProps> = (props) => {
                 return (
                     <Div style={{display: 'flex', flexDirection: 'row'}} key={index} >
                         <Div style={{width: `${515 * scaleFactor}pt`, fontSize: `${11 * scaleFactor}pt`}}>
-                          <p style={{fontFamily: 'Calibri', margin: 'auto 0'}}>{removeHtmlTags(summary)}</p>
+                          <Div style={{fontFamily: 'Calibri', margin: 'auto 0'}}>{parse(convertToHTML((summary)))}</Div>
                         </Div>
                                
                          
